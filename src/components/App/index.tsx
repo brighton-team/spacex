@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
+import Button from '@material-ui/core/Button';
 
 import { useForm } from "react-hook-form";
 
@@ -30,6 +31,9 @@ const App = () => {
 
     return (
       <div>
+        <Button variant="contained" color="primary" onClick={() => {console.log('13213')}}>
+          Hello World
+        </Button>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input name="firstName" ref={register({ required: true, maxLength: 20 })} />
           <input type="submit" />
