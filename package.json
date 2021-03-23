@@ -20,7 +20,7 @@
     "url": "https://github.com/brighton-team/spacex/issues"
   },
   "homepage": "https://github.com/brighton-team/spacex#readme",
-  "eslintConfig":{
+  "eslintConfig": {
     "extends": [
       "react-app"
     ],
@@ -29,6 +29,7 @@
     }
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.19.0",
     "@typescript-eslint/parser": "^4.19.0",
     "babel-plugin-styled-components": "1.12.0",
