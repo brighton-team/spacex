@@ -30,6 +30,7 @@ const App = () => {
   const onSubmit = (data: IFormInput) => console.log(data);
   fds;
   dsa;
+  fds;
 
   return (
     <div>
