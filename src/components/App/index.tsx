@@ -28,9 +28,6 @@ const Wrapper = styled.section`
 const App = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
   const onSubmit = (data: IFormInput) => console.log(data);
-  fds;
-  dsa;
-  fds;
 
   return (
     <div>

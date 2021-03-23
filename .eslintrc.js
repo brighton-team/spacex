@@ -45,7 +45,7 @@ module.exports = {
     ],
     'react-hooks/rules-of-hooks': 'error',
     'react/prefer-stateless-function': [1, { ignorePureComponents: true }],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     'jsx-a11y/anchor-is-valid': [
       'error',
@@ -63,5 +63,6 @@ module.exports = {
     'react/static-property-placement': 'off',
     '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/semi': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
   },
 };
