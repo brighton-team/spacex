@@ -1,14 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import LoginPage from './pages/Login';
+import LoginPage from 'pages/Login';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Switch>
-        <Route component={LoginPage} path="/" exact />
-        <Route path="/login" component={LoginPage} exact />
+        <Route path="/" component={LoginPage} exact />
+        <Route path="/signin" component={LoginPage} />
       </Switch>
     </Router>
   );
