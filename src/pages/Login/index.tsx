@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Button, TextField, FormControl, withStyles } from '@material-ui/core';
 
 import { linkColor, authButtonColor, white } from 'consts/colors';
+import { signUp } from 'consts/routes';
 
 import img from 'pages/Login/img/loginback.png';
 
@@ -35,10 +36,6 @@ const TitleText = styled.span`
   text-align: center;
   letter-spacing: 0.05em;
   margin-top: 50px;
-`;
-const LinkWrapper = styled.div`
-  position: absolute;
-  bottom: 90px;
 `;
 const TextLink = styled.span`
   font-family: Montserrat, serif;
@@ -74,6 +71,20 @@ const StyledButton = withStyles({
     bottom: '120px',
   },
 })(Button);
+
+const StyledLink = styled(Link)`
+  position: absolute;
+  bottom: 90px;
+  text-decoration: none;
+
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+`;
 
 type FormData = {
   login: string;
@@ -132,11 +143,9 @@ const LoginPage: React.FC = () => {
             </StyledButton>
           </form>
         </FormInputWrapper>
-        <LinkWrapper>
-          <Link to="/signup">
-            <TextLink>Нет аккаунта?</TextLink>
-          </Link>
-        </LinkWrapper>
+        <StyledLink to={signUp}>
+          <TextLink>Нет аккаунта?</TextLink>
+        </StyledLink>
       </FormWrapper>
     </HeaderWrapper>
   );
