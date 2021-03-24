@@ -20,7 +20,7 @@
     "url": "https://github.com/brighton-team/spacex/issues"
   },
   "homepage": "https://github.com/brighton-team/spacex#readme",
-  "eslintConfig":{
+  "eslintConfig": {
     "extends": [
       "react-app"
     ],
