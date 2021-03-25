@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useForm } from 'react-hook-form';
 
 import './App.css';
+import { Header } from 'components/Header/Header';
 
 interface IFormInput {
   firstName: string;
@@ -31,6 +32,7 @@ const App = () => {
 
   return (
     <div>
+      <Header/>
       <Button
         variant="contained"
         color="primary"
