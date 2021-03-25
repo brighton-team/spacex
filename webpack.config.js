@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/Login.tsx',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
@@ -19,13 +19,6 @@ module.exports = {
       pages: path.resolve(__dirname, './src/pages/'),
     },
     extensions: ['.tsx', '.ts', '.js'],
-  },
-  devServer: {
-    contentBase: "dist",
-    compress: true,
-    host: "0.0.0.0",
-    historyApiFallback: true,
-    port: 3000
   },
   module: {
     rules: [
@@ -61,8 +54,6 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-
-
       template: './public/index.html',
     }),
   ],
@@ -71,5 +62,4 @@ module.exports = {
     contentBase: './',
     hot: true,
   },
-
 };

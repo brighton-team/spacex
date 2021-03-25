@@ -91,7 +91,7 @@ type FormData = {
   password: string;
 };
 
-const LoginPage: React.FC = () => {
+export const LoginPage: React.FC = () => {
   const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
   const onSubmit = handleSubmit(({ login, password }) => {
     console.log('login:', login, 'password:', password);
@@ -150,5 +150,3 @@ const LoginPage: React.FC = () => {
     </HeaderWrapper>
   );
 };
-
-export default LoginPage;
