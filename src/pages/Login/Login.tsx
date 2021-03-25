@@ -1,64 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import styled from 'styled-components';
 import { Button, TextField, FormControl, withStyles } from '@material-ui/core';
 
-import { linkColor, authButtonColor, white } from 'consts/colors';
-import { signUp } from 'consts/routes';
-
-import img from 'pages/Login/img/loginback.png';
-
-const HeaderWrapper = styled.div`
-  background: url(${img}) no-repeat center center;
-  min-height: 100vh;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-`;
-const FormWrapper = styled.div`
-  width: 340px;
-  height: 450px;
-  background: rgba(209, 199, 255, 0.75);
-  border-radius: 12px;
-  margin-left: 20%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-`;
-const TitleText = styled.span`
-  font-family: Montserrat, serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 20px;
-  text-align: center;
-  letter-spacing: 0.05em;
-  margin-top: 50px;
-`;
-const TextLink = styled.span`
-  font-family: Montserrat, serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 11px;
-  color: ${linkColor};
-`;
-const TextButton = styled.span`
-  font-family: Montserrat, serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 13px;
-  text-align: center;
-  letter-spacing: 0.05em;
-  color: ${white};
-`;
-const FormInputWrapper = styled.div`
-  width: 280px;
-  margin-top: 40px;
-`;
+import { authButtonColor } from 'consts/colors';
+import { signUp, signIn } from 'consts/routes';
+import { useLocation } from 'react-router';
+import {
+  FormInputWrapper,
+  FormWrapper,
+  HeaderWrapper,
+  TextButton,
+  TextLink,
+  TitleText,
+  StyledLink,
+} from './styles';
 
 const StyledButton = withStyles({
   root: {
@@ -72,36 +27,68 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-const StyledLink = styled(Link)`
-  position: absolute;
-  bottom: 90px;
-  text-decoration: none;
-
-  &:focus,
-  &:hover,
-  &:visited,
-  &:link,
-  &:active {
-    text-decoration: none;
-  }
-`;
-
 type FormData = {
+  email: string;
   login: string;
   password: string;
 };
 
+type PagesType = {
+  [key: string]: string;
+};
+
+const loginPage = 'login';
+const registerPage = 'register';
+const authWrapperHeight = '450px';
+const regWrapperHeight = '650px';
+
+const pages: PagesType = {
+  [signIn]: loginPage,
+  [signUp]: registerPage,
+  default: loginPage,
+};
+
+const getPage = (path: string): string => (path.length === 1 ? pages.default : pages[path]);
+const isLoginPage = (pageName: string): boolean => pageName === loginPage;
+
 export const LoginPage: React.FC = () => {
   const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
-  const onSubmit = handleSubmit(({ login, password }) => {
-    console.log('login:', login, 'password:', password);
+  const { pathname }: { pathname: string } = useLocation();
+  const currentPage = getPage(pathname);
+  const checkLoginPage = isLoginPage(currentPage);
+  const wrapperHeight = checkLoginPage ? authWrapperHeight : regWrapperHeight;
+  const link = checkLoginPage ? signUp : signIn;
+  const onSubmit = handleSubmit(({ email, login, password }) => {
+    console.log('email:', email, 'login:', login, 'password:', password);
   });
   return (
     <HeaderWrapper>
-      <FormWrapper>
-        <TitleText>ВХОД</TitleText>
+      <FormWrapper height={wrapperHeight}>
+        <TitleText>{checkLoginPage ? 'ВХОД' : 'РЕГИСТРАЦИЯ'}</TitleText>
         <FormInputWrapper>
           <form onSubmit={onSubmit}>
+            <FormControl fullWidth variant="outlined">
+              <Controller
+                name="email"
+                as={
+                  <TextField
+                    id="email"
+                    helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
+                    label="Email"
+                    error={Boolean(fieldsErrors.email)}
+                  />
+                }
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: 'Required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                    message: 'invalid email address',
+                  },
+                }}
+              />
+            </FormControl>
             <FormControl fullWidth variant="outlined">
               <Controller
                 name="login"
@@ -139,12 +126,12 @@ export const LoginPage: React.FC = () => {
               />
             </FormControl>
             <StyledButton type="submit">
-              <TextButton>АВТОРИЗОВАТЬСЯ</TextButton>
+              <TextButton>{checkLoginPage ? 'АВТОРИЗОВАТЬСЯ' : 'ЗАРЕГИСТРИРОВАТЬСЯ'}</TextButton>
             </StyledButton>
           </form>
         </FormInputWrapper>
-        <StyledLink to={signUp}>
-          <TextLink>Нет аккаунта?</TextLink>
+        <StyledLink to={link}>
+          <TextLink>{checkLoginPage ? 'Нет аккаунта?' : 'Уже зарегистрированы?'}</TextLink>
         </StyledLink>
       </FormWrapper>
     </HeaderWrapper>
