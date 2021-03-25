@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/Login.tsx',
+  entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
@@ -17,6 +17,7 @@ module.exports = {
       store: path.resolve(__dirname, './src/store/'),
       styles: path.resolve(__dirname, './src/styles/'),
       pages: path.resolve(__dirname, './src/pages/'),
+      assets: path.resolve(__dirname, './src/assets/'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },
