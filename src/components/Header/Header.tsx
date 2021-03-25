@@ -1,5 +1,5 @@
 import './Header.css';
-import ActionButton from 'components/App/ActionButton/ActionButton';
+import ActionButton from 'components/ActionButton/ActionButton';
 import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 
