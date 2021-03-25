@@ -2,8 +2,8 @@ import { ActionButton } from 'components/ActionButton';
 import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
-
 import img from 'components/Header/logo.png';
+
 
 const Wraper = styled.div`
   position: absolute;
@@ -44,13 +44,21 @@ const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
 `;
+ 
+
+const HeaderButton = styled.div`
+  position: absolute;
+  left:180px;
+`;
 
 export function Header(): JSX.Element {
   return (
     <Wraper>
       <Content>
         <Logo />
-        <ActionButton customClass="header__content_button">Играть</ActionButton>
+        <HeaderButton>
+          <ActionButton>Играть</ActionButton>
+        </HeaderButton>
         <TopLinks>
           <BrowserRouter>
             <StyledLink to="/leaders">Лидеры</StyledLink>

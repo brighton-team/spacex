@@ -8,6 +8,7 @@ import { linkColor, authButtonColor, white } from 'consts/colors';
 import { signUp } from 'consts/routes';
 
 import img from 'pages/Login/img/loginback.png';
+import { Header } from 'components/Header';
 
 const HeaderWrapper = styled.div`
   background: url(${img}) no-repeat center center;
@@ -98,6 +99,7 @@ export const LoginPage: React.FC = () => {
   });
   return (
     <HeaderWrapper>
+      <Header/>
       <FormWrapper>
         <TitleText>ВХОД</TitleText>
         <FormInputWrapper>
