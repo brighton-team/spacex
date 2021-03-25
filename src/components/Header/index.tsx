@@ -56,7 +56,7 @@ export function Header(): JSX.Element {
             <StyledLink to="/leaders">Лидеры</StyledLink>
             <StyledLink to="/forum">Форум</StyledLink>
             <StyledLink to="/profile">Профиль</StyledLink>
-         </BrowserRouter>
+          </BrowserRouter>
         </TopLinks>
       </Content>
     </Wraper>
