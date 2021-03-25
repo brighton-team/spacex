@@ -1,9 +1,9 @@
-import './Header.css'
+import './Header.css';
 import ActionButton from 'components/App/ActionButton/ActionButton';
 import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 
-export function Header() {
+export function Header(): JSX.Element {
   return (
     <div className="header">
       <div className="header__content">

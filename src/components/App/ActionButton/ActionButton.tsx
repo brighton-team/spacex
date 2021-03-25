@@ -2,7 +2,6 @@ import React, { PropsWithChildren } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
-
 const useStyles = makeStyles({
   root: {
     border: '1px solid #FFFFFF',
@@ -12,12 +11,14 @@ const useStyles = makeStyles({
     fontWeight: 700,
     padding: '5px 24px 0px 24px',
     fontSize: '16px',
-    height: '33px'
-    
+    height: '33px',
   },
 });
 
-export default function ActionButton(props:PropsWithChildren<{customClass:string}>):JSX.Element {
+export default function ActionButton(
+  props: PropsWithChildren<{ customClass: string }>
+): JSX.Element {
   const classes = useStyles();
-  return <Button className={`${classes.root} ${props.customClass}`}>{props.children}</Button>;
+  const { customClass, children } = props;
+  return <Button className={`${classes.root} ${customClass}`}>{children}</Button>;
 }

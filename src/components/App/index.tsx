@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <Button
         variant="contained"
         color="primary"
