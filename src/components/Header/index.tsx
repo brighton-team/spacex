@@ -3,6 +3,8 @@ import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
+import img from 'components/Header/logo.png';
+
 const Wraper = styled.div`
   position: absolute;
   left: 0%;
@@ -21,8 +23,6 @@ const Content = styled.div`
   height: 33px;
   padding: 0 50px;
 `;
-
-import img from 'components/Header/logo.png';
 const Logo = styled.div`
   position: absolute;
   background: url(${img});
