@@ -4,7 +4,6 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'components/Header/logo.png';
 
-
 const Wraper = styled.div`
   position: absolute;
   left: 0%;
@@ -44,11 +43,10 @@ const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
 `;
- 
 
 const HeaderButton = styled.div`
   position: absolute;
-  left:180px;
+  left: 180px;
 `;
 
 export function Header(): JSX.Element {

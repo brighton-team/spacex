@@ -99,7 +99,7 @@ export const LoginPage: React.FC = () => {
   });
   return (
     <HeaderWrapper>
-      <Header/>
+      <Header />
       <FormWrapper>
         <TitleText>ВХОД</TitleText>
         <FormInputWrapper>
