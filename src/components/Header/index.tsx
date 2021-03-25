@@ -22,13 +22,13 @@ const Content = styled.div`
   padding: 0 50px;
 `;
 
+import img from 'components/Header/logo.png';
 const Logo = styled.div`
   position: absolute;
-  background: url(logo.png);
+  background: url(${img});
   width: 115px;
   height: 33px;
 `;
-
 const TopLinks = styled.div`
   float: right;
   height: 33px;
