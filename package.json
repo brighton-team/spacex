@@ -9,8 +9,6 @@
     "build": "webpack --mode production",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}",
     "lint:fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
-    "start": "webpack serve --mode development --progress",
-    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",

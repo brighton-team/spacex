@@ -20,13 +20,6 @@ module.exports = {
     },
     extensions: ['.tsx', '.ts', '.js'],
   },
-  devServer: {
-    contentBase: "dist",
-    compress: true,
-    host: "0.0.0.0",
-    historyApiFallback: true,
-    port: 3000
-  },
   module: {
     rules: [
       {
