@@ -23,7 +23,7 @@ const FormWrapper = styled.div<{ height: string }>`
   align-items: center;
   position: relative;
 `;
-const TitleText = styled.span`
+const TitleText = styled.span<{ marginTop: string }>`
   font-family: Montserrat, serif;
   font-style: normal;
   font-weight: 600;
@@ -31,7 +31,7 @@ const TitleText = styled.span`
   line-height: 20px;
   text-align: center;
   letter-spacing: 0.05em;
-  margin-top: 50px;
+  margin-top: ${(props) => props.marginTop};
 `;
 const TextLink = styled.span`
   font-family: Montserrat, serif;
@@ -51,14 +51,14 @@ const TextButton = styled.span`
   letter-spacing: 0.05em;
   color: ${white};
 `;
-const FormInputWrapper = styled.div`
+const FormInputWrapper = styled.div<{ marginTop: string }>`
   width: 280px;
-  margin-top: 40px;
+  margin-top: ${(props) => props.marginTop};
 `;
 
 const StyledLink = styled(Link)`
   position: absolute;
-  bottom: 90px;
+  bottom: 15px;
   text-decoration: none;
 
   &:focus,
