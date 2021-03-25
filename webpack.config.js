@@ -20,6 +20,13 @@ module.exports = {
     },
     extensions: ['.tsx', '.ts', '.js'],
   },
+  devServer: {
+    contentBase: "dist",
+    compress: true,
+    host: "0.0.0.0",
+    historyApiFallback: true,
+    port: 3000
+  },
   module: {
     rules: [
       {
@@ -35,6 +42,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+
+
       template: './public/index.html',
     }),
   ],
@@ -43,4 +52,5 @@ module.exports = {
     contentBase: './',
     hot: true,
   },
+
 };
