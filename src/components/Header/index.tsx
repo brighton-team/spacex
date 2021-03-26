@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'components/Header/logo.png';
+import {leaders, forum, profile} from 'consts/routes';
 
 const Wraper = styled.div`
   position: absolute;
@@ -59,9 +60,9 @@ export function Header(): JSX.Element {
         </HeaderButton>
         <TopLinks>
           <BrowserRouter>
-            <StyledLink to="/leaders">Лидеры</StyledLink>
-            <StyledLink to="/forum">Форум</StyledLink>
-            <StyledLink to="/profile">Профиль</StyledLink>
+            <StyledLink to={leaders}>Лидеры</StyledLink>
+            <StyledLink to={forum}>Форум</StyledLink>
+            <StyledLink to={profile}>Профиль</StyledLink>
           </BrowserRouter>
         </TopLinks>
       </Content>
