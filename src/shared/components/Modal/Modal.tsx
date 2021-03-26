@@ -1,20 +1,9 @@
-import React, { FC } from 'react';
+import React from 'react';
 import DialogContent from '@material-ui/core/DialogContent';
 
 import { StyledDialog, Title, Actions, StyledButton } from './styledItems';
 
-type OwnProps = {
-  title: string;
-  isVisible: boolean;
-  onOk: () => void;
-  onClose: () => void;
-  okButtonText?: string;
-  okButton?: React.ReactNode;
-};
-
-type Props = FC<OwnProps>;
-
-const Modal: Props = (props) => {
+const Modal = (props: OwnProps) => {
   const { isVisible, onClose, onOk, okButtonText, title, children, okButton } = props;
 
   return (
@@ -34,6 +23,22 @@ const Modal: Props = (props) => {
       </Actions>
     </StyledDialog>
   );
+};
+
+type OwnProps = {
+  title: string;
+  isVisible: boolean;
+  onOk?: () => void;
+  onClose: () => void;
+  okButtonText?: string;
+  okButton?: React.ReactNode;
+  children: React.ReactNode;
+};
+
+Modal.defaultProps = {
+  okButtonText: null,
+  okButton: null,
+  onOk: () => {},
 };
 
 export default Modal;
