@@ -56,6 +56,17 @@ export const StyledButton = withStyles({
   },
 })(Button);
 
+export const SubmitButton = withStyles({
+  root: {
+    background: 'transparent',
+    height: '37px',
+    width: '280px',
+    color: '#221749',
+    borderColor: '#221749',
+    marginTop: 10,
+  },
+})(Button);
+
 export default {
   PageWrapper,
   Heading,
@@ -63,4 +74,5 @@ export default {
   StyledButton,
   EmptySpace,
   TableWrapper,
+  SubmitButton,
 };

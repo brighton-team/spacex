@@ -12,6 +12,7 @@ export const TableCell = withStyles({
     fontSize: 13,
     color: 'white',
     paddingLeft: 40,
+    cursor: 'pointer',
   },
 })(BaseTableCell);
 
