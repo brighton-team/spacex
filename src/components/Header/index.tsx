@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'components/Header/logo.png';
-import {leaders, forum, profile} from 'consts/routes';
+import { leaders, forum, profile } from 'consts/routes';
 
 const Wraper = styled.div`
   position: absolute;
