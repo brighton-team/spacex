@@ -1,21 +1,20 @@
 import React from 'react';
-import { TableBody} from '@material-ui/core';
+import { TableBody } from '@material-ui/core';
 import styled from 'styled-components';
-import { white } from 'consts/colors'; 
+import { white } from 'consts/colors';
 
- 
 import {
   PageTitle,
   HeaderWrapper,
   StyledTableRow,
   StyledTableHead,
   StyledTable,
-  StyledTableCell
+  StyledTableCell,
 } from './styles';
 
 const HeaderWrapperStyled = styled(HeaderWrapper)`
-    flex-direction:column;
-  `;
+  flex-direction: column;
+`;
 
 /*
 Request URL: https://ya-praktikum.tech/api/v2/leaderboard/all
@@ -29,34 +28,42 @@ Post Data
 Example Response
   [{"data":{"id":566,"name":"ship","avatar":null,"sdcScore":28800}},{"data":{"id":6713,"name":"string007","avatar":null,"sdcScore":3400}},{"data":{"id":19632,"name":"vladimirsuragin","avatar":null,"sdcScore":1200}},{"data":{"id":5484,"name":"vova2","avatar":null,"sdcScore":800}},{"data":{"id":12,"name":"max","avatar":null,"sdcScore":666}}]
 */
-type leaderboardResponse = {
-  data:{
-      id: number;
-      name: string;
-      avatar: null;
-      sdcScore: number;
+type LeaderboardResponse = {
+  data: {
+    id: number;
+    name: string;
+    avatar: null;
+    sdcScore: number;
   };
-}[]
-type tableData = {
-      name: string;
-      score: number;
-}[]
+}[];
+type TableData = {
+  name: string;
+  score: number;
+  id: number;
+}[];
 
-const res:leaderboardResponse =  [{"data":{"id":566,"name":"ship","avatar":null,"sdcScore":28800}},{"data":{"id":6713,"name":"string007","avatar":null,"sdcScore":3400}},{"data":{"id":19632,"name":"vladimirsuragin","avatar":null,"sdcScore":1200}},{"data":{"id":5484,"name":"vova2","avatar":null,"sdcScore":800}},{"data":{"id":12,"name":"max","avatar":null,"sdcScore":666}}];
-function createData(res:leaderboardResponse):tableData {
-  let out:tableData = [];
+const sampleRes: LeaderboardResponse = [
+  { data: { id: 566, name: 'ship', avatar: null, sdcScore: 28800 } },
+  { data: { id: 6713, name: 'string007', avatar: null, sdcScore: 3400 } },
+  { data: { id: 19632, name: 'vladimirsuragin', avatar: null, sdcScore: 1200 } },
+  { data: { id: 5484, name: 'vova2', avatar: null, sdcScore: 800 } },
+  { data: { id: 12, name: 'max', avatar: null, sdcScore: 666 } },
+];
+function createData(res: LeaderboardResponse): TableData {
+  const out: TableData = [];
   if (res.length) {
-    res.map(element =>out.push({name:element.data.name, score:element.data.sdcScore})) 
+    res.map((element) =>
+      out.push({ id: element.data.id, name: element.data.name, score: element.data.sdcScore })
+    );
   }
- return out;
-} 
-
+  return out;
+}
 
 export const LeadersPage: React.FC = () => {
-  const rows  = createData(res);
+  const rows = createData(sampleRes);
   return (
     <HeaderWrapperStyled>
-      <PageTitle color={white}>Лидеры</PageTitle> 
+      <PageTitle color={white}>Лидеры</PageTitle>
       <StyledTable>
         <StyledTableHead>
           <StyledTableRow>
@@ -67,8 +74,8 @@ export const LeadersPage: React.FC = () => {
         </StyledTableHead>
         <TableBody>
           {rows.map((row, key) => (
-            <StyledTableRow key={key}>
-              <StyledTableCell>{key+1}</StyledTableCell>
+            <StyledTableRow key={row.id}>
+              <StyledTableCell>{key + 1}</StyledTableCell>
               <StyledTableCell>{row.name}</StyledTableCell>
               <StyledTableCell>{row.score}</StyledTableCell>
             </StyledTableRow>

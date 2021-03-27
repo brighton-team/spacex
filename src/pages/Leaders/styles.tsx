@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { white } from 'consts/colors';
+import { Table, TableHead, TableCell, TableRow, withStyles } from '@material-ui/core';
 import img from './img/loginback.png';
-import { white } from 'consts/colors'; 
-import { Table, TableHead, TableCell, TableRow, withStyles} from '@material-ui/core';
 
 const HeaderWrapper = styled.div`
   background: url(${img}) no-repeat center center;
@@ -11,7 +11,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
 `;
 
-const PageTitle = styled.h1<{color:string }>`
+const PageTitle = styled.h1<{ color: string }>`
   font-family: Montserrat, serif;
   font-style: normal;
   font-weight: 600;
@@ -19,11 +19,11 @@ const PageTitle = styled.h1<{color:string }>`
   line-height: 16px;
   text-align: center;
   letter-spacing: 0.05em;
-  text-transform:uppercase;
+  text-transform: uppercase;
   align-self: center;
-  margin-top:130px;
-  margin-bottom:30px;
-  color:${(props) => props.color};
+  margin-top: 130px;
+  margin-bottom: 30px;
+  color: ${(props) => props.color};
 `;
 
 const StyledTable = withStyles({
@@ -34,36 +34,30 @@ const StyledTable = withStyles({
   },
   '@global': {
     'table tr:last-of-type > td': {
-        borderBottom: 'none',
-    }},
+      borderBottom: 'none',
+    },
+  },
 })(Table);
 
 const StyledTableCell = withStyles({
   root: {
-    color:white,
-    fontSize:'14px',
+    color: white,
+    fontSize: '14px',
     borderBottom: '1px solid #4D5F8F',
   },
 })(TableCell);
 
 const StyledTableHead = withStyles({
   root: {
-    fontWeght:600,
-    width:'100px',
+    fontWeght: 600,
+    width: '100px',
   },
 })(TableHead);
 
 const StyledTableRow = withStyles({
   head: {
-    height:'80px',
+    height: '80px',
   },
 })(TableRow);
 
-export {
-  PageTitle,
-  HeaderWrapper,
-  StyledTableRow,
-  StyledTableHead,
-  StyledTable,
-  StyledTableCell
-};
+export { PageTitle, HeaderWrapper, StyledTableRow, StyledTableHead, StyledTable, StyledTableCell };
