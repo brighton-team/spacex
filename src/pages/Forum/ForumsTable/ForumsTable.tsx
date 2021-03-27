@@ -1,4 +1,6 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
@@ -13,6 +15,12 @@ const forumTopics = [
 ];
 
 const ForumsTable: React.FC = () => {
+  const history = useHistory();
+
+  const goToTopic = () => {
+    history.push('/forum-topic');
+  };
+
   return (
     <Table aria-label="forums topics">
       <TableHead>
@@ -22,7 +30,7 @@ const ForumsTable: React.FC = () => {
       </TableHead>
       <TableBody>
         {forumTopics.map((row) => (
-          <TableRow key={row.title}>
+          <TableRow key={row.title} onClick={goToTopic}>
             <TableCell component="th" scope="row">
               {row.title}
             </TableCell>
