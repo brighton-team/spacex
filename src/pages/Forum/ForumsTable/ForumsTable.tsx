@@ -9,16 +9,16 @@ import TableRow from '@material-ui/core/TableRow';
 import { TableCell } from './styledItems';
 
 const forumTopics = [
-  { title: 'Атака звезды смерти' },
-  { title: 'Крушение Вулкана' },
-  { title: 'Карибский кризис' },
+  { id: 1, title: 'Атака звезды смерти' },
+  { id: 2, title: 'Крушение Вулкана' },
+  { id: 3, title: 'Карибский кризис' },
 ];
 
 const ForumsTable: React.FC = () => {
   const history = useHistory();
 
-  const goToTopic = () => {
-    history.push('/forum-topic');
+  const goToTopic = (id: number) => () => {
+    history.push(`forum/${id}`);
   };
 
   return (
@@ -30,7 +30,7 @@ const ForumsTable: React.FC = () => {
       </TableHead>
       <TableBody>
         {forumTopics.map((row) => (
-          <TableRow key={row.title} onClick={goToTopic}>
+          <TableRow key={row.title} onClick={goToTopic(row.id)}>
             <TableCell component="th" scope="row">
               {row.title}
             </TableCell>
