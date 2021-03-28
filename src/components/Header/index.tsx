@@ -1,9 +1,9 @@
 import { ActionButton } from 'components/ActionButton';
 import React from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import img from 'components/Header/logo.png';
-import { leaders, forum, profile } from 'consts/routes';
+import img from 'assets/images/logo.png';
+import { leaders, forum, profile, signIn, signUp } from 'consts/routes';
 
 const Wraper = styled.div`
   position: absolute;
@@ -50,7 +50,13 @@ const HeaderButton = styled.div`
   left: 180px;
 `;
 
-export function Header(): JSX.Element {
+export function Header(): JSX.Element | null {
+  const { pathname } = useLocation();
+
+  if (pathname === signIn || pathname === signUp || pathname === '/') {
+    return null;
+  }
+
   return (
     <Wraper>
       <Content>
@@ -59,11 +65,9 @@ export function Header(): JSX.Element {
           <ActionButton>Играть</ActionButton>
         </HeaderButton>
         <TopLinks>
-          <BrowserRouter>
-            <StyledLink to={leaders}>Лидеры</StyledLink>
-            <StyledLink to={forum}>Форум</StyledLink>
-            <StyledLink to={profile}>Профиль</StyledLink>
-          </BrowserRouter>
+          <StyledLink to={leaders}>Лидеры</StyledLink>
+          <StyledLink to={forum}>Форум</StyledLink>
+          <StyledLink to={profile}>Профиль</StyledLink>
         </TopLinks>
       </Content>
     </Wraper>

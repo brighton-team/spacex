@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { white } from 'consts/colors';
 import { Table, TableHead, TableCell, TableRow, withStyles } from '@material-ui/core';
-import img from './img/loginback.png';
+import img from 'assets/images/loginBg.png';
 
 const HeaderWrapper = styled.div`
   background: url(${img}) no-repeat center center;

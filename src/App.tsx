@@ -6,10 +6,13 @@ import { LoginPage } from 'pages/Login';
 import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
+import { Header } from 'components/Header';
 
 const App: React.FC = () => {
   return (
     <Router>
+      <Header />
+
       <Switch>
         <Route path="/" component={LoginPage} exact />
         <Route path={signIn} component={LoginPage} />
