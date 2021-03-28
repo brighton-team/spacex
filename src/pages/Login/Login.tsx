@@ -15,7 +15,7 @@ import {
   StyledLink,
 } from './styles';
 
-const StyledButton = withStyles({
+export const StyledButton = withStyles({
   root: {
     backgroundColor: authButtonColor,
     height: '37px',
@@ -27,7 +27,7 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-type FormData = {
+export type FormData = {
   email?: string;
   login: string;
   firstName?: string;
@@ -35,6 +35,7 @@ type FormData = {
   phoneNumber?: string;
   password: string;
   confirmPassword?: string;
+  chatName?: string;
 };
 
 type PagesType = {
@@ -74,7 +75,7 @@ export const LoginPage: React.FC = () => {
     <HeaderWrapper>
       <FormWrapper height={wrapperHeight}>
         <TitleText marginTop={titleMarginTop}>{checkLoginPage ? 'ВХОД' : 'РЕГИСТРАЦИЯ'}</TitleText>
-        <FormInputWrapper marginTop={titleMarginTop}>
+        <FormInputWrapper marginTop={titleMarginTop} width="280px">
           <form onSubmit={onSubmit}>
             <FormControl fullWidth variant="outlined">
               <Controller

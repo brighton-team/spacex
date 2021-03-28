@@ -1,22 +1,11 @@
 import React from 'react';
 import { TableBody } from '@material-ui/core';
-import styled from 'styled-components';
 import { Header } from 'components/Header';
 
 import { white } from 'consts/colors';
 
-import {
-  PageTitle,
-  HeaderWrapper,
-  StyledTableRow,
-  StyledTableHead,
-  StyledTable,
-  StyledTableCell,
-} from './styles';
-
-const HeaderWrapperStyled = styled(HeaderWrapper)`
-  flex-direction: column;
-`;
+import { PageTitle, StyledTableRow, StyledTableHead, StyledTable, StyledTableCell } from './styles';
+import { PageWrapper } from '../Forum/styledItems';
 
 /*
 Request URL: https://ya-praktikum.tech/api/v2/leaderboard/all
@@ -64,7 +53,7 @@ function createData(res: LeaderboardResponse): TableData {
 export const LeadersPage: React.FC = () => {
   const rows = createData(sampleRes);
   return (
-    <HeaderWrapperStyled>
+    <PageWrapper padding="0">
       <Header />
       <PageTitle color={white}>Лидеры</PageTitle>
       <StyledTable>
@@ -85,6 +74,6 @@ export const LeadersPage: React.FC = () => {
           ))}
         </TableBody>
       </StyledTable>
-    </HeaderWrapperStyled>
+    </PageWrapper>
   );
 };

@@ -4,6 +4,7 @@ import FormControl from '@material-ui/core/FormControl';
 import { useForm, Controller } from 'react-hook-form';
 
 import Modal from 'shared/components/Modal';
+import { Header } from 'components/Header';
 
 import ForumsTable from './ForumsTable';
 
@@ -46,7 +47,8 @@ const Forum = (): JSX.Element => {
   });
 
   return (
-    <PageWrapper>
+    <PageWrapper padding="120px 70px 0">
+      <Header />
       <Heading>
         <EmptySpace />
         <TitleText>ТЕМЫ ФОРУМА</TitleText>

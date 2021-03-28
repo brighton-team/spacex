@@ -28,6 +28,7 @@ module.exports = {
     createDefaultProgram: true,
   },
   rules: {
+    'react/prop-types': 0,
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',

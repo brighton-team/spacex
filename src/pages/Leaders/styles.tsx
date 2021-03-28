@@ -1,15 +1,6 @@
 import styled from 'styled-components';
 import { white } from 'consts/colors';
 import { Table, TableHead, TableCell, TableRow, withStyles } from '@material-ui/core';
-import img from './img/loginback.png';
-
-const HeaderWrapper = styled.div`
-  background: url(${img}) no-repeat center center;
-  min-height: 100vh;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-`;
 
 const PageTitle = styled.h1<{ color: string }>`
   font-family: Montserrat, serif;
@@ -60,4 +51,4 @@ const StyledTableRow = withStyles({
   },
 })(TableRow);
 
-export { PageTitle, HeaderWrapper, StyledTableRow, StyledTableHead, StyledTable, StyledTableCell };
+export { PageTitle, StyledTableRow, StyledTableHead, StyledTable, StyledTableCell };
