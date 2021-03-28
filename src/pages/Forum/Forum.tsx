@@ -17,11 +17,17 @@ import {
   SubmitButton,
 } from './styledItems';
 
+const submitButton = (
+  <SubmitButton variant="outlined" type="submit" form="new-forum-topic">
+    Создать
+  </SubmitButton>
+);
+
 type FormData = {
   title: string;
 };
 
-const Forum: React.FC = () => {
+const Forum = (): JSX.Element => {
   const [isModalVisible, setModalVisibility] = useState(false);
 
   const openModal = useCallback(() => {
@@ -38,12 +44,6 @@ const Forum: React.FC = () => {
     console.log('title:', title); // eslint-disable-line no-console
     closeModal();
   });
-
-  const submitButton = (
-    <SubmitButton variant="outlined" type="submit" form="new-forum-topic">
-      Создать
-    </SubmitButton>
-  );
 
   return (
     <PageWrapper>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Button, withStyles } from '@material-ui/core';
 
 import img from 'assets/images/rocketBg.jpg';
@@ -18,6 +19,7 @@ export const Heading = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const TitleText = styled.h1`
@@ -39,6 +41,14 @@ export const TableWrapper = styled.div`
   border-radius: 7px;
   margin-top: 20px;
   overflow-y: scroll;
+`;
+
+export const StyledLink = styled(Link)`
+  width: 280px;
+  color: #fff;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  text-align: left;
 `;
 
 export const StyledButton = withStyles({
@@ -67,6 +77,7 @@ export default {
   Heading,
   TitleText,
   StyledButton,
+  StyledLink,
   TableWrapper,
   SubmitButton,
 };

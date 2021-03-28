@@ -1,11 +1,11 @@
 import React, { useState, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import { useForm, Controller } from 'react-hook-form';
 
-import Modal from 'shared/components/Modal';
+import { forum } from 'consts/routes';
 
+import Modal from 'shared/components/Modal';
 import MessageCard from './MessageCard';
 
 import {
@@ -13,6 +13,7 @@ import {
   Heading,
   TitleText,
   StyledButton,
+  StyledLink,
   TableWrapper,
   SubmitButton,
 } from './styledItems';
@@ -39,8 +40,6 @@ const messages = [
 ];
 
 const ForumTopicView: React.FC = () => {
-  const history = useHistory();
-
   const [isModalVisible, setModalVisibility] = useState(false);
 
   const openModal = useCallback(() => {
@@ -64,16 +63,10 @@ const ForumTopicView: React.FC = () => {
     </SubmitButton>
   );
 
-  const goBack = () => {
-    history.push('/forum');
-  };
-
   return (
     <PageWrapper>
       <Heading>
-        <StyledButton variant="outlined" onClick={goBack}>
-          Назад
-        </StyledButton>
+        <StyledLink to={forum}>Назад</StyledLink>
         <TitleText>ТЕМА</TitleText>
         <StyledButton variant="outlined" onClick={openModal}>
           Новое сообщение

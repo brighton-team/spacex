@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <Switch>
         <Route path="/" component={LoginPage} exact />
         <Route path={signIn} component={LoginPage} />
-        <Route path={`${forum}`} component={Forum} exact />
+        <Route path={forum} component={Forum} exact />
         <Route path={`${forum}/:id`} component={ForumTopicView} />
       </Switch>
     </Router>
