@@ -1,21 +1,21 @@
 import { ActionButton } from 'components/ActionButton';
 import React from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'components/Header/logo.png';
 import { leaders, forum, profile } from 'consts/routes';
 
-const Wraper = styled.div`
+const Wrapper = styled.div`
   position: absolute;
-  left: 0%;
-  top: 0%;
+  left: 0;
+  top: 0;
   background: rgba(24, 23, 67, 0.65);
   width: 100%;
   height: 70px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
 `;
 
 const Content = styled.div`
@@ -52,20 +52,18 @@ const HeaderButton = styled.div`
 
 export function Header(): JSX.Element {
   return (
-    <Wraper>
+    <Wrapper>
       <Content>
         <Logo />
         <HeaderButton>
           <ActionButton>Играть</ActionButton>
         </HeaderButton>
         <TopLinks>
-          <BrowserRouter>
-            <StyledLink to={leaders}>Лидеры</StyledLink>
-            <StyledLink to={forum}>Форум</StyledLink>
-            <StyledLink to={profile}>Профиль</StyledLink>
-          </BrowserRouter>
+          <StyledLink to={leaders}>Лидеры</StyledLink>
+          <StyledLink to={forum}>Форум</StyledLink>
+          <StyledLink to={profile}>Профиль</StyledLink>
         </TopLinks>
       </Content>
-    </Wraper>
+    </Wrapper>
   );
 }
