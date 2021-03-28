@@ -4,7 +4,7 @@ import { Button, TextField, FormControl, withStyles } from '@material-ui/core';
 
 import { authButtonColor } from 'consts/colors';
 import { signUp, signIn } from 'consts/routes';
-import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 import {
   FormInputWrapper,
   FormWrapper,
