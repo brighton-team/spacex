@@ -59,6 +59,10 @@ const pages: PagesType = {
 const getPage = (path: string): string => (path.length === 1 ? pages.default : pages[path]);
 const isLoginPage = (pageName: string): boolean => pageName === loginPage;
 
+const instanceAxios = axios.create({
+  withCredentials: true,
+});
+
 export const LoginPage: React.FC = () => {
   const { control, handleSubmit, watch, errors: fieldsErrors } = useForm<FormData>();
   const password = useRef({});
@@ -72,13 +76,13 @@ export const LoginPage: React.FC = () => {
   const link = checkLoginPage ? signUp : signIn;
   const onSubmit = handleSubmit((values) => {
     if (checkLoginPage) {
-      axios.post(SIGN_IN_URL, values).then((response) => {
+      instanceAxios.post(SIGN_IN_URL, values).then((response) => {
         if (response.status === 200) {
           history.push(leaders);
         }
       });
     } else {
-      axios.post(SIGN_UP_URL, values).then((response) => {
+      instanceAxios.post(SIGN_UP_URL, values).then((response) => {
         if (response.status === 200) {
           history.push(leaders);
         }

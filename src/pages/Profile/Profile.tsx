@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 import { Controller, useForm } from 'react-hook-form';
 import { Button, FormControl } from '@material-ui/core';
@@ -10,6 +12,7 @@ import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './style
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { FormData } from '../Login/Login';
 import { authButtonColor } from '../../consts/colors';
+import { LOG_OUT_URL, signIn } from '../../consts/routes';
 import { ChangePasswordModal } from '../../components/ChangePasswordModal';
 
 export const StyledButton = withStyles({
@@ -22,8 +25,13 @@ export const StyledButton = withStyles({
   },
 })(Button);
 
+const instanceAxios = axios.create({
+  withCredentials: true,
+});
+
 export const ProfilePage = (): JSX.Element => {
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const history = useHistory();
   const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
   const onSubmit = handleSubmit((values) => {
     console.log('values:', values);
@@ -31,6 +39,14 @@ export const ProfilePage = (): JSX.Element => {
 
   const handleVisibleModalChangePasswords = () => {
     setIsVisibleModal(!isVisibleModal);
+  };
+
+  const logOut = () => {
+    instanceAxios.post(LOG_OUT_URL).then(({ data }) => {
+      if (data === 'OK') {
+        history.push(signIn);
+      }
+    });
   };
 
   return (
@@ -90,13 +106,13 @@ export const ProfilePage = (): JSX.Element => {
             </FormControl>
             <FormControl fullWidth variant="outlined">
               <Controller
-                name="firstName"
+                name="first_name"
                 as={
                   <CssTextField
                     id="firstName"
-                    helperText={fieldsErrors.firstName ? fieldsErrors.firstName.message : null}
+                    helperText={fieldsErrors.first_name ? fieldsErrors.first_name.message : null}
                     label="FirstName"
-                    error={Boolean(fieldsErrors.firstName)}
+                    error={Boolean(fieldsErrors.first_name)}
                   />
                 }
                 control={control}
@@ -112,13 +128,13 @@ export const ProfilePage = (): JSX.Element => {
             </FormControl>
             <FormControl fullWidth variant="outlined">
               <Controller
-                name="lastName"
+                name="second_name"
                 as={
                   <CssTextField
                     id="lastName"
-                    helperText={fieldsErrors.lastName ? fieldsErrors.lastName.message : null}
+                    helperText={fieldsErrors.second_name ? fieldsErrors.second_name.message : null}
                     label="LastName"
-                    error={Boolean(fieldsErrors.lastName)}
+                    error={Boolean(fieldsErrors.second_name)}
                   />
                 }
                 control={control}
@@ -134,13 +150,13 @@ export const ProfilePage = (): JSX.Element => {
             </FormControl>
             <FormControl fullWidth variant="outlined">
               <Controller
-                name="phoneNumber"
+                name="phone"
                 as={
                   <CssTextField
                     id="phoneNumber"
-                    helperText={fieldsErrors.phoneNumber ? fieldsErrors.phoneNumber.message : null}
+                    helperText={fieldsErrors.phone ? fieldsErrors.phone.message : null}
                     label="PhoneNumber"
-                    error={Boolean(fieldsErrors.phoneNumber)}
+                    error={Boolean(fieldsErrors.phone)}
                   />
                 }
                 control={control}
@@ -183,7 +199,7 @@ export const ProfilePage = (): JSX.Element => {
           <StyledButton onClick={handleVisibleModalChangePasswords}>
             <TextButton>Изменить пароль</TextButton>
           </StyledButton>
-          <StyledButton onClick={handleVisibleModalChangePasswords}>
+          <StyledButton onClick={logOut}>
             <TextButton>Выход</TextButton>
           </StyledButton>
         </FormInputWrapper>

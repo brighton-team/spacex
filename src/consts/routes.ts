@@ -8,3 +8,4 @@ const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 export const BASE_AUTH_URL = `${BASE_URL}/auth`;
 export const SIGN_UP_URL = `${BASE_AUTH_URL}/signup`;
 export const SIGN_IN_URL = `${BASE_AUTH_URL}/signin`;
+export const LOG_OUT_URL = `${BASE_AUTH_URL}/logout`;
