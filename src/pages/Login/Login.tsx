@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
+
 import { Button, TextField, FormControl, withStyles } from '@material-ui/core';
 
 import { authButtonColor } from 'consts/colors';
-import { signUp, signIn } from 'consts/routes';
-import { useLocation } from 'react-router-dom';
+import { signUp, signIn, leaders, SIGN_UP_URL, SIGN_IN_URL } from 'consts/routes';
 import {
   FormInputWrapper,
   FormWrapper,
@@ -30,12 +32,11 @@ export const StyledButton = withStyles({
 export type FormData = {
   email?: string;
   login: string;
-  firstName?: string;
-  lastName?: string;
-  phoneNumber?: string;
+  first_name?: string;
+  second_name?: string;
+  phone?: string;
   password: string;
-  confirmPassword?: string;
-  chatName?: string;
+  password_confirm?: string;
 };
 
 type PagesType = {
@@ -61,6 +62,7 @@ const isLoginPage = (pageName: string): boolean => pageName === loginPage;
 export const LoginPage: React.FC = () => {
   const { control, handleSubmit, watch, errors: fieldsErrors } = useForm<FormData>();
   const password = useRef({});
+  const history = useHistory();
   password.current = watch('password', '');
   const { pathname }: { pathname: string } = useLocation();
   const currentPage = getPage(pathname);
@@ -69,7 +71,19 @@ export const LoginPage: React.FC = () => {
   const titleMarginTop = checkLoginPage ? authMarginTopTitle : regMarginTopTitle;
   const link = checkLoginPage ? signUp : signIn;
   const onSubmit = handleSubmit((values) => {
-    console.log('values:', values);
+    if (checkLoginPage) {
+      axios.post(SIGN_IN_URL, values).then((response) => {
+        if (response.status === 200) {
+          history.push(leaders);
+        }
+      });
+    } else {
+      axios.post(SIGN_UP_URL, values).then((response) => {
+        if (response.status === 200) {
+          history.push(leaders);
+        }
+      });
+    }
   });
   return (
     <HeaderWrapper>
@@ -126,13 +140,15 @@ export const LoginPage: React.FC = () => {
                 </FormControl>
                 <FormControl fullWidth variant="outlined">
                   <Controller
-                    name="firstName"
+                    name="first_name"
                     as={
                       <TextField
                         id="firstName"
-                        helperText={fieldsErrors.firstName ? fieldsErrors.firstName.message : null}
+                        helperText={
+                          fieldsErrors.first_name ? fieldsErrors.first_name.message : null
+                        }
                         label="FirstName"
-                        error={Boolean(fieldsErrors.firstName)}
+                        error={Boolean(fieldsErrors.first_name)}
                       />
                     }
                     control={control}
@@ -148,13 +164,15 @@ export const LoginPage: React.FC = () => {
                 </FormControl>
                 <FormControl fullWidth variant="outlined">
                   <Controller
-                    name="lastName"
+                    name="second_name"
                     as={
                       <TextField
                         id="lastName"
-                        helperText={fieldsErrors.lastName ? fieldsErrors.lastName.message : null}
+                        helperText={
+                          fieldsErrors.second_name ? fieldsErrors.second_name.message : null
+                        }
                         label="LastName"
-                        error={Boolean(fieldsErrors.lastName)}
+                        error={Boolean(fieldsErrors.second_name)}
                       />
                     }
                     control={control}
@@ -170,15 +188,13 @@ export const LoginPage: React.FC = () => {
                 </FormControl>
                 <FormControl fullWidth variant="outlined">
                   <Controller
-                    name="phoneNumber"
+                    name="phone"
                     as={
                       <TextField
                         id="phoneNumber"
-                        helperText={
-                          fieldsErrors.phoneNumber ? fieldsErrors.phoneNumber.message : null
-                        }
+                        helperText={fieldsErrors.phone ? fieldsErrors.phone.message : null}
                         label="PhoneNumber"
-                        error={Boolean(fieldsErrors.phoneNumber)}
+                        error={Boolean(fieldsErrors.phone)}
                       />
                     }
                     control={control}
@@ -220,16 +236,16 @@ export const LoginPage: React.FC = () => {
             {!checkLoginPage && (
               <FormControl fullWidth variant="outlined">
                 <Controller
-                  name="confirmPassword"
+                  name="password_confirm"
                   as={
                     <TextField
                       id="confirmPassword"
                       type="password"
                       helperText={
-                        fieldsErrors.confirmPassword ? fieldsErrors.confirmPassword.message : null
+                        fieldsErrors.password_confirm ? fieldsErrors.password_confirm.message : null
                       }
                       label="Confirm Password"
-                      error={Boolean(fieldsErrors.confirmPassword)}
+                      error={Boolean(fieldsErrors.password_confirm)}
                     />
                   }
                   control={control}
