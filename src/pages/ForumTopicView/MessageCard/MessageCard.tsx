@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card, Author, Content, StyledAvatar } from './styledItems';
 
-const MessageCard = (props: OwnProps) => {
+const MessageCard = (props: OwnProps): JSX.Element => {
   const { authorName, datePublished, message } = props;
 
   return (
