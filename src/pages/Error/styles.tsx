@@ -1,24 +1,20 @@
 import styled from 'styled-components';
 import { gobackLinkColor, white } from '../../consts/colors';
 
-
-
-
 const HeaderWrapper = styled.div`
-  background:  no-repeat center center;
+  background: no-repeat center center;
   min-height: 100vh;
   background-size: cover;
   display: flex;
   align-items: center;
 `;
 const TextWrapper = styled.div`
-
   margin-left: 16%;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  width:170px;
+  width: 170px;
 `;
 const ErrorNumber = styled.div<{ color: string }>`
   font-family: Montserrat, serif;
@@ -45,15 +41,9 @@ const Message = styled.div`
   font-size: 26px;
   text-align: center;
   letter-spacing: 0.05em;
-  margin-bottom:10px;
-  white-space:nowrap;
+  margin-bottom: 10px;
+  white-space: nowrap;
   color: ${white};
 `;
 
-export {
-  HeaderWrapper,
-  TextWrapper,
-  TextLink,
-  ErrorNumber,
-  Message,
-};
+export { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message };

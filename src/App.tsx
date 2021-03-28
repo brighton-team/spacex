@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { signIn, signUp, forum, leaders, error4XX,error5XX } from 'consts/routes';
+import { signIn, signUp, forum, leaders, error4XX, error5XX } from 'consts/routes';
 import { LoginPage } from 'pages/Login';
 import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
