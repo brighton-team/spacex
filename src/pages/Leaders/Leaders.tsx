@@ -1,6 +1,8 @@
 import React from 'react';
 import { TableBody } from '@material-ui/core';
 import styled from 'styled-components';
+import { Header } from 'components/Header';
+
 import { white } from 'consts/colors';
 
 import {
@@ -63,6 +65,7 @@ export const LeadersPage: React.FC = () => {
   const rows = createData(sampleRes);
   return (
     <HeaderWrapperStyled>
+      <Header />
       <PageTitle color={white}>Лидеры</PageTitle>
       <StyledTable>
         <StyledTableHead>
