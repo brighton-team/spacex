@@ -50,10 +50,12 @@ const HeaderButton = styled.div`
   left: 180px;
 `;
 
+const routesWithoutHeader = ['/', signIn, signUp];
+
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
 
-  if (pathname === signIn || pathname === signUp || pathname === '/') {
+  if (routesWithoutHeader.includes(pathname)) {
     return null;
   }
 
