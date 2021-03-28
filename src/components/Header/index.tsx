@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'assets/images/logo.png';
-import { leaders, forum, profile, signIn, signUp } from 'consts/routes';
+import { leaders, forum, profile, signIn, signUp, game } from 'consts/routes';
 
 const Wraper = styled.div`
   position: absolute;
@@ -62,7 +62,9 @@ export function Header(): JSX.Element | null {
       <Content>
         <Logo />
         <HeaderButton>
-          <ActionButton>Играть</ActionButton>
+          <Link to={game}>
+            <ActionButton>Играть</ActionButton>
+          </Link>
         </HeaderButton>
         <TopLinks>
           <StyledLink to={leaders}>Лидеры</StyledLink>
