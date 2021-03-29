@@ -8,20 +8,24 @@ import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
 
+import ErrorBoundary from 'components/ErrorBoundary';
+
 const App: React.FC = () => {
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={LoginPage} exact />
-        <Route path={signIn} component={LoginPage} />
-        <Route path={signUp} component={LoginPage} />
-        <Route path={forum} component={Forum} exact />
-        <Route path={`${forum}/:id`} component={ForumTopicView} />
-        <Route path={leaders} component={LeadersPage} />
-        <Route path={error4XX} component={ErrorPage4XX} />
-        <Route path={error5XX} component={ErrorPage5XX} />
-      </Switch>
-    </Router>
+    <ErrorBoundary type="global">
+      <Router>
+        <Switch>
+          <Route path="/" component={LoginPage} exact />
+          <Route path={signIn} component={LoginPage} />
+          <Route path={signUp} component={LoginPage} />
+          <Route path={forum} component={Forum} exact />
+          <Route path={`${forum}/:id`} component={ForumTopicView} />
+          <Route path={leaders} component={LeadersPage} />
+          <Route path={error4XX} component={ErrorPage4XX} />
+          <Route path={error5XX} component={ErrorPage5XX} />
+        </Switch>
+      </Router>
+    </ErrorBoundary>
   );
 };
 export default App;

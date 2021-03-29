@@ -10,15 +10,18 @@ const HeaderWrapperBack = styled(HeaderWrapper)`
   background-image: url(${img});
 `;
 
-type ErrorNumber5XX = { number: number | string };
+type ErrorNumber5XX = { number?: number | string; errorSize?: 'small' | 'large' }; // eslint-disable-line react/require-default-props
+
 export const ErrorPage5XX: React.FC<ErrorNumber5XX> = (props: ErrorNumber5XX) => {
   const history = useHistory();
-  let { number } = props;
-  number = number || 500;
+  const { number = 500, errorSize = 'large' } = props;
+
   return (
     <HeaderWrapperBack>
       <TextWrapper>
-        <ErrorNumber color={error5XXColor}>{number}</ErrorNumber>
+        <ErrorNumber color={error5XXColor} errorSize={errorSize}>
+          {number}
+        </ErrorNumber>
         <Message>Мы уже фиксим</Message>
         <TextLink
           onClick={() => {
