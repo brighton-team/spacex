@@ -63,5 +63,8 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './',
     hot: true,
+    port: 8080,
+    host: '0.0.0.0',
+    public: 'localhost:8080',
   },
 };

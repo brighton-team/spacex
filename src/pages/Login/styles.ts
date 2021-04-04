@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { linkColor, white } from '../../consts/colors';
+import img from 'assets/images/loginBg.png';
 
-import img from './img/loginback.png';
+import { linkColor, white } from '../../consts/colors';
 
 const HeaderWrapper = styled.div`
   background: url(${img}) no-repeat center center;
