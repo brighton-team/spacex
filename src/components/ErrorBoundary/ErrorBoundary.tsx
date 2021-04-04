@@ -12,7 +12,7 @@ type State = {
   hasError: boolean;
 };
 
-class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
+export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
@@ -45,5 +45,3 @@ class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
     return children;
   }
 }
-
-export default ErrorBoundary;

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import { useForm, Controller } from 'react-hook-form';
-import ErrorBoundary from 'components/ErrorBoundary';
+import { ErrorBoundary } from 'components/ErrorBoundary';
 
 import Modal from 'shared/components/Modal';
 

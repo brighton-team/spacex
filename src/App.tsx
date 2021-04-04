@@ -8,7 +8,7 @@ import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
 
-import ErrorBoundary from 'components/ErrorBoundary';
+import { ErrorBoundary } from 'components/ErrorBoundary';
 
 const App: React.FC = () => {
   return (
