@@ -7,7 +7,7 @@ COPY package.json /app
 COPY package-lock.json /app
 COPY . /app
 
-EXPOSE 3000
+EXPOSE 8080
 
 RUN npm install
 
