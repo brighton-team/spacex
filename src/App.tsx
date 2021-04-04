@@ -8,7 +8,7 @@ import { LoginPage } from 'pages/Login';
 import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
-import Game from 'pages/Game';
+import { Game } from 'pages/Game';
 import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
 
 const App: React.FC = () => {

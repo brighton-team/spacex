@@ -12,7 +12,3 @@ export const PageWrapper = styled.div`
   padding: 90px 50px 0;
   box-sizing: border-box;
 `;
-
-export default {
-  PageWrapper,
-};
