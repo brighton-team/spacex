@@ -18,7 +18,7 @@ const App: React.FC = () => {
     <ErrorBoundary type="global">
       <Router>
         <Header />
-        
+
         <Switch>
           <Route path="/" component={LoginPage} exact />
           <Route path={signIn} component={LoginPage} />
