@@ -1,7 +1,6 @@
 import React from 'react';
 import { TableBody } from '@material-ui/core';
 import styled from 'styled-components';
-import { Header } from 'components/Header';
 
 import { white } from 'consts/colors';
 
@@ -22,7 +21,7 @@ const HeaderWrapperStyled = styled(HeaderWrapper)`
 Request URL: https://ya-praktikum.tech/api/v2/leaderboard/all
 Request Method: POST
 
-Post Data  
+Post Data
   cursor: 0
   limit: 10
   ratingFieldName: "sdcScore"
@@ -65,7 +64,6 @@ export const LeadersPage: React.FC = () => {
   const rows = createData(sampleRes);
   return (
     <HeaderWrapperStyled>
-      <Header />
       <PageTitle color={white}>Лидеры</PageTitle>
       <StyledTable>
         <StyledTableHead>
