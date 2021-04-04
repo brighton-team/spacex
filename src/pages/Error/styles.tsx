@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 import { gobackLinkColor, white } from '../../consts/colors';
 
+enum FontSizes {
+  small = '60px',
+  large = '130px',
+}
+
 const HeaderWrapper = styled.div`
   background: no-repeat center center;
   min-height: 100vh;
@@ -16,11 +21,10 @@ const TextWrapper = styled.div`
   position: relative;
   width: 170px;
 `;
-const ErrorNumber = styled.div<{ color: string }>`
+const ErrorNumber = styled.div<{ color: string; errorSize?: 'small' | 'large' }>`
   font-family: Montserrat, serif;
   font-weight: 700;
-  font-size: 130px;
-  line-height: 130px;
+  font-size: ${(props) => (props.errorSize ? FontSizes[props.errorSize] : FontSizes.large)};
   text-align: center;
   letter-spacing: 0.05em;
   margin-bottom: 10px;

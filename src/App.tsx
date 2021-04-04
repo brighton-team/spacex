@@ -11,23 +11,27 @@ import { LeadersPage } from 'pages/Leaders';
 import { Game } from 'pages/Game';
 import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
 
+import { ErrorBoundary } from 'components/ErrorBoundary';
+
 const App: React.FC = () => {
   return (
-    <Router>
-      <Header />
-
-      <Switch>
-        <Route path="/" component={LoginPage} exact />
-        <Route path={signIn} component={LoginPage} />
-        <Route path={signUp} component={LoginPage} />
-        <Route path={forum} component={Forum} exact />
-        <Route path={`${forum}/:id`} component={ForumTopicView} />
-        <Route path={leaders} component={LeadersPage} />
-        <Route path={game} component={Game} />
-        <Route path={error4XX} component={ErrorPage4XX} />
-        <Route path={error5XX} component={ErrorPage5XX} />
-      </Switch>
-    </Router>
+    <ErrorBoundary type="global">
+      <Router>
+        <Header />
+        
+        <Switch>
+          <Route path="/" component={LoginPage} exact />
+          <Route path={signIn} component={LoginPage} />
+          <Route path={signUp} component={LoginPage} />
+          <Route path={forum} component={Forum} exact />
+          <Route path={`${forum}/:id`} component={ForumTopicView} />
+          <Route path={leaders} component={LeadersPage} />
+          <Route path={game} component={Game} />
+          <Route path={error4XX} component={ErrorPage4XX} />
+          <Route path={error5XX} component={ErrorPage5XX} />
+        </Switch>
+      </Router>
+    </ErrorBoundary>
   );
 };
 export default App;
