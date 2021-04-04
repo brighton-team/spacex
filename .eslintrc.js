@@ -29,6 +29,7 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 0,
+    'no-case-declarations': 'off',
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
