@@ -13,7 +13,8 @@
       "reducers": ["./reducers"],
       "store": ["./store"],
       "styles": ["./styles"],
-      "pages": ["./pages"]
+      "pages": ["./pages"],
+      "types": ["./types"]
     },
     "module": "esnext",
     "moduleResolution": "node",
