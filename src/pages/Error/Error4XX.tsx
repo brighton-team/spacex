@@ -10,12 +10,11 @@ const HeaderWrapperBack = styled(HeaderWrapper)`
   background-image: url(${img});
 `;
 
-type ErrorNumber4XX = { number: number | string };
+type ErrorNumber4XX = { number?: number | string };
 
 export const ErrorPage4XX: React.FC<ErrorNumber4XX> = (props: ErrorNumber4XX) => {
   const history = useHistory();
-  let { number } = props;
-  number = number || 404;
+  const { number = 404 } = props
   return (
     <HeaderWrapperBack>
       <TextWrapper>
