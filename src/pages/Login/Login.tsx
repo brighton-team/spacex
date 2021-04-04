@@ -1,12 +1,11 @@
 import React, { useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
-import axios from 'axios';
 
 import { Button, TextField, FormControl, withStyles } from '@material-ui/core';
 
 import { authButtonColor } from 'consts/colors';
-import { signUp, signIn, leaders, SIGN_UP_URL, SIGN_IN_URL } from 'consts/routes';
+import { signUp, signIn, leaders } from 'consts/routes';
 import {
   FormInputWrapper,
   FormWrapper,
@@ -16,6 +15,7 @@ import {
   TitleText,
   StyledLink,
 } from './styles';
+import { ApiServiceInstance } from '../../utils/ApiService/ApiService';
 
 export const StyledButton = withStyles({
   root: {
@@ -59,10 +59,6 @@ const pages: PagesType = {
 const getPage = (path: string): string => (path.length === 1 ? pages.default : pages[path]);
 const isLoginPage = (pageName: string): boolean => pageName === loginPage;
 
-const instanceAxios = axios.create({
-  withCredentials: true,
-});
-
 export const LoginPage: React.FC = () => {
   const { control, handleSubmit, watch, errors: fieldsErrors } = useForm<FormData>();
   const password = useRef({});
@@ -74,19 +70,12 @@ export const LoginPage: React.FC = () => {
   const wrapperHeight = checkLoginPage ? authWrapperHeight : regWrapperHeight;
   const titleMarginTop = checkLoginPage ? authMarginTopTitle : regMarginTopTitle;
   const link = checkLoginPage ? signUp : signIn;
+  const redirectToMain = () => history.push(leaders);
   const onSubmit = handleSubmit((values) => {
     if (checkLoginPage) {
-      instanceAxios.post(SIGN_IN_URL, values).then((response) => {
-        if (response.status === 200) {
-          history.push(leaders);
-        }
-      });
+      ApiServiceInstance.signIn(values, redirectToMain);
     } else {
-      instanceAxios.post(SIGN_UP_URL, values).then((response) => {
-        if (response.status === 200) {
-          history.push(leaders);
-        }
-      });
+      ApiServiceInstance.signUp(values, redirectToMain);
     }
   });
   return (
