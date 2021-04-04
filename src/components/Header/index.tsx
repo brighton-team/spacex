@@ -7,15 +7,15 @@ import { signIn, signUp, forum, leaders, game, error4XX, error5XX, profile } fro
 
 const Wraper = styled.div`
   position: absolute;
-  left: 0%;
-  top: 0%;
+  left: 0;
+  top: 0;
   background: rgba(24, 23, 67, 0.65);
   width: 100%;
   height: 70px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
 `;
 
 const Content = styled.div`

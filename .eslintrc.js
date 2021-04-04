@@ -28,6 +28,7 @@ module.exports = {
     createDefaultProgram: true,
   },
   rules: {
+    'no-case-declarations': 'off',
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
