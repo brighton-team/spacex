@@ -91,5 +91,5 @@ export {
   TextButton,
   FormInputWrapper,
   StyledLink,
-  StyledButton
+  StyledButton,
 };
