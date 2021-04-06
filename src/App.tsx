@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { signIn, signUp, forum, leaders, game, error4XX, error5XX, profile } from 'consts/routes';
 
@@ -13,8 +14,14 @@ import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
 import { ProfilePage } from 'pages/Profile';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
+import { getUserDataAction } from './actions/signInActions';
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUserDataAction());
+  }, [dispatch]);
+
   return (
     <ErrorBoundary type="global">
       <Router>

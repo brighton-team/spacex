@@ -2,10 +2,12 @@ import React, { useRef } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useForm, Controller } from 'react-hook-form';
 
-import { Button, TextField, FormControl, withStyles } from '@material-ui/core';
+import { TextField, FormControl } from '@material-ui/core';
 
-import { authButtonColor } from 'consts/colors';
+import { signInAction, signUpAction } from 'actions/signInActions';
 import { signUp, signIn, leaders } from 'consts/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { UserState } from 'types/actionTypes';
 import {
   FormInputWrapper,
   FormWrapper,
@@ -14,33 +16,29 @@ import {
   TextLink,
   TitleText,
   StyledLink,
+  StyledButton,
 } from './styles';
-import { ApiServiceInstance } from '../../utils/ApiService/ApiService';
-
-export const StyledButton = withStyles({
-  root: {
-    backgroundColor: authButtonColor,
-    height: '37px',
-    width: '280px',
-    position: 'absolute',
-    left: '50%',
-    marginLeft: '-140px',
-    bottom: '40px',
-  },
-})(Button);
 
 export type FormData = {
-  email?: string;
-  login: string;
+  id?: number | null;
   first_name?: string;
   second_name?: string;
+  display_name?: string;
+  login?: string;
+  email?: string;
   phone?: string;
-  password: string;
+  avatar?: string;
+  password?: string;
   password_confirm?: string;
 };
 
 type PagesType = {
   [key: string]: string;
+};
+
+type LoginPageProps = {
+  loaded: boolean;
+  isAuth: boolean;
 };
 
 const loginPage = 'login';
@@ -59,10 +57,17 @@ const pages: PagesType = {
 const getPage = (path: string): string => (path.length === 1 ? pages.default : pages[path]);
 const isLoginPage = (pageName: string): boolean => pageName === loginPage;
 
-export const LoginPage: React.FC = () => {
-  const { control, handleSubmit, watch, errors: fieldsErrors } = useForm<FormData>();
-  const password = useRef({});
+export const LoginPage: React.FC<LoginPageProps> = () => {
+  const { isAuth } = useSelector((state: UserState) => state.user);
   const history = useHistory();
+  if (isAuth) {
+    history.push(leaders);
+  }
+  const { control, handleSubmit, watch, errors: fieldsErrors } = useForm<FormData>();
+  const dispatch = useDispatch();
+  const password = useRef<HTMLInputElement | null>(null);
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   password.current = watch('password', '');
   const { pathname }: { pathname: string } = useLocation();
   const currentPage = getPage(pathname);
@@ -70,12 +75,11 @@ export const LoginPage: React.FC = () => {
   const wrapperHeight = checkLoginPage ? authWrapperHeight : regWrapperHeight;
   const titleMarginTop = checkLoginPage ? authMarginTopTitle : regMarginTopTitle;
   const link = checkLoginPage ? signUp : signIn;
-  const redirectToMain = () => history.push(leaders);
   const onSubmit = handleSubmit((values) => {
     if (checkLoginPage) {
-      ApiServiceInstance.signIn(values, redirectToMain);
+      dispatch(signInAction(values));
     } else {
-      ApiServiceInstance.signUp(values, redirectToMain);
+      dispatch(signUpAction(values));
     }
   });
   return (
@@ -266,3 +270,9 @@ export const LoginPage: React.FC = () => {
     </HeaderWrapper>
   );
 };
+
+// const mapStateToProps = ({ user }: { user: IUser }) => ({
+//   isAuth: user.isAuth,
+// });
+
+// export const LoginPage = connect(mapStateToProps, { signInAction })(Login);

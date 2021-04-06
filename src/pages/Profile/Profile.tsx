@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Controller, useForm } from 'react-hook-form';
 import { Button, FormControl } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+import { signIn } from 'consts/routes';
 import { Header } from '../../components/Header';
 
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
@@ -12,8 +13,9 @@ import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './style
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { FormData } from '../Login/Login';
 import { authButtonColor } from '../../consts/colors';
-import { LOG_OUT_URL, signIn } from '../../consts/routes';
 import { ChangePasswordModal } from '../../components/ChangePasswordModal';
+import { logOutAction } from '../../actions/signInActions';
+import { UserState } from '../../types/actionTypes';
 
 export const StyledButton = withStyles({
   root: {
@@ -25,13 +27,23 @@ export const StyledButton = withStyles({
   },
 })(Button);
 
-const instanceAxios = axios.create({
-  withCredentials: true,
-});
-
 export const ProfilePage = (): JSX.Element => {
-  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const { isAuth, loaded } = useSelector((state: UserState) => state.user);
+  // const { login, email, first_name, second_name, phone, display_name } = useSelector((state: UserState) => state.user?.data);
+  const data = useSelector((state: UserState) => state.user.data);
+  // console.log('login', data.login)
+  // console.log('data', data);
+  if (loaded) {
+    // console.log('login', data?.login);
+  }
   const history = useHistory();
+  useEffect(() => {
+    if (!isAuth) {
+      history.push(signIn);
+    }
+  }, [isAuth, history]);
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const dispatch = useDispatch();
   const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
   const onSubmit = handleSubmit((values) => {
     console.log('values:', values);
@@ -42,14 +54,10 @@ export const ProfilePage = (): JSX.Element => {
   };
 
   const logOut = () => {
-    instanceAxios.post(LOG_OUT_URL).then(({ data }) => {
-      if (data === 'OK') {
-        history.push(signIn);
-      }
-    });
+    dispatch(logOutAction());
   };
 
-  return (
+  return loaded ? (
     <PageWrapper padding="90px 318px 30px">
       <Header />
       <TableWrapper>
@@ -71,7 +79,7 @@ export const ProfilePage = (): JSX.Element => {
                   />
                 }
                 control={control}
-                defaultValue=""
+                defaultValue={data?.login}
                 rules={{
                   required: 'Required',
                   pattern: {
@@ -209,5 +217,7 @@ export const ProfilePage = (): JSX.Element => {
         closeModal={handleVisibleModalChangePasswords}
       />
     </PageWrapper>
+  ) : (
+    <h1>Loader</h1>
   );
 };
