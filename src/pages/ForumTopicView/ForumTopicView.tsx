@@ -39,6 +39,12 @@ const messages = [
   },
 ];
 
+const submitButton = (
+  <SubmitButton variant="outlined" type="submit" form="new-forum-message">
+    Опубликовать
+  </SubmitButton>
+);
+
 const ForumTopicView: React.FC = () => {
   const [isModalVisible, setModalVisibility] = useState(false);
 
@@ -56,12 +62,6 @@ const ForumTopicView: React.FC = () => {
     console.log('message:', message); // eslint-disable-line no-console
     closeModal();
   });
-
-  const submitButton = (
-    <SubmitButton variant="outlined" type="submit" form="new-forum-message">
-      Опубликовать
-    </SubmitButton>
-  );
 
   return (
     <PageWrapper>

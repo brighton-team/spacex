@@ -1,21 +1,21 @@
 import { ActionButton } from 'components/ActionButton';
 import React from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import img from 'components/Header/logo.png';
-import { leaders, forum, profile } from 'consts/routes';
+import img from 'assets/images/logo.png';
+import { signIn, signUp, forum, leaders, game, error4XX, error5XX, profile } from 'consts/routes';
 
 const Wraper = styled.div`
   position: absolute;
-  left: 0%;
-  top: 0%;
+  left: 0;
+  top: 0;
   background: rgba(24, 23, 67, 0.65);
   width: 100%;
   height: 70px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  font-family: Montserrat;
+  font-family: Montserrat, serif;
 `;
 
 const Content = styled.div`
@@ -50,20 +50,28 @@ const HeaderButton = styled.div`
   left: 180px;
 `;
 
-export function Header(): JSX.Element {
+const routesWithoutHeader = ['/', signIn, signUp, error4XX, error5XX];
+
+export function Header(): JSX.Element | null {
+  const { pathname } = useLocation();
+
+  if (routesWithoutHeader.includes(pathname)) {
+    return null;
+  }
+
   return (
     <Wraper>
       <Content>
         <Logo />
         <HeaderButton>
-          <ActionButton>Играть</ActionButton>
+          <Link to={game}>
+            <ActionButton>Играть</ActionButton>
+          </Link>
         </HeaderButton>
         <TopLinks>
-          <BrowserRouter>
-            <StyledLink to={leaders}>Лидеры</StyledLink>
-            <StyledLink to={forum}>Форум</StyledLink>
-            <StyledLink to={profile}>Профиль</StyledLink>
-          </BrowserRouter>
+          <StyledLink to={leaders}>Лидеры</StyledLink>
+          <StyledLink to={forum}>Форум</StyledLink>
+          <StyledLink to={profile}>Профиль</StyledLink>
         </TopLinks>
       </Content>
     </Wraper>

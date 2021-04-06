@@ -19,6 +19,7 @@ module.exports = {
       pages: path.resolve(__dirname, './src/pages/'),
       assets: path.resolve(__dirname, './src/assets/'),
       shared: path.resolve(__dirname, './src/shared/'),
+      types: path.resolve(__dirname, './src/types/'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },
@@ -63,5 +64,8 @@ module.exports = {
     historyApiFallback: true,
     contentBase: './',
     hot: true,
+    port: 8080,
+    host: '0.0.0.0',
+    public: 'localhost:8080',
   },
 };
