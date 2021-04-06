@@ -6,7 +6,7 @@ import { StyledDialog, Title, Actions } from './styles';
 
 export const PauseWindow = (props: OwnProps): JSX.Element => {
   const { isVisible, onClose, title, children } = props;
-
+  // onClick={closeModal}
   return (
     <StyledDialog open={isVisible} onClose={onClose}>
       <Title disableTypography>
@@ -16,8 +16,8 @@ export const PauseWindow = (props: OwnProps): JSX.Element => {
       <DialogContent>{children}</DialogContent>
 
       <Actions>
-   
-          <ActionButton>
+ 
+          <ActionButton> 
             Продолжить
           </ActionButton>
       

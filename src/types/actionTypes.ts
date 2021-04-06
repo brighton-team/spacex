@@ -17,3 +17,17 @@ export type SignInAction = {
 export type UserState = {
   user: IUser;
 };
+
+
+export interface IPauseWindow {
+  title: string;
+  isVisible: boolean;
+  okButtonText?: string;
+  okButton?: React.ReactNode;
+}
+
+export type PauseWindow = {
+  type: string;
+  payload: IPauseWindow;
+};
+
