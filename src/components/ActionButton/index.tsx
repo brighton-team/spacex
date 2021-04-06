@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
@@ -15,7 +15,10 @@ const StyledButton = styled(Button)`
   }
 `;
 
-export function ActionButton(props: PropsWithChildren<{ customClass?: string }>): JSX.Element {
+export function ActionButton(props: OwnProps): JSX.Element {
   const { children } = props;
   return <StyledButton>{children}</StyledButton>;
 }
+type OwnProps = {
+  children: React.ReactNode;
+};
