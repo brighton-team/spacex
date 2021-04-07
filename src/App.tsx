@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { signIn, signUp, forum, leaders, game, error4XX, error5XX } from 'consts/routes';
+import { signIn, signUp, forum, leaders, game, error } from 'consts/routes';
 
 import { Header } from 'components/Header';
 import { LoginPage } from 'pages/Login';
@@ -9,7 +9,7 @@ import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { Game } from 'pages/Game';
-import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
+import { ErrorPageXXX } from 'pages/Error';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 
@@ -27,8 +27,7 @@ const App: React.FC = () => {
           <Route path={`${forum}/:id`} component={ForumTopicView} />
           <Route path={leaders} component={LeadersPage} />
           <Route path={game} component={Game} />
-          <Route path={error4XX} component={ErrorPage4XX} />
-          <Route path={error5XX} component={ErrorPage5XX} />
+          <Route path={error} component={ErrorPageXXX} />
         </Switch>
       </Router>
     </ErrorBoundary>
