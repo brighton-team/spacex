@@ -28,7 +28,6 @@ const App: React.FC = () => {
         <Header />
 
         <Switch>
-          <Route path="/" component={LoginPage} exact />
           <Route path={signIn} component={LoginPage} />
           <Route path={signUp} component={LoginPage} />
           <Route path={forum} component={Forum} exact />

@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-import { SIGN_IN_URL, SIGN_UP_URL, GET_USER_URL, LOG_OUT_URL } from 'consts/routes';
+import {
+  SIGN_IN_URL,
+  SIGN_UP_URL,
+  GET_USER_URL,
+  LOG_OUT_URL,
+  PUT_USER_DATA_URL,
+} from 'consts/routes';
 
 import { FormData } from 'pages/Login/Login';
 
@@ -38,6 +44,18 @@ class ApiService {
     return this.instanceAxios
       .post(LOG_OUT_URL)
       .then((response) => {
+        return response.status;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  putUserData(values: FormData) {
+    return this.instanceAxios
+      .put(PUT_USER_DATA_URL, values)
+      .then((response) => {
+        console.log('response', response);
         return response.status;
       })
       .catch((err) => {
