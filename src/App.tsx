@@ -12,7 +12,7 @@ import { Game } from 'pages/Game';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   return (
     <Router>
       <ErrorBoundary type="global">
@@ -31,4 +31,3 @@ const App: React.FC = () => {
     </Router>
   );
 };
-export default App;

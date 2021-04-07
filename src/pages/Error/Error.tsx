@@ -9,20 +9,22 @@ import { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message } from './st
 
 type OwnProps = { errorNumber?: 404 | 500; header?: string }; // eslint-disable-line react/require-default-props
 
-export const ErrorPage: React.FC<OwnProps> = (props: OwnProps) => {
-  const { errorNumber, header } = props;
+const getHeaderWrapperBack = (img: string) => styled(HeaderWrapper)`
+  background-image: url(${img});
+`;
+
+export const ErrorPage: React.FC<OwnProps> = ({ errorNumber, header }) => {
   const errorSize = header ? 'small' : 'large';
   const is5XX = errorNumber === 500;
   const img = is5XX ? img5 : img4;
   const message = is5XX ? 'Мы уже фиксим' : 'Ой! Что-то пошло не так...';
   const color = is5XX ? error5XXColor : error4XXColor;
-  const HeaderWrapperBack = styled(HeaderWrapper)`
-    background-image: url(${img});
-  `;
   const history = useHistory();
   const onClickHandler = useCallback(() => {
     history.goBack();
   }, [history]);
+  const HeaderWrapperBack = getHeaderWrapperBack(img);
+
   return (
     <HeaderWrapperBack>
       <TextWrapper>
