@@ -28,6 +28,7 @@ module.exports = {
     createDefaultProgram: true,
   },
   rules: {
+    'react/prop-types': 0,
     'no-case-declarations': 'off',
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
