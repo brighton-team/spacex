@@ -68,7 +68,7 @@ export const logOutFailure = (): SignInAction => ({
   type: LOG_OUT_FAILURE,
 });
 
-export const logOutAction = () => (dispatch: ThunkDispatch<UserState, void, Action>) => {
+export const logOutAction = () => (dispatch: ThunkDispatch<UserState, void, Action>): void => {
   dispatch(logOutRequest());
   ApiServiceInstance.logOut()
     .then((status) => {
@@ -79,7 +79,7 @@ export const logOutAction = () => (dispatch: ThunkDispatch<UserState, void, Acti
     .catch(() => dispatch(logOutFailure()));
 };
 
-export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void, Action>) => {
+export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void, Action>): void => {
   dispatch(getUserDataRequest());
   ApiServiceInstance.getUserData()
     .then((res) => {
@@ -90,7 +90,7 @@ export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void,
 
 export const signUpAction = (userData: FormData) => (
   dispatch: ThunkDispatch<UserState, void, Action>
-) => {
+): void => {
   dispatch(signUpRequest());
   ApiServiceInstance.signUp(userData)
     .then((status) => {
@@ -104,7 +104,7 @@ export const signUpAction = (userData: FormData) => (
 
 export const signInAction = (userData: FormData) => (
   dispatch: ThunkDispatch<UserState, void, Action>
-) => {
+): void => {
   dispatch(signInRequest());
   ApiServiceInstance.signIn(userData)
     .then((status) => {
