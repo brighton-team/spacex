@@ -29,6 +29,9 @@ const App: React.FC = () => {
           <Route path={game} component={Game} />
           <Route path={error4XX} component={ErrorPage4XX} />
           <Route path={error5XX} component={ErrorPage5XX} />
+          <Route path="*">
+            <ErrorPage4XX number={404} />
+          </Route>
         </Switch>
       </Router>
     </ErrorBoundary>
