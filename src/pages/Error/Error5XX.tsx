@@ -1,9 +1,11 @@
-import React , { useState, useCallback }from 'react';
+import React , {useContext, useCallback }from 'react';
 import { useHistory } from 'react-router-dom';
 import { error5XXColor } from 'consts/colors';
 import styled from 'styled-components';
 import img from './img/5XX.png';
 import {PauseWindow} from 'components/PauseWindow'
+import { ReactReduxContext } from 'react-redux'
+import {pauseWindowOpen} from 'actions/pauseWindowActions'
 
 import { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message,StyledButton } from './styles';
 
@@ -14,17 +16,22 @@ const HeaderWrapperBack = styled(HeaderWrapper)`
 type ErrorNumber5XX = { number?: number | string; errorSize?: 'small' | 'large' }; // eslint-disable-line react/require-default-props
 
 export const ErrorPage5XX: React.FC<ErrorNumber5XX> = (props: ErrorNumber5XX) => {
+  const {store} = useContext(ReactReduxContext);
   const history = useHistory();
   const { number = 500, errorSize = 'large' } = props;
-  const [isModalVisible, setModalVisibility] = useState(false);
+  
+ 
 
   const openModal = useCallback(() => {
-    setModalVisibility(true);
+    store.dispatch(pauseWindowOpen({isVisible:true, title:''}));
   }, []);
 
   const closeModal = useCallback(() => {
-    setModalVisibility(false);
+   // store.getState().pauseWindow.isVisible = false;
+
   }, []);
+
+
 
   return (
     <HeaderWrapperBack>
@@ -43,7 +50,7 @@ export const ErrorPage5XX: React.FC<ErrorNumber5XX> = (props: ErrorNumber5XX) =>
      
 
       
-      <PauseWindow  isVisible={isModalVisible} onClose={closeModal}
+      <PauseWindow  isVisible={store.getState().pauseWindow.isVisible} onClose={closeModal} onButtonClick={closeModal}
  
       title="Опубликуйте сообщение">Children</PauseWindow>
            <StyledButton variant="outlined" onClick={openModal}>

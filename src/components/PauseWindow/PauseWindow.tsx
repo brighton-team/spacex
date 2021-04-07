@@ -5,8 +5,8 @@ import {ActionButton} from 'components/ActionButton';
 import { StyledDialog, Title, Actions } from './styles';
 
 export const PauseWindow = (props: OwnProps): JSX.Element => {
-  const { isVisible, onClose, title, children } = props;
-  // onClick={closeModal}
+  const { isVisible, onClose, title, children, onButtonClick } = props;
+ 
   return (
     <StyledDialog open={isVisible} onClose={onClose}>
       <Title disableTypography>
@@ -17,7 +17,7 @@ export const PauseWindow = (props: OwnProps): JSX.Element => {
 
       <Actions>
  
-          <ActionButton> 
+          <ActionButton onclick={onButtonClick}> 
             Продолжить
           </ActionButton>
       
@@ -29,7 +29,7 @@ export const PauseWindow = (props: OwnProps): JSX.Element => {
 type OwnProps = {
   title: string;
   isVisible: boolean;
-  onOk?: () => void;
+  onButtonClick?: () => void;
   onClose: () => void;
   okButtonText?: string;
   okButton?: React.ReactNode;
@@ -39,7 +39,7 @@ type OwnProps = {
 PauseWindow.defaultProps = {
   okButtonText: null,
   okButton: null,
-  onOk: () => {},
+  onButtonClick: () => {},
 };
 
  

@@ -16,9 +16,10 @@ const StyledButton = styled(Button)`
 `;
 
 export function ActionButton(props: OwnProps): JSX.Element {
-  const { children } = props;
-  return <StyledButton>{children}</StyledButton>;
+  const { children, onclick } = props;
+  return <StyledButton onClick={onclick}>{children}</StyledButton>;
 }
 type OwnProps = {
   children: React.ReactNode;
+  onclick?: () => void;
 };
