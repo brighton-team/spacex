@@ -16,8 +16,7 @@ import { ErrorBoundary } from 'components/ErrorBoundary';
 const App: React.FC = () => {
   return (
     <Router>
-    <ErrorBoundary type="global">
-      
+      <ErrorBoundary type="global">
         <Header />
 
         <Switch>
@@ -30,8 +29,7 @@ const App: React.FC = () => {
           <Route path={game} component={Game} />
           <Route path={error} component={ErrorPageXXX} />
         </Switch>
-      
-    </ErrorBoundary>
+      </ErrorBoundary>
     </Router>
   );
 };
