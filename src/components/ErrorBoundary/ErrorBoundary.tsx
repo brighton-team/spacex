@@ -1,6 +1,6 @@
 import React, { Component, PropsWithChildren } from 'react';
 
-import { ErrorPageXXX } from 'pages/Error';
+import { ErrorPage } from 'pages/Error';
 
 import { ErrorMsgWrapper } from './styledItems';
 
@@ -39,7 +39,7 @@ export class ErrorBoundary extends Component<PropsWithChildren<Props>, State> {
         );
       }
 
-      return <ErrorPageXXX number="Упс, ошибка!" errorSize="small" />;
+      return <ErrorPage header="Упс, ошибка!" />;
     }
 
     return children;
