@@ -3,7 +3,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import { StyledDialog, Title, Actions, StyledButton } from './styledItems';
 
-const Modal = (props: OwnProps): JSX.Element => {
+export const Modal = (props: OwnProps): JSX.Element => {
   const { isVisible, onClose, onOk, okButtonText, title, children, okButton } = props;
 
   return (
@@ -40,5 +40,3 @@ Modal.defaultProps = {
   okButton: null,
   onOk: () => {},
 };
-
-export default Modal;
