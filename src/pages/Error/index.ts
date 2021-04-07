@@ -1,4 +1,3 @@
-
 import { ErrorPageXXX } from './ErrorXXX';
 
-export {  ErrorPageXXX };
+export { ErrorPageXXX };
