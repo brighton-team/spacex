@@ -3,7 +3,7 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'assets/images/logo.png';
-import { signIn, signUp, forum, leaders, game, error, profile } from 'consts/routes';
+import { forum, leaders, game, profile } from 'consts/routes';
 
 const Wraper = styled.div`
   position: absolute;
@@ -50,16 +50,16 @@ const HeaderButton = styled.div`
   left: 180px;
 `;
 
-const routesWithoutHeader = ['/', signIn, signUp, error];
+const routesWithHeader = [forum, leaders, game, profile];
 
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
+  const isShowHeader = routesWithHeader.includes(pathname);
+  // if (routesWithoutHeader.includes(pathname)) {
+  //   return null;
+  // }
 
-  if (routesWithoutHeader.includes(pathname)) {
-    return null;
-  }
-
-  return (
+  return isShowHeader ? (
     <Wraper>
       <Content>
         <Logo />
@@ -75,5 +75,5 @@ export function Header(): JSX.Element | null {
         </TopLinks>
       </Content>
     </Wraper>
-  );
+  ) : null;
 }

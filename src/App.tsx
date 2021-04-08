@@ -9,8 +9,8 @@ import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { Game } from 'pages/Game';
-
 import { ErrorBoundary } from 'components/ErrorBoundary';
+import { ErrorPage } from './pages/Error';
 
 export const App: React.FC = () => {
   return (
@@ -26,6 +26,9 @@ export const App: React.FC = () => {
           <Route path={`${forum}/:id`} component={ForumTopicView} />
           <Route path={leaders} component={LeadersPage} />
           <Route path={game} component={Game} />
+          <Route path="*">
+            <ErrorPage errorNumber={404} />
+          </Route>
         </Switch>
       </ErrorBoundary>
     </Router>
