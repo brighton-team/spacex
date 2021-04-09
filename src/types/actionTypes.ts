@@ -7,6 +7,8 @@ export interface IUser {
   email?: string;
   phone?: string;
   avatar?: string;
+  password?: string;
+  password_confirm?: string;
 }
 
 export type SignInAction = {

@@ -21,5 +21,4 @@ export function ActionButton(props: OwnProps): JSX.Element {
 }
 type OwnProps = {
   children: React.ReactNode;
-  onclick?: () => void;
 };
