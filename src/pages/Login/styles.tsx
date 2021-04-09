@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 
 import img from 'assets/images/loginBg.png';
 
-import { linkColor, white } from '../../consts/colors';
+import { Button, withStyles } from '@material-ui/core';
+import { authButtonColor, linkColor, white } from '../../consts/colors';
 
 const HeaderWrapper = styled.div`
   background: url(${img}) no-repeat center center;
@@ -70,6 +71,18 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const StyledButton = withStyles({
+  root: {
+    backgroundColor: authButtonColor,
+    height: '37px',
+    width: '280px',
+    position: 'absolute',
+    left: '50%',
+    marginLeft: '-140px',
+    bottom: '40px',
+  },
+})(Button);
+
 export {
   HeaderWrapper,
   FormWrapper,
@@ -78,4 +91,5 @@ export {
   TextButton,
   FormInputWrapper,
   StyledLink,
+  StyledButton,
 };
