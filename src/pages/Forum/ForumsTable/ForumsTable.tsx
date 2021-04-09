@@ -1,12 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-import { TableCell } from './styledItems';
+import { TableCell, StyledLink } from './styledItems';
 
 const forumTopics = [
   { id: 1, title: 'Атака звезды смерти' },
@@ -15,12 +14,6 @@ const forumTopics = [
 ];
 
 const ForumsTable: React.FC = () => {
-  const history = useHistory();
-
-  const goToTopic = (id: number) => () => {
-    history.push(`forum/${id}`);
-  };
-
   return (
     <Table aria-label="forums topics">
       <TableHead>
@@ -30,9 +23,9 @@ const ForumsTable: React.FC = () => {
       </TableHead>
       <TableBody>
         {forumTopics.map((row) => (
-          <TableRow key={row.title} onClick={goToTopic(row.id)}>
+          <TableRow key={row.title}>
             <TableCell component="th" scope="row">
-              {row.title}
+              <StyledLink to={`forum/${row.id}`}>{row.title}</StyledLink>
             </TableCell>
           </TableRow>
         ))}
