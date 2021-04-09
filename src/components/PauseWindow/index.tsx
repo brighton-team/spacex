@@ -1,3 +1,3 @@
-import {PauseWindow} from './PauseWindow';
+import { PauseWindow } from './PauseWindow';
 
-export {PauseWindow};
+export { PauseWindow };

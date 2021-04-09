@@ -20,7 +20,6 @@ export type UserState = {
   user: IUser;
 };
 
-
 export interface IPauseWindow {
   title: string;
   isVisible: boolean;
@@ -32,4 +31,3 @@ export type PauseWindow = {
   type: string;
   payload: IPauseWindow;
 };
-

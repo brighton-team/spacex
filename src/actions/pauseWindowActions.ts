@@ -9,8 +9,8 @@ export const pauseWindowOpen = (pw: IPauseWindow): PauseWindow => {
 };
 
 export const pauseWindowClose = (pw: IPauseWindow): PauseWindow => {
-    return {
-      type: actionTypes.PAUSE_WINDOW_CLOSE,
-      payload: pw,
-    };
+  return {
+    type: actionTypes.PAUSE_WINDOW_CLOSE,
+    payload: pw,
   };
+};

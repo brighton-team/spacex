@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { gobackLinkColor, white } from '../../consts/colors';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
+import { gobackLinkColor, white } from '../../consts/colors';
 
 enum FontSizes {
   small = '60px',
@@ -62,4 +62,4 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-export { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message,StyledButton };
+export { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message, StyledButton };
