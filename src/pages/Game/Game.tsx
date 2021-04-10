@@ -1,7 +1,13 @@
 import React from 'react';
 
-import { PageWrapper } from './styledItems';
+import { PageWrapper, Canvas } from './styledItems';
+
+import './gameLogic';
 
 export const Game = (): JSX.Element => {
-  return <PageWrapper />;
+  return (
+    <PageWrapper>
+      <Canvas id="game" />
+    </PageWrapper>
+  );
 };
