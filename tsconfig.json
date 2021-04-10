@@ -4,6 +4,18 @@
       "dom",
       "es2017"
     ],
+    "baseUrl": "./src",
+    "paths": {
+      "actions": ["./actions"],
+      "components": ["./components"],
+      "consts": ["./consts"],
+      "decorators": ["./decorators"],
+      "reducers": ["./reducers"],
+      "store": ["./store"],
+      "styles": ["./styles"],
+      "pages": ["./pages"],
+      "types": ["./types"]
+    },
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
@@ -17,16 +29,11 @@
     "skipLibCheck": true,
     "declaration": false,
     "sourceMap": false,
-    "baseUrl": ".",
     "outDir": "./dist",
-    "paths": {
-      "*": ["./src/*"]
-    },
-    "typeRoots": ["typings/**/*.d.ts", "node_modules/@types"],
+    "typeRoots": ["./src/@types", "./node_modules/@types"]
   },
   "include": [
     "src",
-    "typings/**/*.d.ts",
     "./node_modules/@types"
   ],
   "exclude": [
