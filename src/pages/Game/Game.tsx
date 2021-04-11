@@ -1,7 +1,7 @@
 import { pauseWindowOpen,pauseWindowClose } from 'actions/pauseWindowActions';
 import { PauseWindow } from 'components/PauseWindow';
-import React, { useCallback, useContext } from 'react';
- 
+import React, { useCallback } from 'react';
+import { store } from 'store';
 import {connect} from 'react-redux';
 
 import { PageWrapper, PauseButton } from './styledItems';
@@ -10,7 +10,7 @@ import { PageWrapper, PauseButton } from './styledItems';
  
 
 
-const Game = (): JSX.Element => {
+const Game = (props:any): JSX.Element => {
  
   const openModal = useCallback(() => {
     store.dispatch(pauseWindowOpen({ isVisible: true, title: '' }));
@@ -19,18 +19,18 @@ const Game = (): JSX.Element => {
   const closeModal = useCallback(() => {
     store.dispatch(pauseWindowClose({ isVisible: false, title: '' }));
   }, []);
-  
+ 
   return <PageWrapper>
     <PauseButton onClick={openModal}></PauseButton>
-    <PauseWindow isVisible={this.props.pauseWindow.isVisible}
+    <PauseWindow isVisible={ props.pauseWindow.isVisible}
         onClose={closeModal}
-        title="ПАУЗА">Children</PauseWindow>
+        title="Что вы хотите сделать?" />
   </PageWrapper>;
 };
 
-const mapStateToProps = (state: AllStateType): StateProps => ({
+const mapStateToProps = (state: any): any => ({
   state,
-  user: state.user,  
+  pauseWindow: state.pauseWindow,  
 });
 
-export   connect(mapStateToProps)(Game);
+export  default  connect(mapStateToProps)(Game);

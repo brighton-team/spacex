@@ -3,31 +3,37 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
+import {white} from 'consts/colors'
 
 export const StyledDialog = withStyles({
   paper: {
-    width: 340,
-    background: 'rgba(199, 218, 255, 0.9)',
+    width: 450,
+    height: 480,
+    background: 'rgba(24, 23, 67, 0.8)',
     boxShadow: '0px 0px 6px rgb(0 0 0 / 14%)',
-    borderRadius: 12,
-    paddingBottom: 15,
+    borderRadius: 0,
   },
 })(Dialog);
 
 export const Actions = withStyles({
   root: {
-    justifyContent: 'center',
+    display: 'flex',
+    'flex-direction': 'column',
+    'flex-grow': 0,
+    'flex-shrink': 0,
+    'align-items': 'center',
   },
+
 })(DialogActions);
 
 export const Title = withStyles({
   root: {
     fontFamily: 'Montserrat, sans-serif',
     textAlign: 'center',
-    fontWeight: 500,
-    fontSize: 15,
-    lineHeight: '20px',
-    color: '#221749',
+    fontWeight: 700,
+    fontSize: 16,
+    lineHeight: '24px',
+    color: white,
   },
 })(DialogTitle);
 

@@ -1,23 +1,22 @@
 import React from 'react';
-import DialogContent from '@material-ui/core/DialogContent';
+
 import { ActionButton } from 'components/ActionButton';
 
 import { StyledDialog, Title, Actions } from './styles';
 
 export const PauseWindow = (props: OwnProps): JSX.Element => {
-  const { isVisible, onClose, title, children } = props;
+  const { isVisible, onClose, title } = props;
 
   return (
     <StyledDialog open={isVisible} onClose={onClose}>
       <Title disableTypography>
         <h4>{title}</h4>
       </Title>
-
-      <DialogContent>{children}</DialogContent>
-
       <Actions>
         <ActionButton>Продолжить</ActionButton>
-      </Actions>
+        <ActionButton>Завершить</ActionButton>
+        <ActionButton>Начать заново</ActionButton>
+      </Actions> 
     </StyledDialog>
   );
 };
@@ -29,7 +28,7 @@ type OwnProps = {
   onClose: () => void;
  
  
-  children: React.ReactNode;
+
 };
 
  
