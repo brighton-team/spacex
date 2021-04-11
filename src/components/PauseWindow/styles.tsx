@@ -3,7 +3,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core';
-import {white} from 'consts/colors'
+import { white } from 'consts/colors';
 
 export const StyledDialog = withStyles({
   paper: {
@@ -23,7 +23,6 @@ export const Actions = withStyles({
     'flex-shrink': 0,
     'align-items': 'center',
   },
-
 })(DialogActions);
 
 export const Title = withStyles({

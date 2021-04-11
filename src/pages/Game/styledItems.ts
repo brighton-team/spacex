@@ -23,12 +23,12 @@ export const PauseButton = withStyles({
   root: {
     background: `url(${pause}) no-repeat center center`,
     height: '40px',
-    width:'40px',
+    width: '40px',
     'background-size': 'cover',
-    position:'absolute',
-    'z-index':'10000',
-    top:'120px',
-    left:'50px',
-    'min-width':'auto',
+    position: 'absolute',
+    'z-index': '10000',
+    top: '120px',
+    left: '50px',
+    'min-width': 'auto',
   },
 })(Button);

@@ -16,7 +16,7 @@ export const PauseWindow = (props: OwnProps): JSX.Element => {
         <ActionButton>Продолжить</ActionButton>
         <ActionButton>Завершить</ActionButton>
         <ActionButton>Начать заново</ActionButton>
-      </Actions> 
+      </Actions>
     </StyledDialog>
   );
 };
@@ -24,11 +24,6 @@ export const PauseWindow = (props: OwnProps): JSX.Element => {
 type OwnProps = {
   title: string;
   isVisible: boolean;
- 
+
   onClose: () => void;
- 
- 
-
 };
-
- 
