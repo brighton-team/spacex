@@ -4,40 +4,38 @@ import { ActionButton } from 'components/ActionButton';
 
 import { StyledDialog, Title, Actions, StyledLink } from './styles';
 
-
 export const GameModal = (props: OwnProps): JSX.Element => {
-  const { isVisible, onClose, title, buttons} = props;
+  const { isVisible, onClose, title, buttons } = props;
 
   return (
     <StyledDialog open={isVisible} onClose={onClose}>
-
-      <Actions onClick ={onClose} >
+      <Actions onClick={onClose}>
         <Title disableTypography>
           <h4>{title}</h4>
         </Title>
         {buttons?.map((button) => (
-            <StyledLink key={button.text} to={button.link}>
-              <ActionButton >{button.text}</ActionButton>
-            </StyledLink>
-          ))}
-      
+          <StyledLink key={button.text} to={button.link}>
+            <ActionButton>{button.text}</ActionButton>
+          </StyledLink>
+        ))}
       </Actions>
     </StyledDialog>
   );
 };
 
 type OwnProps = {
-  title: string;
+  title?: string;
   isVisible: boolean;
-  buttons?:Record<string,string>[];
+  buttons?: Record<string, string>[];
 
   onClose: () => void;
 };
 
-GameModal.defaultProps={
-  title:'Что вы хотите сделать?',
-  buttons:[
-  {text:'Продолжить', link:'play'},
-  {text:'Завершить', link:''},
-  {text:'Начать заново', link:''}],
-}
+GameModal.defaultProps = {
+  title: 'Что вы хотите сделать?',
+  buttons: [
+    { text: 'Продолжить', link: 'play' },
+    { text: 'Завершить', link: '' },
+    { text: 'Начать заново', link: '' },
+  ],
+};

@@ -21,7 +21,6 @@ export type UserState = {
 };
 
 export interface IGameModal {
-
   isVisible: boolean;
 }
 
