@@ -3,18 +3,21 @@ import { PAUSE_WINDOW_CLOSE, PAUSE_WINDOW_OPEN } from '../store/actionTypes';
 
 const initialState: IPauseWindow = {
   isVisible: false,
-  title: 'Окно паузы',
+ 
+ 
 };
 
 export const pauseWindowReducer = (
-  state: IPauseWindow = initialState,
+  state: IPauseWindow ,
   action: PauseWindow
 ): IPauseWindow => {
-  switch (action.type) {
+  const {payload,type} = action;
+  switch (type) {
     case PAUSE_WINDOW_OPEN:
       return {
         ...state,
-        isVisible: true,
+        ...payload
+
       };
     case PAUSE_WINDOW_CLOSE:
       return initialState;

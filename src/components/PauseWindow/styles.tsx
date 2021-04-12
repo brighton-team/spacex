@@ -2,30 +2,34 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core';
+import  {  withStyles } from '@material-ui/core';
+import styled from 'styled-components';
 import { white } from 'consts/colors';
+import { Link } from 'react-router-dom';
 
-export const StyledDialog = withStyles({
+ const StyledDialog = withStyles({
   paper: {
     width: 450,
     height: 480,
+    padding: '0px 85px',
     background: 'rgba(24, 23, 67, 0.8)',
     boxShadow: '0px 0px 6px rgb(0 0 0 / 14%)',
     borderRadius: 0,
+    boxSizing:'border-box'
   },
 })(Dialog);
 
-export const Actions = withStyles({
+ const Actions = withStyles({
   root: {
-    display: 'flex',
+    height:400,
+     'align-items': 'stretch',
     'flex-direction': 'column',
-    'flex-grow': 0,
-    'flex-shrink': 0,
-    'align-items': 'center',
+    'justify-content': 'space-evenly',
+ 
   },
 })(DialogActions);
 
-export const Title = withStyles({
+ const Title = withStyles({
   root: {
     fontFamily: 'Montserrat, sans-serif',
     textAlign: 'center',
@@ -36,7 +40,7 @@ export const Title = withStyles({
   },
 })(DialogTitle);
 
-export const StyledButton = withStyles({
+const StyledButton = withStyles({
   root: {
     background: 'transparent',
     height: '37px',
@@ -46,10 +50,15 @@ export const StyledButton = withStyles({
     marginTop: 10,
   },
 })(Button);
+ 
+const StyledLink = styled(Link)`
+  display:contents;
+`;
 
-export default {
+export  {
   StyledDialog,
   Title,
   Actions,
   StyledButton,
+  StyledLink,
 };

@@ -1,27 +1,22 @@
-import { pauseWindowOpen, pauseWindowClose } from 'actions/pauseWindowActions';
-import { PauseWindow } from 'components/PauseWindow';
-import React, { useCallback } from 'react';
-import { store } from 'store';
+
+import { PauseWindow, openModal, closeModal } from 'components/PauseWindow';
+import React, {useCallback} from 'react';
 import { connect } from 'react-redux';
 
 import { PageWrapper, PauseButton } from './styledItems';
 
 const Game = (props: any): JSX.Element => {
-  const openModal = useCallback(() => {
-    store.dispatch(pauseWindowOpen({ isVisible: true, title: '' }));
-  }, []);
 
-  const closeModal = useCallback(() => {
-    store.dispatch(pauseWindowClose({ isVisible: false, title: '' }));
-  }, []);
+  const openModalCallback = useCallback(openModal,[]);
+  const closeModalCallback = useCallback(closeModal,[]);
 
   return (
     <PageWrapper>
-      <PauseButton onClick={openModal} />
+      <PauseButton onClick={openModalCallback} />
       <PauseWindow
         isVisible={props.pauseWindow.isVisible}
-        onClose={closeModal}
-        title="Что вы хотите сделать?"
+        onClose={closeModalCallback}
+        title={props.pauseWindow.title}
       />
     </PageWrapper>
   );

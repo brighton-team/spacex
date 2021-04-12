@@ -1,3 +1,4 @@
 import { PauseWindow } from './PauseWindow';
+import { openModal, closeModal } from './control';
 
-export { PauseWindow };
+export { PauseWindow, openModal, closeModal};

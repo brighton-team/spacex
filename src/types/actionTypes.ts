@@ -21,10 +21,8 @@ export type UserState = {
 };
 
 export interface IPauseWindow {
-  title: string;
+
   isVisible: boolean;
-  okButtonText?: string;
-  okButton?: React.ReactNode;
 }
 
 export type PauseWindow = {
