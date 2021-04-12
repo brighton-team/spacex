@@ -12,15 +12,72 @@ import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_FAILURE,
   GET_USER_DATA_SUCCESS,
+  CHANGE_USER_DATA_REQUEST,
+  CHANGE_USER_DATA_FAILURE,
+  CHANGE_USER_DATA_SUCCESS,
+  CHANGE_USER_PASSWORD_REQUEST,
+  CHANGE_USER_PASSWORD_FAILURE,
+  CHANGE_USER_PASSWORD_SUCCESS,
+  CHANGE_USER_AVATAR_REQUEST,
+  CHANGE_USER_AVATAR_FAILURE,
+  CHANGE_USER_AVATAR_SUCCESS,
 } from 'store/actionTypes';
 
 const initialState: IUser = {
   isAuth: false,
   loaded: true,
+  isPasswordChanged: false,
+  isAvatarChanged: false,
 };
 
 export const userReducer = (state: IUser = initialState, action: SignInAction): IUser => {
   switch (action.type) {
+    case CHANGE_USER_AVATAR_REQUEST:
+      return {
+        ...state,
+      };
+    case CHANGE_USER_AVATAR_SUCCESS:
+      return {
+        ...state,
+        data: { ...action.payload },
+      };
+    case CHANGE_USER_AVATAR_FAILURE:
+      return {
+        ...state,
+      };
+    case CHANGE_USER_PASSWORD_REQUEST:
+      return {
+        ...state,
+        isPasswordChanged: false,
+      };
+    case CHANGE_USER_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        isPasswordChanged: true,
+      };
+    case CHANGE_USER_PASSWORD_FAILURE:
+      return {
+        ...state,
+        isPasswordChanged: false,
+      };
+    case CHANGE_USER_DATA_REQUEST:
+      return {
+        ...state,
+        loaded: false,
+      };
+    case CHANGE_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        data: { ...action.payload },
+        isAuth: true,
+        loaded: true,
+      };
+    case CHANGE_USER_DATA_FAILURE:
+      return {
+        ...state,
+        isAuth: false,
+        loaded: true,
+      };
     case GET_USER_DATA_REQUEST:
       return {
         ...state,

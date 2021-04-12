@@ -6,9 +6,12 @@ import {
   GET_USER_URL,
   LOG_OUT_URL,
   PUT_USER_DATA_URL,
+  CHANGE_USER_PASSWORD_URL,
+  CHANGE_USER_AVATAR_URL,
 } from 'consts/routes';
 
 import { FormData } from 'pages/Login/Login';
+import { PasswordData } from 'actions/profileActions';
 
 class ApiService {
   signIn(values: FormData) {
@@ -54,10 +57,25 @@ class ApiService {
   putUserData(values: FormData) {
     return this.instanceAxios
       .put(PUT_USER_DATA_URL, values)
-      .then((response) => {
-        console.log('response', response);
-        return response.status;
-      })
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  changeUserPassword(values: PasswordData) {
+    return this.instanceAxios
+      .put(CHANGE_USER_PASSWORD_URL, values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  changeUserAvatar(values: any) {
+    return this.instanceAxios
+      .put(CHANGE_USER_AVATAR_URL, values)
+      .then((response) => response)
       .catch((err) => {
         throw err;
       });

@@ -14,3 +14,5 @@ export const SIGN_IN_URL = `${BASE_AUTH_URL}/signin`;
 export const LOG_OUT_URL = `${BASE_AUTH_URL}/logout`;
 export const GET_USER_URL = `${BASE_AUTH_URL}/user`;
 export const PUT_USER_DATA_URL = `${BASE_URL}/user/profile`;
+export const CHANGE_USER_PASSWORD_URL = `${BASE_URL}/user/password`;
+export const CHANGE_USER_AVATAR_URL = `${BASE_URL}/user/profile/avatar`;

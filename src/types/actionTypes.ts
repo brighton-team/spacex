@@ -3,6 +3,8 @@ import { FormData } from 'pages/Login/Login';
 export interface IUser {
   loaded?: boolean;
   isAuth?: boolean;
+  isPasswordChanged: boolean;
+  isAvatarChanged: boolean;
   data?: FormData;
 }
 

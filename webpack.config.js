@@ -20,6 +20,7 @@ module.exports = {
       assets: path.resolve(__dirname, './src/assets/'),
       shared: path.resolve(__dirname, './src/shared/'),
       types: path.resolve(__dirname, './src/types/'),
+      utils: path.resolve(__dirname, './src/utils/'),
     },
     extensions: ['.tsx', '.ts', '.js'],
   },

@@ -5,7 +5,7 @@ import img from './img/defaultimg.png';
 
 import { white } from '../../consts/colors';
 
-const AvatarWrapper = styled.div`
+const AvatarWrapper = styled.div<{ onClick: any }>`
   width: 100px;
   height: 100px;
   border: 1px solid ${white};

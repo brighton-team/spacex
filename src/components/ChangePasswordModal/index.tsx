@@ -1,22 +1,21 @@
-import { FormControl, TextField } from '@material-ui/core';
+import React, { useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
-import React, { useEffect, useRef, useState } from 'react';
+import { FormControl, TextField } from '@material-ui/core';
+
 import Modal from '../../shared/components/Modal';
 import { SubmitButton } from '../../pages/Forum/styledItems';
+import { changeUserPasswordAction, PasswordData } from '../../actions/profileActions';
+import { UserState } from '../../types/actionTypes';
 
 type ChangePasswordModalProps = {
   visible: boolean;
   closeModal(): void;
 };
 
-type FormData = {
-  password: string;
-  confirmPassword: string;
-};
-
 const submitButton = (
   <SubmitButton variant="outlined" type="submit" form="new-password">
-    Создать
+    Изменить пароль
   </SubmitButton>
 );
 
@@ -24,23 +23,30 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
   visible,
   closeModal,
 }) => {
-  const [isModalVisible, setModalVisibility] = useState(false);
+  const { isPasswordChanged } = useSelector((state: UserState) => state.user);
+  const dispatch = useDispatch();
+  function usePrevious<T>(value: T): T {
+    const ref: any = useRef<T>();
+    useEffect(() => {
+      ref.current = value;
+    }, [value]);
+    return ref.current;
+  }
+  const prevIsPasswordChanged: boolean = usePrevious<boolean>(isPasswordChanged);
   useEffect(() => {
-    setModalVisibility(visible);
-  }, [visible]);
+    if (prevIsPasswordChanged !== isPasswordChanged && isPasswordChanged) {
+      closeModal();
+    }
+  }, [closeModal, isPasswordChanged, prevIsPasswordChanged]);
 
-  const { control, handleSubmit, watch, errors: fieldsErrors } = useForm<FormData>();
-  const password = useRef({});
-  password.current = watch('password', '');
-
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<PasswordData>();
   const onSubmit = handleSubmit((values) => {
-    console.log('values:', values); // eslint-disable-line no-console
-    closeModal();
+    dispatch(changeUserPasswordAction(values));
   });
 
   return (
     <Modal
-      isVisible={isModalVisible}
+      isVisible={visible}
       onOk={closeModal}
       onClose={closeModal}
       title="Придумайте новый пароль"
@@ -49,16 +55,16 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
       <form id="new-password" onSubmit={onSubmit}>
         <FormControl fullWidth variant="outlined">
           <Controller
-            name="password"
+            name="oldPassword"
             as={
               <TextField
-                id="password"
+                id="oldPassword"
                 margin="dense"
                 type="password"
                 fullWidth
-                helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
-                label="password"
-                error={Boolean(fieldsErrors.password)}
+                helperText={fieldsErrors.oldPassword ? fieldsErrors.oldPassword.message : null}
+                label="Old password"
+                error={Boolean(fieldsErrors.oldPassword)}
               />
             }
             control={control}
@@ -74,18 +80,16 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
         </FormControl>
         <FormControl fullWidth variant="outlined">
           <Controller
-            name="confirmPassword"
+            name="newPassword"
             as={
               <TextField
-                id="confirmPassword"
+                id="newPassword"
                 margin="dense"
                 type="password"
                 fullWidth
-                helperText={
-                  fieldsErrors.confirmPassword ? fieldsErrors.confirmPassword.message : null
-                }
-                label="Confirm Password"
-                error={Boolean(fieldsErrors.confirmPassword)}
+                helperText={fieldsErrors.newPassword ? fieldsErrors.newPassword.message : null}
+                label="New password"
+                error={Boolean(fieldsErrors.newPassword)}
               />
             }
             control={control}
@@ -96,7 +100,6 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                 value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
                 message: 'invalid value',
               },
-              validate: (value) => value === password.current || 'The passwords do not match',
             }}
           />
         </FormControl>

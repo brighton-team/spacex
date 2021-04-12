@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Controller, useForm } from 'react-hook-form';
 import { Button, FormControl } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { useHistory } from 'react-router-dom';
-import { signIn } from 'consts/routes';
 
 import { authButtonColor } from 'consts/colors';
 import { ChangePasswordModal } from 'components/ChangePasswordModal';
 import { logOutAction } from 'actions/signInActions';
 import { UserState } from 'types/actionTypes';
 import { changeUserDataAction } from 'actions/profileActions';
+import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
 import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './styledItems';
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
@@ -28,31 +27,20 @@ export const StyledButton = withStyles({
 })(Button);
 
 export const ProfilePage = (): JSX.Element => {
-  const { isAuth, loaded } = useSelector((state: UserState) => state.user);
+  const { loaded } = useSelector((state: UserState) => state.user);
   const data = useSelector((state: UserState | undefined) => state?.user?.data);
-  // const { login, email, first_name, second_name, phone, display_name } = data;
-  // const data = useSelector((state: UserState) => state.user.data);
-  // console.log('login', data.login)
-  // console.log('data', data);
-  if (loaded) {
-    console.log('login', data?.login);
-  }
-  const history = useHistory();
-  useEffect(() => {
-    if (!isAuth) {
-      history.push(signIn);
-    }
-  }, [isAuth, history]);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [isVisibleAvatarModal, setIsVisibleAvatarModal] = useState(false);
   const dispatch = useDispatch();
   const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
   const onSubmit = handleSubmit((values) => {
     dispatch(changeUserDataAction(values));
-    console.log('values:', values);
   });
-
   const handleVisibleModalChangePasswords = () => {
     setIsVisibleModal(!isVisibleModal);
+  };
+  const handleVisibleModalAvatar = () => {
+    setIsVisibleAvatarModal(!isVisibleAvatarModal);
   };
 
   const logOut = () => {
@@ -64,11 +52,11 @@ export const ProfilePage = (): JSX.Element => {
       {loaded ? (
         <>
           <TableWrapper>
-            <AvatarWrapper>
-              <AvatarImage />
+            <AvatarWrapper onClick={handleVisibleModalAvatar}>
+              <AvatarImage src={`https://ya-praktikum.tech/api/v2/resources/${data?.avatar}`} />
             </AvatarWrapper>
             <TitleUserName>Иван</TitleUserName>
-            <FormInputWrapper marginTop="10px" width="80%">
+            <FormInputWrapper currentMarginTop="10px" currentWidth="80%">
               <form onSubmit={onSubmit}>
                 <FormControl fullWidth variant="outlined">
                   <Controller
@@ -187,13 +175,15 @@ export const ProfilePage = (): JSX.Element => {
                 </FormControl>
                 <FormControl fullWidth variant="outlined">
                   <Controller
-                    name="nickname"
+                    name="display_name"
                     as={
                       <CssTextField
                         id="nickname"
-                        helperText={fieldsErrors.login ? fieldsErrors.login.message : null}
+                        helperText={
+                          fieldsErrors.display_name ? fieldsErrors.display_name.message : null
+                        }
                         label="Nickname"
-                        error={Boolean(fieldsErrors.login)}
+                        error={Boolean(fieldsErrors.display_name)}
                       />
                     }
                     control={control}
@@ -223,6 +213,7 @@ export const ProfilePage = (): JSX.Element => {
             visible={isVisibleModal}
             closeModal={handleVisibleModalChangePasswords}
           />
+          <ChangeAvatarModal visible={isVisibleAvatarModal} closeModal={handleVisibleModalAvatar} />
         </>
       ) : (
         <h1>Loader</h1>

@@ -52,9 +52,9 @@ const TextButton = styled.span`
   letter-spacing: 0.05em;
   color: ${white};
 `;
-const FormInputWrapper = styled.div<{ marginTop: string; width: string }>`
-  width: ${(props) => props.width};
-  margin-top: ${(props) => props.marginTop};
+const FormInputWrapper = styled.div<{ currentMarginTop: string; currentWidth: string }>`
+  width: ${(props) => props.currentWidth};
+  margin-top: ${(props) => props.currentMarginTop};
 `;
 
 const StyledLink = styled(Link)`
