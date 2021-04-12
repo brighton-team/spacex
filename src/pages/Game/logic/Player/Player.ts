@@ -16,21 +16,21 @@ export class Player {
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     this.radius = 40;
-    this.speed = 256;
+    this.speed = 5;
   }
 
   update(canvas: HTMLCanvasElement, keysDown: Record<string, boolean>): void {
     if ('ArrowUp' in keysDown) {
-      this.y -= this.speed * 0.02;
+      this.y -= this.speed;
     }
     if ('ArrowDown' in keysDown) {
-      this.y += this.speed * 0.02;
+      this.y += this.speed;
     }
     if ('ArrowLeft' in keysDown) {
-      this.x -= this.speed * 0.02;
+      this.x -= this.speed;
     }
     if ('ArrowRight' in keysDown) {
-      this.x += this.speed * 0.02;
+      this.x += this.speed;
     }
 
     if (this.x < 0) {
