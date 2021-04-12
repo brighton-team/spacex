@@ -5,7 +5,7 @@ import { IGameModal } from 'types/actionTypes';
 
 import { PageWrapper, PauseButton } from './styledItems';
 
-const Game = (props: any): JSX.Element => {
+const Game = (props: OwnProps): JSX.Element => {
   const openModalCallback = useCallback(openModal, []);
   const closeModalCallback = useCallback(closeModal, []);
 
@@ -22,5 +22,9 @@ const mapStateToProps = (state: { gameModal: IGameModal }) => ({
   state,
   gameModal: state.gameModal,
 });
+
+type OwnProps = {
+  gameModal: IGameModal;
+};
 
 export default connect(mapStateToProps)(Game);
