@@ -39,8 +39,8 @@ export class Player {
     if (this.x > canvas.width) {
       this.x = canvas.width;
     }
-    if (this.y < 50) {
-      this.y = 50;
+    if (this.y < 40) {
+      this.y = 40;
     }
     if (this.y > canvas.height) {
       this.y = canvas.height;
