@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { signIn, signUp, forum, game, error4XX, error5XX, profile, leaders } from 'consts/routes';
+import { signIn, signUp, forum, game, profile, leaders } from 'consts/routes';
 
 import { Header } from 'components/Header';
 import { LoginPage } from 'pages/Login';
@@ -10,14 +10,14 @@ import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { Game } from 'pages/Game';
-import { ErrorPage4XX, ErrorPage5XX } from 'pages/Error';
 import { ProfilePage } from 'pages/Profile';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { getUserDataAction } from './actions/signInActions';
 import { UserState } from './types/actionTypes';
+import { ErrorPage } from './pages/Error';
 
-const App: React.FC = () => {
+export const App: React.FC = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getUserDataAction());
@@ -25,8 +25,8 @@ const App: React.FC = () => {
   const { isAuth } = useSelector((state: UserState) => state.user);
 
   return (
-    <ErrorBoundary type="global">
-      <Router>
+    <Router>
+      <ErrorBoundary type="global">
         <Header />
 
         <Switch>
@@ -54,14 +54,11 @@ const App: React.FC = () => {
           <Route path={forum} component={Forum} exact />
           <Route path={`${forum}/:id`} component={ForumTopicView} />
           <Route path={game} component={Game} />
-          <Route path={error4XX} component={ErrorPage4XX} />
-          <Route path={error5XX} component={ErrorPage5XX} />
           <Route path="*">
-            <ErrorPage4XX number={404} />
+            <ErrorPage errorNumber={404} />
           </Route>
         </Switch>
-      </Router>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </Router>
   );
 };
-export default App;
