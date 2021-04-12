@@ -1,5 +1,5 @@
 
-import { PauseWindow, openModal, closeModal } from 'components/PauseWindow';
+import { GameModal, openModal, closeModal } from 'components/GameModal';
 import React, {useCallback} from 'react';
 import { connect } from 'react-redux';
 
@@ -13,10 +13,10 @@ const Game = (props: any): JSX.Element => {
   return (
     <PageWrapper>
       <PauseButton onClick={openModalCallback} />
-      <PauseWindow
-        isVisible={props.pauseWindow.isVisible}
+      <GameModal
+        isVisible={props.gameModal.isVisible}
         onClose={closeModalCallback}
-        title={props.pauseWindow.title}
+        
       />
     </PageWrapper>
   );
@@ -24,7 +24,7 @@ const Game = (props: any): JSX.Element => {
 
 const mapStateToProps = (state: any): any => ({
   state,
-  pauseWindow: state.pauseWindow,
+  gameModal: state.gameModal,
 });
 
 export default connect(mapStateToProps)(Game);

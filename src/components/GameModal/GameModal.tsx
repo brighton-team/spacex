@@ -5,7 +5,7 @@ import { ActionButton } from 'components/ActionButton';
 import { StyledDialog, Title, Actions, StyledLink } from './styles';
 
 
-export const PauseWindow = (props: OwnProps): JSX.Element => {
+export const GameModal = (props: OwnProps): JSX.Element => {
   const { isVisible, onClose, title, buttons} = props;
 
   return (
@@ -34,7 +34,7 @@ type OwnProps = {
   onClose: () => void;
 };
 
-PauseWindow.defaultProps={
+GameModal.defaultProps={
   title:'Что вы хотите сделать?',
   buttons:[
   {text:'Продолжить', link:'play'},

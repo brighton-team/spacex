@@ -20,12 +20,12 @@ export type UserState = {
   user: IUser;
 };
 
-export interface IPauseWindow {
+export interface IGameModal {
 
   isVisible: boolean;
 }
 
-export type PauseWindow = {
+export type GameModal = {
   type: string;
-  payload: IPauseWindow;
+  payload: IGameModal;
 };
