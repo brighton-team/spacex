@@ -29,7 +29,6 @@ export const TitleText = styled.h1`
   text-align: center;
   letter-spacing: 0.05em;
   color: #fff;
-  /* margin-top: 50px; */
 `;
 
 export const TableWrapper = styled.div`

@@ -1,11 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { ErrorBoundary } from 'components/ErrorBoundary';
 
-import Modal from 'shared/components/Modal';
-import { Header } from 'components/Header';
+import { FormModal } from 'components/FormModal';
 
 import ForumsTable from './ForumsTable';
 
@@ -30,6 +27,8 @@ type FormData = {
 };
 
 const Forum = (): JSX.Element => {
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
+
   const [isModalVisible, setModalVisibility] = useState(false);
 
   const openModal = useCallback(() => {
@@ -40,16 +39,14 @@ const Forum = (): JSX.Element => {
     setModalVisibility(false);
   }, []);
 
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
-
   const onSubmit = handleSubmit(({ title }) => {
+    // TODO: remove console logging
     console.log('title:', title); // eslint-disable-line no-console
     closeModal();
   });
 
   return (
-    <PageWrapper padding="120px 70px 0">
-      <Header />
+    <PageWrapper>
       <Heading>
         <EmptySpace />
         <TitleText>ТЕМЫ ФОРУМА</TitleText>
@@ -64,38 +61,17 @@ const Forum = (): JSX.Element => {
         </ErrorBoundary>
       </TableWrapper>
 
-      <Modal
+      <FormModal
         isVisible={isModalVisible}
-        onOk={closeModal}
-        onClose={closeModal}
+        closeModal={closeModal}
+        submitButton={submitButton}
         title="Создайте новую тему"
-        okButton={submitButton}
-      >
-        <form id="new-forum-topic" onSubmit={onSubmit}>
-          <FormControl fullWidth variant="outlined">
-            <Controller
-              name="title"
-              as={
-                <TextField
-                  id="title"
-                  autoFocus
-                  margin="dense"
-                  type="text"
-                  fullWidth
-                  helperText={fieldsErrors.title ? fieldsErrors.title.message : null}
-                  label="Название темы"
-                  error={Boolean(fieldsErrors.title)}
-                />
-              }
-              control={control}
-              defaultValue=""
-              rules={{
-                required: 'Required',
-              }}
-            />
-          </FormControl>
-        </form>
-      </Modal>
+        formId="new-forum-topic"
+        onSubmit={onSubmit}
+        formFields={[{ title: 'title', label: 'Название темы', required: true }]}
+        fieldsErrors={fieldsErrors}
+        control={control}
+      />
     </PageWrapper>
   );
 };
