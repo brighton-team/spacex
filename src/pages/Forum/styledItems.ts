@@ -3,7 +3,7 @@ import { Button, withStyles } from '@material-ui/core';
 
 import img from 'assets/images/rocketBg.jpg';
 
-export const PageWrapper = styled.div<{ padding: string }>`
+export const PageWrapper = styled.div<{ padding?: string }>`
   background: url(${img}) no-repeat center center;
   height: 100vh;
   background-size: cover;

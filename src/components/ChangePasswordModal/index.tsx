@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { FormControl, TextField } from '@material-ui/core';
 
-import Modal from '../../shared/components/Modal';
 import { SubmitButton } from '../../pages/Forum/styledItems';
 import { changeUserPasswordAction, PasswordData } from '../../actions/profileActions';
 import { UserState } from '../../types/actionTypes';
+import { Modal } from '../Modal';
 
 type ChangePasswordModalProps = {
   visible: boolean;

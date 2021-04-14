@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Modal from '../../shared/components/Modal';
 import { UserState } from '../../types/actionTypes';
 import { changeUserAvatarAction } from '../../actions/profileActions';
+import { Modal } from '../Modal';
 
 type ChangeAvaterModalProps = {
   visible: boolean;
