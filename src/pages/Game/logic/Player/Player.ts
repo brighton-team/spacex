@@ -16,7 +16,7 @@ export class Player {
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     this.radius = 40;
-    this.speed = 5;
+    this.speed = 15;
   }
 
   update(canvas: HTMLCanvasElement, keysDown: Record<string, boolean>): void {
