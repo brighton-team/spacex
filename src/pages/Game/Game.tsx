@@ -1,22 +1,33 @@
 import React, { useEffect } from 'react';
 
-import { GameLogic } from './logic/GameLogic';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { PageWrapper, Canvas } from './styledItems';
+import { PageWrapper, Canvas, Score, Health } from './styledItems';
+import { UserState } from '../../types/actionTypes';
+import { gameInst } from './logic/GameLogic/GameLogic';
 
 export const Game = (): JSX.Element => {
+  const { score, lives } = useSelector((state: UserState) => state.game);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const game = new GameLogic();
-    game.initialize();
+    gameInst.initialize(dispatch);
 
     return () => {
-      game.deinitialize();
+      gameInst.deinitialize();
     };
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (lives === 3) {
+      gameInst.setPause();
+    }
+  }, [lives]);
 
   return (
     <PageWrapper>
       <Canvas id="game" />
+      <Score>Score: {score}</Score>
+      <Health>Health: {lives}</Health>
     </PageWrapper>
   );
 };

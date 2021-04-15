@@ -1,11 +1,14 @@
+import redux from 'redux';
+
 import { Player } from 'pages/Game/logic/Player';
 import { Rock } from 'pages/Game/logic/Rock';
+import { increaseGameScore, reduceGameLives } from 'actions/gameActions';
 import { Bullet } from '../Bullet';
 
 import { Explosion } from '../explosion';
 
 export class GameLogic {
-  private canvas: HTMLCanvasElement;
+  private canvas: HTMLCanvasElement | null;
 
   private ctx: CanvasRenderingContext2D | null;
 
@@ -21,18 +24,26 @@ export class GameLogic {
 
   private explosions: Explosion[];
 
+  public dispatch: redux.Dispatch<any> | null;
+
+  private isPause: boolean;
+
   constructor() {
     this.keysDown = {};
-    this.canvas = document.getElementById('game') as HTMLCanvasElement;
+    this.canvas = null;
     this.ctx = null;
     this.gameFrame = 0;
     this.player = null;
     this.obstacles = [];
     this.bullets = [];
     this.explosions = [];
+    this.isPause = false;
+    this.dispatch = null;
   }
 
-  initialize(): void {
+  initialize(dispatch: redux.Dispatch<any>): void {
+    this.dispatch = dispatch;
+    this.canvas = document.getElementById('game') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
@@ -53,7 +64,7 @@ export class GameLogic {
   }
 
   onKeyDown = (event: KeyboardEvent): void => {
-    if (!this.player || !this.ctx) {
+    if (!this.player || !this.ctx || !this.canvas) {
       return;
     }
     if (event.key === ' ') {
@@ -83,7 +94,7 @@ export class GameLogic {
   }
 
   handleObstacles(): void {
-    if (!this.player || !this.ctx) {
+    if (!this.player || !this.ctx || !this.canvas || !this.dispatch) {
       return;
     }
 
@@ -93,12 +104,15 @@ export class GameLogic {
     }
 
     for (let i = 0; i < this.obstacles.length; i += 1) {
-      if (this.obstacles[i].y > this.canvas.height * 2) {
+      if (this.canvas && this.obstacles[i].y > this.canvas.height * 3) {
         this.obstacles.splice(i, 1);
       }
     }
     for (let i = 0; i < this.obstacles.length; i += 1) {
       if (this.obstacles[i].distance < this.obstacles[i].radius + this.player.radius) {
+        const explosion = new Explosion(this.obstacles[i], this.gameFrame);
+        this.explosions.push(explosion);
+        this.dispatch(reduceGameLives());
         this.obstacles.splice(i, 1);
       }
     }
@@ -106,15 +120,14 @@ export class GameLogic {
     for (let i = 0; i < this.obstacles.length; i += 1) {
       for (let j = 0; j < this.bullets.length; j += 1) {
         if (
-          Math.abs(this.obstacles[i].x + 135 - this.bullets[j].x) < 50 &&
+          Math.abs(this.obstacles[i]?.x + 135 - this.bullets[j].x) < 50 &&
           Math.abs(this.obstacles[i].y + 50 - this.bullets[j].y) < 130
         ) {
-          const expl = new Explosion(this.obstacles[i], this.gameFrame);
-          this.explosions.push(expl);
-          // expl.draw(this.ctx);
-          // this.ctx.drawImage(image, this.obstacles[i].x, this.obstacles[i].y, 135, 135);
+          const explosion = new Explosion(this.obstacles[i], this.gameFrame);
+          this.explosions.push(explosion);
           this.obstacles.splice(i, 1);
           this.bullets.splice(j, 1);
+          this.dispatch(increaseGameScore());
         }
       }
     }
@@ -137,8 +150,12 @@ export class GameLogic {
     }
   }
 
+  setPause(): void {
+    this.isPause = !this.isPause;
+  }
+
   animate = (): void => {
-    if (!this.ctx || !this.player) {
+    if (!this.ctx || !this.player || this.isPause || !this.canvas) {
       return;
     }
 
@@ -157,3 +174,5 @@ export class GameLogic {
     requestAnimationFrame(this.animate);
   };
 }
+
+export const gameInst = new GameLogic();

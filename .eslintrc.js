@@ -32,6 +32,7 @@ module.exports = {
     'no-case-declarations': 'off',
     'prettier/prettier': 'error',
     'import/prefer-default-export': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
     'linebreak-style': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',

@@ -15,4 +15,10 @@ export type SignInAction = {
 
 export type UserState = {
   user: IUser;
+  game: GameReducer;
 };
+
+export interface GameReducer {
+  score: number;
+  lives: number;
+}
