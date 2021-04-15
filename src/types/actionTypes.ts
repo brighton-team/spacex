@@ -16,3 +16,12 @@ export type SignInAction = {
 export type UserState = {
   user: IUser;
 };
+
+export interface IGameModal {
+  isVisible: boolean;
+}
+
+export type GameModal = {
+  type: string;
+  payload: IGameModal;
+};
