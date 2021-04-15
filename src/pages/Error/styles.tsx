@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core';
 import { gobackLinkColor, white } from '../../consts/colors';
 
 enum FontSizes {
@@ -50,4 +52,14 @@ const Message = styled.div`
   color: ${white};
 `;
 
-export { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message };
+const StyledButton = withStyles({
+  root: {
+    background: 'transparent',
+    height: '37px',
+    width: '280px',
+    color: '#fff',
+    borderColor: '#fff',
+  },
+})(Button);
+
+export { HeaderWrapper, TextWrapper, TextLink, ErrorNumber, Message, StyledButton };

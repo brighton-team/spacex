@@ -1,14 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { GameModal, openModal, closeModal } from 'components/GameModal';
 
-import { PageWrapper, Canvas, Score, Health } from './styledItems';
+import { PageWrapper, PauseButton, Canvas, Score, Health } from './styledItems';
 import { UserState } from '../../types/actionTypes';
 import { gameInst } from './logic/GameLogic/GameLogic';
 
 export const Game = (): JSX.Element => {
   const { score, lives } = useSelector((state: UserState) => state.game);
+  const { isVisible } = useSelector((state: UserState) => state.gameModal);
+  const ref: any = useRef();
   const dispatch = useDispatch();
+  const openModalCallback = useCallback(() => {
+    ref.current?.blur();
+    openModal();
+    gameInst.togglePause();
+  }, []);
+  const closeModalCallback = useCallback(() => {
+    closeModal();
+    gameInst.togglePause();
+    gameInst.animate();
+  }, []);
   useEffect(() => {
     gameInst.initialize(dispatch);
 
@@ -19,7 +32,7 @@ export const Game = (): JSX.Element => {
 
   useEffect(() => {
     if (lives === 3) {
-      gameInst.setPause();
+      gameInst.togglePause();
     }
   }, [lives]);
 
@@ -28,6 +41,8 @@ export const Game = (): JSX.Element => {
       <Canvas id="game" />
       <Score>Score: {score}</Score>
       <Health>Health: {lives}</Health>
+      <PauseButton onClick={openModalCallback} ref={ref} />
+      <GameModal isVisible={isVisible} onClose={closeModalCallback} />
     </PageWrapper>
   );
 };

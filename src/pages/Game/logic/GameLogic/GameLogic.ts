@@ -58,6 +58,10 @@ export class GameLogic {
   }
 
   deinitialize(): void {
+    this.gameFrame = 0;
+    this.obstacles = [];
+    this.bullets = [];
+    this.explosions = [];
     window.removeEventListener('keydown', this.onKeyDown);
 
     window.removeEventListener('keyup', this.onKeyUp);
@@ -150,12 +154,12 @@ export class GameLogic {
     }
   }
 
-  setPause(): void {
+  togglePause(): void {
     this.isPause = !this.isPause;
   }
 
   animate = (): void => {
-    if (!this.ctx || !this.player || this.isPause || !this.canvas) {
+    if (!this.ctx || !this.player || !this.canvas) {
       return;
     }
 
@@ -166,12 +170,13 @@ export class GameLogic {
     this.handleBullets();
     this.handleExplosions();
 
-    this.gameFrame += 1;
-    if (this.gameFrame >= Number.MAX_SAFE_INTEGER) {
-      this.gameFrame = 0;
+    if (!this.isPause) {
+      this.gameFrame += 1;
+      if (this.gameFrame >= Number.MAX_SAFE_INTEGER) {
+        this.gameFrame = 0;
+      }
+      requestAnimationFrame(this.animate);
     }
-
-    requestAnimationFrame(this.animate);
   };
 }
 
