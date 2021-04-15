@@ -2,11 +2,7 @@ import { Player } from 'pages/Game/logic/Player';
 import { Rock } from 'pages/Game/logic/Rock';
 import { Bullet } from '../Bullet';
 
-import imageSrc from './img/ex2.png';
 import { Explosion } from '../explosion';
-
-const image = new Image();
-image.src = imageSrc;
 
 export class GameLogic {
   private canvas: HTMLCanvasElement;

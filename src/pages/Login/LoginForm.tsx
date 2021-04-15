@@ -1,21 +1,17 @@
 import React from 'react';
-import axios from 'axios';
 import { Controller, useForm } from 'react-hook-form';
 
 import { FormControl, TextField } from '@material-ui/core';
-
-import { SIGN_IN_URL } from 'consts/routes';
-import { IUser } from 'types/actionTypes';
+import { FormData } from 'pages/Login/Login';
+import { useDispatch } from 'react-redux';
+import { signInAction } from 'actions/signInActions';
 import { StyledButton, TextButton } from './styles';
 
 export const LoginForm: React.FC = () => {
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<IUser>();
+  const dispatch = useDispatch();
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
   const onSubmit = handleSubmit((values) => {
-    axios.post(SIGN_IN_URL, values).then((response) => {
-      if (response.status === 200) {
-        console.log('values', values);
-      }
-    });
+    dispatch(signInAction(values));
   });
   return (
     <form onSubmit={onSubmit}>

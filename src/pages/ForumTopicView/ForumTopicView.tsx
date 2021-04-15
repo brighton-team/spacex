@@ -1,11 +1,10 @@
 import React, { useState, useCallback } from 'react';
-import TextField from '@material-ui/core/TextField';
-import FormControl from '@material-ui/core/FormControl';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { forum } from 'consts/routes';
 
-import Modal from 'shared/components/Modal';
+import { FormModal } from 'components/FormModal';
+
 import MessageCard from './MessageCard';
 
 import {
@@ -59,6 +58,7 @@ const ForumTopicView: React.FC = () => {
   const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
 
   const onSubmit = handleSubmit(({ message }) => {
+    // TODO: remove console logging
     console.log('message:', message); // eslint-disable-line no-console
     closeModal();
   });
@@ -79,39 +79,17 @@ const ForumTopicView: React.FC = () => {
         ))}
       </TableWrapper>
 
-      <Modal
+      <FormModal
         isVisible={isModalVisible}
-        onOk={closeModal}
-        onClose={closeModal}
+        closeModal={closeModal}
+        submitButton={submitButton}
         title="Опубликуйте сообщение"
-        okButton={submitButton}
-      >
-        <form id="new-forum-message" onSubmit={onSubmit}>
-          <FormControl fullWidth variant="outlined">
-            <Controller
-              name="message"
-              as={
-                <TextField
-                  id="message"
-                  multiline
-                  autoFocus
-                  margin="dense"
-                  type="text"
-                  fullWidth
-                  helperText={fieldsErrors.message ? fieldsErrors.message.message : null}
-                  label="Сообщение"
-                  error={Boolean(fieldsErrors.message)}
-                />
-              }
-              control={control}
-              defaultValue=""
-              rules={{
-                required: 'Required',
-              }}
-            />
-          </FormControl>
-        </form>
-      </Modal>
+        formId="new-forum-message"
+        onSubmit={onSubmit}
+        formFields={[{ title: 'message', label: 'Сообщение', required: true }]}
+        fieldsErrors={fieldsErrors}
+        control={control}
+      />
     </PageWrapper>
   );
 };

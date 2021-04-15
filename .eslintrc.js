@@ -31,6 +31,7 @@ module.exports = {
     'react/prop-types': 0,
     'no-case-declarations': 'off',
     'prettier/prettier': 'error',
+    '@typescript-eslint/no-explicit-any': 'off',
     'import/prefer-default-export': 'off',
     'linebreak-style': 'off',
     'import/extensions': 'off',

@@ -14,7 +14,8 @@
       "store": ["./store"],
       "styles": ["./styles"],
       "pages": ["./pages"],
-      "types": ["./types"]
+      "types": ["./types"],
+      "utils": ["./utils"]
     },
     "module": "esnext",
     "moduleResolution": "node",

@@ -1,21 +1,27 @@
+import { FormData } from 'pages/Login/Login';
+
 export interface IUser {
-  id?: number | null;
-  first_name?: string;
-  second_name?: string;
-  display_name?: string;
-  login?: string;
-  email?: string;
-  phone?: string;
-  avatar?: string;
-  password?: string;
-  password_confirm?: string;
+  loaded?: boolean;
+  isAuth?: boolean;
+  isPasswordChanged: boolean;
+  isAvatarChanged: boolean;
+  data?: FormData;
 }
 
 export type SignInAction = {
   type: string;
-  payload: IUser;
+  payload?: FormData;
 };
 
 export type UserState = {
   user: IUser;
+};
+
+export interface IGameModal {
+  isVisible: boolean;
+}
+
+export type GameModal = {
+  type: string;
+  payload: IGameModal;
 };
