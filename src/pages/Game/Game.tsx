@@ -1,7 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { PageWrapper } from './styledItems';
+import { GameLogic } from './logic/GameLogic';
+
+import { PageWrapper, Canvas } from './styledItems';
 
 export const Game = (): JSX.Element => {
-  return <PageWrapper />;
+  useEffect(() => {
+    const game = new GameLogic();
+    game.initialize();
+
+    return () => {
+      game.deinitialize();
+    };
+  }, []);
+
+  return (
+    <PageWrapper>
+      <Canvas id="game" />
+    </PageWrapper>
+  );
 };
