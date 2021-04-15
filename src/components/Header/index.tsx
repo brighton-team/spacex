@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import img from 'assets/images/logo.png';
 import { forum, leaders, game, profile } from 'consts/routes';
 
-const Wraper = styled.div`
+const Wrapper = styled.div`
   position: absolute;
   left: 0;
   top: 0;
@@ -60,7 +60,7 @@ export function Header(): JSX.Element | null {
   // }
 
   return isShowHeader ? (
-    <Wraper>
+    <Wrapper>
       <Content>
         <Logo />
         <HeaderButton>
@@ -74,6 +74,6 @@ export function Header(): JSX.Element | null {
           <StyledLink to={profile}>Профиль</StyledLink>
         </TopLinks>
       </Content>
-    </Wraper>
+    </Wrapper>
   ) : null;
 }

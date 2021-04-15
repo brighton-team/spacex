@@ -46,7 +46,7 @@ const Forum = (): JSX.Element => {
   });
 
   return (
-    <PageWrapper>
+    <PageWrapper padding="100px 0">
       <Heading>
         <EmptySpace />
         <TitleText>ТЕМЫ ФОРУМА</TitleText>
