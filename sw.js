@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-globals, func-names */
+/* eslint-disable no-restricted-globals */
 const version = 'v1::'; // Change if you want to regenerate cache
 const staticCacheName = `${version}static-resources`;
 
@@ -8,7 +8,7 @@ this.addEventListener('install', (event) => {
   event.waitUntil(caches.open(staticCacheName).then((cache) => cache.addAll(offlineStuff)));
 });
 
-this.addEventListener('activate', function (event) {
+this.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
@@ -18,7 +18,7 @@ this.addEventListener('activate', function (event) {
   );
 });
 
-this.addEventListener('fetch', function (event) {
+this.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((response) => {
       if (response) {
