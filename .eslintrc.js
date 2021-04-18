@@ -33,6 +33,8 @@ module.exports = {
     'prettier/prettier': 'error',
     '@typescript-eslint/no-explicit-any': 'off',
     'import/prefer-default-export': 'off',
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     'linebreak-style': 'off',
     'import/extensions': 'off',
     'import/no-unresolved': 'off',
