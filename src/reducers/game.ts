@@ -1,4 +1,4 @@
-import { INCREASE_GAME_SCORE, REDUCE_GAME_LIVES } from 'store/actionTypes';
+import { INCREASE_GAME_SCORE, REDUCE_GAME_LIVES, RESTART_GAME } from 'store/actionTypes';
 import { SignInAction, GameReducer } from 'types/actionTypes';
 
 const initialState: GameReducer = {
@@ -22,6 +22,12 @@ export const gameReducer = (
       return {
         ...state,
         lives,
+      };
+    case RESTART_GAME:
+      return {
+        ...state,
+        score: 0,
+        lives: 5,
       };
     default:
       return state;

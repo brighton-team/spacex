@@ -158,6 +158,13 @@ export class GameLogic {
     this.isPause = !this.isPause;
   }
 
+  restart(): void {
+    this.gameFrame = 0;
+    this.obstacles = [];
+    this.bullets = [];
+    this.explosions = [];
+  }
+
   animate = (): void => {
     if (!this.ctx || !this.player || !this.canvas) {
       return;

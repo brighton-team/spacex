@@ -26,6 +26,7 @@ export interface GameReducer {
 
 export interface IGameModal {
   isVisible: boolean;
+  isVisibleGameOver: boolean;
 }
 
 export type GameModal = {
