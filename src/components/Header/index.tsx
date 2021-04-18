@@ -55,9 +55,6 @@ const routesWithHeader = [forum, leaders, game, profile, '/'];
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
   const isShowHeader = routesWithHeader.includes(pathname);
-  // if (routesWithoutHeader.includes(pathname)) {
-  //   return null;
-  // }
 
   return isShowHeader ? (
     <Wrapper>

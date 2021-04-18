@@ -2,10 +2,10 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
 
-const StyledButton = styled(Button)`
+export const StyledButton = styled(Button)`
   && {
     border: 1px solid #ffffff;
-    boxsizing: border-box;
+    boxizing: border-box;
     borderradius: 2px;
     color: white;
     fontweight: 700;

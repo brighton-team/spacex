@@ -15,10 +15,18 @@ export type SignInAction = {
 
 export type UserState = {
   user: IUser;
+  game: GameReducer;
+  gameModal: IGameModal;
 };
+
+export interface GameReducer {
+  score: number;
+  lives: number;
+}
 
 export interface IGameModal {
   isVisible: boolean;
+  isVisibleGameOver: boolean;
 }
 
 export type GameModal = {
