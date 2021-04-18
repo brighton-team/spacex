@@ -7,6 +7,8 @@ import { App } from './App';
 
 import 'normalize.css';
 
+import './initServiceWorker';
+
 ReactDOM.render(
   <Provider store={store}>
     <App />
