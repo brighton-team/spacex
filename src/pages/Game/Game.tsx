@@ -1,40 +1,60 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { GameModal, openModal, closeModal } from 'components/GameModal';
-import { connect } from 'react-redux';
-import { IGameModal } from 'types/actionTypes';
-import { PageWrapper, PauseButton, Canvas } from './styledItems';
-import { GameLogic } from './logic/GameLogic';
 
-export const GameComponent = (props: OwnProps): JSX.Element => {
-  const openModalCallback = useCallback(openModal, []);
-  const closeModalCallback = useCallback(closeModal, []);
-  useEffect(() => {
-    const game = new GameLogic();
-    game.initialize();
+import { GameOverModal } from 'components/GameOverModal';
+import { gameOverAction } from 'actions/gameActions';
+import { PageWrapper, PauseButton, Canvas, Score, Health } from './styledItems';
+import { UserState } from '../../types/actionTypes';
+import { gameInst } from './logic/GameLogic/GameLogic';
 
-    return () => {
-      game.deinitialize();
-    };
+export const Game = (): JSX.Element => {
+  const { score, lives } = useSelector((state: UserState) => state.game);
+  const { isVisible, isVisibleGameOver } = useSelector((state: UserState) => state.gameModal);
+
+  const ref: any = useRef();
+  const dispatch = useDispatch();
+
+  const onClose = () => {
+    dispatch(gameOverAction());
+    gameInst.animate();
+  };
+
+  const openModalCallback = useCallback(() => {
+    ref.current?.blur();
+    openModal();
+    gameInst.togglePause();
+  }, []);
+  const closeModalCallback = useCallback(() => {
+    closeModal();
+    gameInst.togglePause();
+    gameInst.animate();
   }, []);
 
-  const { gameModal } = props;
+  useEffect(() => {
+    gameInst.initialize(dispatch);
+
+    return () => {
+      gameInst.deinitialize();
+    };
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (lives === 0) {
+      gameInst.togglePause();
+      dispatch(gameOverAction());
+    }
+  }, [dispatch, lives]);
+
   return (
     <PageWrapper>
       <Canvas id="game" />
-      <PauseButton onClick={openModalCallback} />
-      <GameModal isVisible={gameModal.isVisible} onClose={closeModalCallback} />
+      <Score>Score: {score}</Score>
+      <Health>Health: {lives}</Health>
+      <PauseButton onClick={openModalCallback} ref={ref} />
+      <GameModal isVisible={isVisible} onClose={closeModalCallback} />
+      <GameOverModal isModalVisible={isVisibleGameOver} onClose={onClose} />
     </PageWrapper>
   );
 };
-
-const mapStateToProps = (state: { gameModal: IGameModal }) => ({
-  state,
-  gameModal: state.gameModal,
-});
-
-type OwnProps = {
-  gameModal: IGameModal;
-};
-
-export const Game = connect(mapStateToProps)(GameComponent);
