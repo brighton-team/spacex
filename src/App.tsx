@@ -11,6 +11,7 @@ import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { Game } from 'pages/Game';
 import { ProfilePage } from 'pages/Profile';
+import { Landing } from 'pages/Landing';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { getUserDataAction } from './actions/signInActions';
@@ -30,7 +31,7 @@ export const App: React.FC = () => {
         <Header />
 
         <Switch>
-          <Route path="/" component={LoginPage} exact />
+          <Route path="/" component={Landing} exact />
           <Route
             path={leaders}
             render={() => (isAuth ? <LeadersPage /> : <Redirect to={signIn} />)}
