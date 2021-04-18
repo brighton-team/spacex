@@ -31,5 +31,4 @@ export interface IGameModal {
 
 export type GameModal = {
   type: string;
-  payload: IGameModal;
 };

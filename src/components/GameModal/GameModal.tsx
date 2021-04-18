@@ -4,29 +4,36 @@ import { ActionButton, StyledButton } from 'components/ActionButton';
 
 import { game, leaders } from 'consts/routes';
 import { useDispatch } from 'react-redux';
+import { restartGame } from 'actions/gameActions';
+import { gameInst } from 'pages/Game/logic/GameLogic/GameLogic';
 import { StyledDialog, Title, Actions, StyledLink } from './styles';
-import { restartGame } from '../../actions/gameActions';
-import { gameInst } from '../../pages/Game/logic/GameLogic/GameLogic';
+import { toggleGameModal } from '../../actions/gameModalActions';
 
 export const GameModal = (props: OwnProps): JSX.Element => {
-  const { isVisible, onClose, title, buttons } = props;
+  const { isVisible, onClose } = props;
   const dispatch = useDispatch();
   const restart = () => {
     dispatch(restartGame());
+    dispatch(toggleGameModal());
     gameInst.restart();
+  };
+
+  const onExit = () => {
+    dispatch(toggleGameModal());
   };
 
   return (
     <StyledDialog open={isVisible} onClose={onClose}>
       <Actions onClick={onClose}>
         <Title disableTypography>
-          <h4>{title}</h4>
+          <h4>Что вы хотите сделать?</h4>
         </Title>
-        {buttons?.map((button) => (
-          <StyledLink key={button.text} to={button.link}>
-            <ActionButton>{button.text}</ActionButton>
-          </StyledLink>
-        ))}
+        <StyledLink to={game}>
+          <ActionButton>Продолжить</ActionButton>
+        </StyledLink>
+        <StyledLink to={leaders}>
+          <StyledButton onClick={onExit}>Завершить</StyledButton>
+        </StyledLink>
         <StyledButton onClick={restart}>Начать заново</StyledButton>
       </Actions>
     </StyledDialog>
@@ -34,18 +41,6 @@ export const GameModal = (props: OwnProps): JSX.Element => {
 };
 
 type OwnProps = {
-  title?: string;
   isVisible: boolean;
-  buttons?: Record<string, string>[];
-
   onClose: () => void;
-};
-
-GameModal.defaultProps = {
-  title: 'Что вы хотите сделать?',
-  buttons: [
-    { text: 'Продолжить', link: game },
-    { text: 'Завершить', link: leaders },
-    // { text: 'Начать заново', link: game },
-  ],
 };

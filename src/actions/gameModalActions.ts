@@ -1,16 +1,6 @@
-import * as actionTypes from 'store/actionTypes';
-import { IGameModal, GameModal } from 'types/actionTypes';
+import { GameModal } from 'types/actionTypes';
+import { TOGGLE_GAME_MODAL } from 'store/actionTypes';
 
-export const gameModalOpen = (pw: IGameModal): GameModal => {
-  return {
-    type: actionTypes.GAME_MODAL_OPEN,
-    payload: { ...pw },
-  };
-};
-
-export const gameModalClose = (pw: IGameModal): GameModal => {
-  return {
-    type: actionTypes.GAME_MODAL_CLOSE,
-    payload: { ...pw },
-  };
-};
+export const toggleGameModal = (): GameModal => ({
+  type: TOGGLE_GAME_MODAL,
+});

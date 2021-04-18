@@ -1,5 +1,5 @@
 import { GameModal, IGameModal } from 'types/actionTypes';
-import { GAME_MODAL_CLOSE, GAME_MODAL_OPEN, GAME_OVER_MODAL_TOGGLE } from '../store/actionTypes';
+import { GAME_OVER_MODAL_TOGGLE, TOGGLE_GAME_MODAL } from 'store/actionTypes';
 
 const initialState: IGameModal = {
   isVisible: false,
@@ -7,20 +7,18 @@ const initialState: IGameModal = {
 };
 
 export const gameModalReducer = (state: IGameModal, action: GameModal): IGameModal => {
-  const { payload, type } = action;
+  const { type } = action;
   switch (type) {
-    case GAME_MODAL_OPEN:
+    case TOGGLE_GAME_MODAL:
       return {
         ...state,
-        ...payload,
+        isVisible: !state.isVisible,
       };
     case GAME_OVER_MODAL_TOGGLE:
       return {
         ...state,
         isVisibleGameOver: !state.isVisibleGameOver,
       };
-    case GAME_MODAL_CLOSE:
-      return initialState;
     default:
       return initialState;
   }

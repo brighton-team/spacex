@@ -28,6 +28,8 @@ export class GameLogic {
 
   private isPause: boolean;
 
+  private isStarted: boolean;
+
   constructor() {
     this.keysDown = {};
     this.canvas = null;
@@ -39,6 +41,7 @@ export class GameLogic {
     this.explosions = [];
     this.isPause = false;
     this.dispatch = null;
+    this.isStarted = false;
   }
 
   initialize(dispatch: redux.Dispatch<any>): void {
@@ -47,12 +50,14 @@ export class GameLogic {
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
+    this.isStarted = true;
 
     window.addEventListener('keydown', this.onKeyDown);
 
     window.addEventListener('keyup', this.onKeyUp);
-
-    this.player = new Player(this.canvas);
+    if (!this.player) {
+      this.player = new Player(this.canvas);
+    }
 
     this.animate();
   }
@@ -62,6 +67,7 @@ export class GameLogic {
     this.obstacles = [];
     this.bullets = [];
     this.explosions = [];
+    this.isStarted = false;
     window.removeEventListener('keydown', this.onKeyDown);
 
     window.removeEventListener('keyup', this.onKeyUp);
@@ -166,7 +172,7 @@ export class GameLogic {
   }
 
   animate = (): void => {
-    if (!this.ctx || !this.player || !this.canvas) {
+    if (!this.ctx || !this.player || !this.canvas || !this.isStarted) {
       return;
     }
 
