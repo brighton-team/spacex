@@ -3,7 +3,7 @@ import { SignInAction, GameReducer } from 'types/actionTypes';
 
 const initialState: GameReducer = {
   score: 0,
-  lives: 5,
+  lives: 3,
 };
 
 export const gameReducer = (

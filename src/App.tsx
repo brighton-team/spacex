@@ -40,9 +40,10 @@ export const App: React.FC = () => {
             path={signIn}
             render={() => (isAuth ? <Redirect to={leaders} /> : <LoginPage page="login" />)}
           />
-          <Route path={signUp}>
-            <LoginPage page="register" />
-          </Route>
+          <Route
+            path={signUp}
+            render={() => (isAuth ? <Redirect to={leaders} /> : <LoginPage page="register" />)}
+          />
           <Route
             path={profile}
             render={() => (isAuth ? <ProfilePage /> : <Redirect to={signIn} />)}

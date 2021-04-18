@@ -50,7 +50,7 @@ const HeaderButton = styled.div`
   left: 180px;
 `;
 
-const routesWithHeader = [forum, leaders, game, profile, '/'];
+const routesWithHeader = [forum, leaders, game, profile];
 
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
