@@ -34,6 +34,7 @@ export const PauseButton = styled.div`
 
 `;
 */
+
 export const PauseButton = withStyles({
   root:  {
     background: `url(${pause}) no-repeat center center`,
@@ -61,4 +62,20 @@ export const Canvas = styled.canvas`
   height: 100%;
   max-width: 1400px;
   max-height: 100vh;
+`;
+
+export const Score = styled.div`
+  position: absolute;
+  right: 100px;
+  top: 100px;
+  font-size: 36px;
+  color: white;
+`;
+
+export const Health = styled.div`
+  position: absolute;
+  right: 100px;
+  top: 150px;
+  font-size: 36px;
+  color: white;
 `;

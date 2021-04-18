@@ -2,22 +2,25 @@ import React from 'react';
 
 import { ActionButton, StyledButton } from 'components/ActionButton';
 
-import { game, leaders } from 'consts/routes';
+import { leaders } from 'consts/routes';
 import { useDispatch } from 'react-redux';
-import { StyledDialog, Title, Actions, StyledLink } from './styles';
-import { restartGame } from '../../actions/gameActions';
+import { StyledDialog, Title, Actions, StyledLink } from '../GameModal/styles';
+import { gameOverAction, restartGame } from '../../actions/gameActions';
 import { gameInst } from '../../pages/Game/logic/GameLogic/GameLogic';
 
-export const GameModal = (props: OwnProps): JSX.Element => {
-  const { isVisible, onClose, title, buttons } = props;
+export const GameOverModal = (props: OwnProps): JSX.Element => {
+  const { isModalVisible, onClose, title, buttons } = props;
   const dispatch = useDispatch();
   const restart = () => {
     dispatch(restartGame());
     gameInst.restart();
+    gameInst.togglePause();
+    gameInst.animate();
+    dispatch(gameOverAction());
   };
 
   return (
-    <StyledDialog open={isVisible} onClose={onClose}>
+    <StyledDialog open={isModalVisible} onClose={onClose}>
       <Actions onClick={onClose}>
         <Title disableTypography>
           <h4>{title}</h4>
@@ -35,17 +38,13 @@ export const GameModal = (props: OwnProps): JSX.Element => {
 
 type OwnProps = {
   title?: string;
-  isVisible: boolean;
+  isModalVisible: boolean;
   buttons?: Record<string, string>[];
 
   onClose: () => void;
 };
 
-GameModal.defaultProps = {
-  title: 'Что вы хотите сделать?',
-  buttons: [
-    { text: 'Продолжить', link: game },
-    { text: 'Завершить', link: leaders },
-    // { text: 'Начать заново', link: game },
-  ],
+GameOverModal.defaultProps = {
+  title: 'Game over',
+  buttons: [{ text: 'Выйти', link: leaders }],
 };
