@@ -14,9 +14,9 @@ import { ProfilePage } from 'pages/Profile';
 import { Landing } from 'pages/Landing';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
-import { getUserDataAction } from './actions/signInActions';
-import { UserState } from './types/actionTypes';
-import { ErrorPage } from './pages/Error';
+import { getUserDataAction } from '../../actions/signInActions';
+import { UserState } from '../../types/actionTypes';
+import { ErrorPage } from '../../pages/Error';
 
 export const App: React.FC = () => {
   const dispatch = useDispatch();

@@ -1,9 +1,5 @@
 import path from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Configuration } from 'webpack';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import nodeExternals from 'webpack-node-externals';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
@@ -11,7 +7,7 @@ import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
 import jsLoader from './loaders/js';
 
-const config: Configuration = {
+const config = {
   name: 'server',
   target: 'node',
   node: { __dirname: false },

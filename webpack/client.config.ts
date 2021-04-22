@@ -1,11 +1,6 @@
 import path from 'path';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { Configuration, Plugin, Entry } from 'webpack';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { TsconfigPathsPlugin } from 'tsconfig-paths-webpack-plugin';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import CompressionPlugin from 'compression-webpack-plugin';
 
 import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
@@ -13,13 +8,13 @@ import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
 import jsLoader from './loaders/js';
 
-const config: Configuration = {
-  entry: ([
+const config = {
+  entry: [
     IS_DEV && 'react-hot-loader/patch',
     IS_DEV && 'webpack-hot-middleware/client',
     IS_DEV && 'css-hot-loader/hotModuleReplacement',
     path.join(SRC_DIR, 'client'),
-  ].filter(Boolean) as unknown) as Entry,
+  ].filter(Boolean),
   module: {
     rules: [fileLoader.client, cssLoader.client, jsLoader.client],
   },
@@ -37,7 +32,7 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     !IS_DEV && new CompressionPlugin(),
-  ].filter(Boolean) as Plugin[],
+  ].filter(Boolean),
 
   devtool: 'source-map',
 

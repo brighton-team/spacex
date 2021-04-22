@@ -2,10 +2,9 @@
   "name": "spacex",
   "version": "1.0.0",
   "description": "space game on React",
-  "main": "index.js",
   "scripts": {
     "clean": "rimraf dist",
-    "build": "NODE_ENV=production NODE_PATH=. npm run clean && webpack --mode production",
+    "build": "NODE_ENV=production NODE_PATH=. npm run clean && webpack --mode production --config webpack/client.config.ts",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"webpack/**/*.ts\"",
     "check-types": "tsc --noEmit",
     "start:webpack": "webpack --mode=development --watch",
@@ -105,7 +104,7 @@
     "postcss-nested": "4.1.2",
     "prettier": "2.0.4",
     "pretty-quick": "3.1.0",
-    "rimraf": "2.6.3",
+    "rimraf": "2.7.1",
     "simple-git-hooks": "2.2.0",
     "source-map-loader": "0.2.4",
     "style-loader": "0.23.1",
@@ -152,10 +151,7 @@
     "webpack-dev-middleware": "3.7.2",
     "webpack-hot-middleware": "2.24.3"
   },
-  "lint-staged": {
-    "*.{ts, tsx}": [
-      "node_modules/.bin/eslint  --max-warnings=10",
-      "prettier --write"
-    ]
-  }
+  "browserslist": [
+    "last 2 versions"
+  ]
 }

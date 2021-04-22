@@ -1,43 +1,14 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "es2017"
-    ],
-    "baseUrl": "./src",
-    "paths": {
-      "actions": ["./actions"],
-      "components": ["./components"],
-      "consts": ["./consts"],
-      "decorators": ["./decorators"],
-      "reducers": ["./reducers"],
-      "store": ["./store"],
-      "styles": ["./styles"],
-      "pages": ["./pages"],
-      "types": ["./types"],
-      "utils": ["./utils"]
-    },
-    "module": "esnext",
-    "moduleResolution": "node",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
     "target": "es5",
     "jsx": "react",
-    "importHelpers": true,
-    "noUnusedLocals": true,
-    "esModuleInterop": true,
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "skipLibCheck": true,
-    "declaration": false,
-    "sourceMap": false,
-    "outDir": "./dist",
-    "typeRoots": ["./src/@types", "./node_modules/@types"]
-  },
-  "include": [
-    "src",
-    "./node_modules/@types"
-  ],
-  "exclude": [
-    "**/*.js"
-  ]
+    "baseUrl": "src"
+  }
 }

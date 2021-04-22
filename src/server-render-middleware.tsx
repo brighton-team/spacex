@@ -1,7 +1,7 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Request, Response } from 'express';
-import { App } from './App';
+import { App } from './components/App/App';
 
 function getHtml(reactHtml: string) {
   return `

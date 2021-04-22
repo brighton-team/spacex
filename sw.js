@@ -2,7 +2,7 @@
 const version = 'v1::'; // Change if you want to regenerate cache
 const staticCacheName = `${version}static-resources`;
 
-const offlineData = ['/', '/play', '/index.tsx', '/bundle.js'];
+const offlineData = ['/', '/play', '/client.tsx', '/bundle.js'];
 
 this.addEventListener('install', (event) => {
   event.waitUntil(caches.open(staticCacheName).then((cache) => cache.addAll(offlineData)));
