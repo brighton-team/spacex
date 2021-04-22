@@ -27,7 +27,7 @@ export const gameReducer = (
       return {
         ...state,
         score: 0,
-        lives: 5,
+        lives: 3,
       };
     default:
       return state;

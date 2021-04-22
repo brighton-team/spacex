@@ -1,11 +1,8 @@
 const REQUEST = '_REQUEST';
 const SUCCESS = '_SUCCESS';
 const FAILURE = '_FAILURE';
-const OPEN = '_OPEN';
-const CLOSE = '_CLOSE';
 
 const SIGN_IN = 'SIGN_IN';
-const GAME_MODAL = 'GAME_MODAL';
 const SIGN_UP = 'SIGN_UP';
 const LOG_OUT = 'LOG_OUT';
 const GET_USER_DATA = 'GET_USER_DATA';
@@ -16,9 +13,8 @@ const CHANGE_USER_AVATAR = 'CHANGE_USER_AVATAR';
 export const SIGN_IN_REQUEST = `${SIGN_IN}${REQUEST}`;
 export const SIGN_IN_SUCCESS = `${SIGN_IN}${SUCCESS}`;
 export const SIGN_IN_FAILURE = `${SIGN_IN}${FAILURE}`;
-export const GAME_MODAL_OPEN = `${GAME_MODAL}${OPEN}`;
-export const GAME_MODAL_CLOSE = `${GAME_MODAL}${CLOSE}`;
 export const GAME_OVER_MODAL_TOGGLE = `GAME_OVER_MODAL_TOGGLE`;
+export const TOGGLE_GAME_MODAL = `TOGGLE_GAME_MODAL`;
 
 export const SIGN_UP_REQUEST = `${SIGN_UP}${REQUEST}`;
 export const SIGN_UP_SUCCESS = `${SIGN_UP}${SUCCESS}`;
