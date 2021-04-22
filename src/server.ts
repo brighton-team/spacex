@@ -8,7 +8,8 @@ const app = express();
 
 // I recommend use it only for development
 // In production env you can use Nginx or CDN
-app.use(compression())
+app
+  .use(compression())
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.static(path.resolve(__dirname, '../static')));
 

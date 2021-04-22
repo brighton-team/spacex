@@ -31,9 +31,7 @@ export default {
         options: {
           plugins: [
             postcssImport({
-              resolve: postcssImportAliasResolver(
-                resolverOptions
-              ),
+              resolve: postcssImportAliasResolver(resolverOptions),
             }),
             postcssCustomMedia(),
             postcssNested(),
