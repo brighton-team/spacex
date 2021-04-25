@@ -13,6 +13,14 @@ app
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.static(path.resolve(__dirname, '../static')));
 
+// для Valeriy Statinov. Надо что-то сделать тут?
+// типа когда попадаем на этот роут, то рисуем обычно по реакту? но как рисовать обычно по реакту?))))
+app.get('/play', (req, res) => {
+  console.log('HHHH', req);
+  console.log('HHHH', res);
+  res.redirect('/profile');
+});
+
 app.get('/*', serverRenderMiddleware);
 
 export { app };

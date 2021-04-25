@@ -1,7 +1,7 @@
 import { INCREASE_GAME_SCORE, REDUCE_GAME_LIVES, RESTART_GAME } from 'store/actionTypes';
 import { SignInAction, GameReducer } from 'types/actionTypes';
 
-const initialState: GameReducer = {
+export const initialState: GameReducer = {
   score: 0,
   lives: 3,
 };

@@ -29,7 +29,6 @@ module.exports = {
   },
   rules: {
     'react/prop-types': 0,
-    'no-extraneous-dependencies': 'off',
     'no-case-declarations': 'off',
     'prettier/prettier': 'error',
     '@typescript-eslint/no-explicit-any': 'off',

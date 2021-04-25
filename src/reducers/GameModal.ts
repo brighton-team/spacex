@@ -1,7 +1,7 @@
 import { GameModal, IGameModal } from 'types/actionTypes';
 import { GAME_OVER_MODAL_TOGGLE, TOGGLE_GAME_MODAL } from 'store/actionTypes';
 
-const initialState: IGameModal = {
+export const initialState: IGameModal = {
   isVisible: false,
   isVisibleGameOver: false,
 };
