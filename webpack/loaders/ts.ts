@@ -1,12 +1,12 @@
 export default {
   client: {
     test: /\.ts(x?)$/,
+    use: 'ts-loader',
     exclude: /node_modules/,
-    use: { loader: 'ts-loader' },
   },
   server: {
     test: /\.ts(x?)$/,
+    use: 'ts-loader',
     exclude: /node_modules/,
-    use: { loader: 'ts-loader' },
   },
 };

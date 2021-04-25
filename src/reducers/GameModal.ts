@@ -6,7 +6,10 @@ const initialState: IGameModal = {
   isVisibleGameOver: false,
 };
 
-export const gameModalReducer = (state: IGameModal, action: GameModal): IGameModal => {
+export const gameModalReducer = (
+  state: IGameModal = initialState,
+  action: GameModal
+): IGameModal => {
   const { type } = action;
   switch (type) {
     case TOGGLE_GAME_MODAL:

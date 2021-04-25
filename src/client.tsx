@@ -1,17 +1,24 @@
-import React from 'react';
+import * as React from 'react';
 import { hydrate } from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider as ReduxProvider } from 'react-redux';
+import 'babel-polyfill';
 
-import { store } from 'store';
 import { App } from './components/App/App';
+import { store } from './store';
 
-import 'normalize.css';
-
-import './initServiceWorker';
+// global redeclared types
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: Function;
+  }
+}
 
 hydrate(
-  <Provider store={store}>
+  <ReduxProvider store={store}>
+    {/* <ConnectedRouter history={history}> */}
     <App />
-  </Provider>,
-  document.getElementById('root')
+    {/* </ConnectedRouter> */}
+  </ReduxProvider>,
+  document.getElementById('mount')
 );

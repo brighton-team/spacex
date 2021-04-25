@@ -2,14 +2,13 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { signIn, signUp, forum, game, profile, leaders } from 'consts/routes';
+import { signIn, signUp, forum, profile, leaders } from 'consts/routes';
 
 import { Header } from 'components/Header';
 import { LoginPage } from 'pages/Login';
 import Forum from 'pages/Forum';
 import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
-import { Game } from 'pages/Game';
 import { ProfilePage } from 'pages/Profile';
 import { Landing } from 'pages/Landing';
 
@@ -55,7 +54,6 @@ export const App: React.FC = () => {
           <Route path={signUp} component={LoginPage} />
           <Route path={forum} component={Forum} exact />
           <Route path={`${forum}/:id`} component={ForumTopicView} />
-          <Route path={game} component={Game} />
           <Route path="*">
             <ErrorPage errorNumber={404} />
           </Route>
