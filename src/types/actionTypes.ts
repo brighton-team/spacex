@@ -1,4 +1,5 @@
 import { FormData } from 'pages/Login/Login';
+import { RouterState } from 'connected-react-router';
 
 export interface IUser {
   loaded?: boolean;
@@ -17,6 +18,7 @@ export type UserState = {
   user: IUser;
   game: GameReducer;
   gameModal: IGameModal;
+  router: RouterState;
 };
 
 export interface GameReducer {

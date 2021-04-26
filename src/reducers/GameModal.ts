@@ -1,12 +1,15 @@
 import { GameModal, IGameModal } from 'types/actionTypes';
 import { GAME_OVER_MODAL_TOGGLE, TOGGLE_GAME_MODAL } from 'store/actionTypes';
 
-const initialState: IGameModal = {
+export const initialState: IGameModal = {
   isVisible: false,
   isVisibleGameOver: false,
 };
 
-export const gameModalReducer = (state: IGameModal, action: GameModal): IGameModal => {
+export const gameModalReducer = (
+  state: IGameModal = initialState,
+  action: GameModal
+): IGameModal => {
   const { type } = action;
   switch (type) {
     case TOGGLE_GAME_MODAL:
