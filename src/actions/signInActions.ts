@@ -15,56 +15,56 @@ import {
   GET_USER_DATA_FAILURE,
   GET_USER_DATA_SUCCESS,
 } from 'store/actionTypes';
-import { SignInAction, UserState } from 'types/actionTypes';
+import { ActionType, UserState } from 'types/actionTypes';
 import { ApiServiceInstance } from '../utils/ApiService/ApiService';
-import { FormData } from '../pages/Login/Login';
+import { UserDataType } from '../pages/Login/Login';
 
-export const getUserDataRequest = (): SignInAction => ({
+export const getUserDataRequest = (): ActionType => ({
   type: GET_USER_DATA_REQUEST,
 });
 
-export const getUserDataSuccess = (userData: FormData): SignInAction => ({
+export const getUserDataSuccess = (userData: UserDataType): ActionType => ({
   type: GET_USER_DATA_SUCCESS,
   payload: userData,
 });
 
-export const getUserDataFailure = (): SignInAction => ({
+export const getUserDataFailure = (): ActionType => ({
   type: GET_USER_DATA_FAILURE,
 });
 
-export const signInRequest = (): SignInAction => ({
+export const signInRequest = (): ActionType => ({
   type: SIGN_IN_REQUEST,
 });
 
-export const signInSuccess = (): SignInAction => ({
+export const signInSuccess = (): ActionType => ({
   type: SIGN_IN_SUCCESS,
 });
 
-export const signInFailure = (): SignInAction => ({
+export const signInFailure = (): ActionType => ({
   type: SIGN_IN_FAILURE,
 });
 
-export const signUpRequest = (): SignInAction => ({
+export const signUpRequest = (): ActionType => ({
   type: SIGN_UP_REQUEST,
 });
 
-export const signUpSuccess = (): SignInAction => ({
+export const signUpSuccess = (): ActionType => ({
   type: SIGN_UP_SUCCESS,
 });
 
-export const signUpFailure = (): SignInAction => ({
+export const signUpFailure = (): ActionType => ({
   type: SIGN_UP_FAILURE,
 });
 
-export const logOutRequest = (): SignInAction => ({
+export const logOutRequest = (): ActionType => ({
   type: LOG_OUT_REQUEST,
 });
 
-export const logOutSuccess = (): SignInAction => ({
+export const logOutSuccess = (): ActionType => ({
   type: LOG_OUT_SUCCESS,
 });
 
-export const logOutFailure = (): SignInAction => ({
+export const logOutFailure = (): ActionType => ({
   type: LOG_OUT_FAILURE,
 });
 
@@ -88,7 +88,7 @@ export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void,
     .catch(() => dispatch(getUserDataFailure()));
 };
 
-export const signUpAction = (userData: FormData) => (
+export const signUpAction = (userData: UserDataType) => (
   dispatch: ThunkDispatch<UserState, void, Action>
 ): void => {
   dispatch(signUpRequest());
@@ -102,7 +102,7 @@ export const signUpAction = (userData: FormData) => (
     .catch(() => dispatch(signUpFailure()));
 };
 
-export const signInAction = (userData: FormData) => (
+export const signInAction = (userData: UserDataType) => (
   dispatch: ThunkDispatch<UserState, void, Action>
 ): void => {
   dispatch(signInRequest());

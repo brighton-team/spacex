@@ -17,7 +17,7 @@ import {
   SubmitButton,
 } from './styledItems';
 
-type FormData = {
+type ForumData = {
   message: string;
 };
 
@@ -55,7 +55,7 @@ const ForumTopicView: React.FC = () => {
     setModalVisibility(false);
   }, []);
 
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumData>();
 
   const onSubmit = handleSubmit(({ message }) => {
     // TODO: remove console logging

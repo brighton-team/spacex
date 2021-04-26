@@ -12,56 +12,56 @@ import {
   CHANGE_USER_AVATAR_FAILURE,
   CHANGE_USER_AVATAR_SUCCESS,
 } from 'store/actionTypes';
-import { SignInAction, UserState } from 'types/actionTypes';
+import { ActionType, UserState } from 'types/actionTypes';
 
 import { ApiServiceInstance } from 'utils/ApiService/ApiService';
-import { FormData } from 'pages/Login/Login';
+import { UserDataType } from 'pages/Login/Login';
 
 export type PasswordData = {
   oldPassword: string;
   newPassword: string;
 };
 
-export const changeUserAvatarRequest = (): SignInAction => ({
+export const changeUserAvatarRequest = (): ActionType => ({
   type: CHANGE_USER_AVATAR_REQUEST,
 });
 
-export const changeUserAvatarSuccess = (data: FormData): SignInAction => ({
+export const changeUserAvatarSuccess = (data: UserDataType): ActionType => ({
   type: CHANGE_USER_AVATAR_SUCCESS,
   payload: data,
 });
 
-export const changeUserAvatarFailure = (): SignInAction => ({
+export const changeUserAvatarFailure = (): ActionType => ({
   type: CHANGE_USER_AVATAR_FAILURE,
 });
 
-export const changeUserPasswordRequest = (): SignInAction => ({
+export const changeUserPasswordRequest = (): ActionType => ({
   type: CHANGE_USER_PASSWORD_REQUEST,
 });
 
-export const changeUserPasswordSuccess = (): SignInAction => ({
+export const changeUserPasswordSuccess = (): ActionType => ({
   type: CHANGE_USER_PASSWORD_SUCCESS,
 });
 
-export const changeUserPasswordFailure = (): SignInAction => ({
+export const changeUserPasswordFailure = (): ActionType => ({
   type: CHANGE_USER_PASSWORD_FAILURE,
 });
 
-export const changeUserDataRequest = (): SignInAction => ({
+export const changeUserDataRequest = (): ActionType => ({
   type: CHANGE_USER_DATA_REQUEST,
 });
 
-export const changeUserDataSuccess = (userData: FormData): SignInAction => ({
+export const changeUserDataSuccess = (userData: UserDataType): ActionType => ({
   type: CHANGE_USER_DATA_SUCCESS,
   payload: userData,
 });
 
-export const changeUserDataFailure = (): SignInAction => ({
+export const changeUserDataFailure = (): ActionType => ({
   type: CHANGE_USER_DATA_FAILURE,
 });
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const changeUserAvatarAction = (userData: any) => (
+export const changeUserAvatarAction = (userData: FormData) => (
   dispatch: ThunkDispatch<UserState, void, Action>
 ): void => {
   dispatch(changeUserAvatarRequest());
@@ -89,7 +89,7 @@ export const changeUserPasswordAction = (userData: PasswordData) => (
     .catch(() => dispatch(changeUserPasswordFailure()));
 };
 
-export const changeUserDataAction = (userData: FormData) => (
+export const changeUserDataAction = (userData: UserDataType) => (
   dispatch: ThunkDispatch<UserState, void, Action>
 ): void => {
   dispatch(changeUserDataRequest());

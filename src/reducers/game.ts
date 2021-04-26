@@ -1,5 +1,5 @@
 import { INCREASE_GAME_SCORE, REDUCE_GAME_LIVES, RESTART_GAME } from 'store/actionTypes';
-import { SignInAction, GameReducer } from 'types/actionTypes';
+import { ActionType, GameReducer } from 'types/actionTypes';
 
 const initialState: GameReducer = {
   score: 0,
@@ -8,7 +8,7 @@ const initialState: GameReducer = {
 
 export const gameReducer = (
   state: GameReducer = initialState,
-  action: SignInAction
+  action: ActionType
 ): GameReducer => {
   switch (action.type) {
     case INCREASE_GAME_SCORE:
