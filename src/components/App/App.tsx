@@ -17,6 +17,7 @@ import { ErrorBoundary } from 'components/ErrorBoundary';
 import { getUserDataAction } from '../../actions/signInActions';
 import { UserState } from '../../types/actionTypes';
 import { ErrorPage } from '../../pages/Error';
+// import { Game } from '../../pages/Game';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -52,6 +53,8 @@ const App: React.FC = () => {
           render={() => (isAuth ? <Redirect to={leaders} /> : <LoginPage page="register" />)}
         />
         <Route path={signUp} component={LoginPage} />
+
+        {/* <Route path={game} component={Game} /> */}
         <Route path={forum} component={Forum} exact />
         <Route path={`${forum}/:id`} component={ForumTopicView} />
         <Route path="*">
