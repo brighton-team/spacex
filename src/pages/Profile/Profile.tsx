@@ -53,9 +53,9 @@ export const ProfilePage = (): JSX.Element => {
         <>
           <TableWrapper>
             <AvatarWrapper onClick={handleVisibleModalAvatar}>
-              <AvatarImage src={`https://ya-praktikum.tech/api/v2/resources/${data?.avatar}`} />
+              <AvatarImage src={data?.avatar} />
             </AvatarWrapper>
-            <TitleUserName>Иван</TitleUserName>
+            <TitleUserName>{data?.first_name}</TitleUserName>
             <FormInputWrapper currentMarginTop="10px" currentWidth="80%">
               <form onSubmit={onSubmit}>
                 <FormControl fullWidth variant="outlined">

@@ -1,14 +1,8 @@
 import React from 'react';
+import './styles.css';
 
 import { signUp, signIn } from 'consts/routes';
-import {
-  FormInputWrapper,
-  FormWrapper,
-  HeaderWrapper,
-  TextLink,
-  TitleText,
-  StyledLink,
-} from './styles';
+import { FormInputWrapper, FormWrapper, TextLink, TitleText, StyledLink } from './styles';
 import { RegisterForm } from './RegisterForm';
 import { LoginForm } from './LoginForm';
 
@@ -37,11 +31,6 @@ const authMarginTopTitle = '50px';
 const regMarginTopTitle = '30px';
 
 export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
-  // const { isAuth } = useSelector((state: UserState) => state.user);
-  // const history = useHistory();
-  // if (isAuth) {
-  //   history.push(leaders);
-  // }
   const checkLoginPage = page === 'login';
   const wrapperHeight = checkLoginPage ? authWrapperHeight : regWrapperHeight;
   const titleMarginTop = checkLoginPage ? authMarginTopTitle : regMarginTopTitle;
@@ -50,7 +39,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
   const linkText = checkLoginPage ? 'Нет аккаунта?' : 'Уже зарегистрированы?';
   const renderPage = checkLoginPage ? <LoginForm /> : <RegisterForm />;
   return (
-    <HeaderWrapper>
+    <div className="headerWrapper">
       <FormWrapper height={wrapperHeight}>
         <TitleText marginTop={titleMarginTop}>{titleText}</TitleText>
         <FormInputWrapper currentMarginTop={titleMarginTop} currentWidth="250px">
@@ -60,6 +49,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
           <TextLink>{linkText}</TextLink>
         </StyledLink>
       </FormWrapper>
-    </HeaderWrapper>
+    </div>
   );
 };
