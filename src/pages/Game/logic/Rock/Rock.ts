@@ -1,9 +1,10 @@
+import { getImage } from 'pages/Game/logic/utils/getImage';
+
 import { Player } from '../Player';
 
 import imageSrc from './img/rock.png';
 
-const image = new Image();
-image.src = imageSrc;
+const image = getImage(imageSrc);
 
 export class Rock {
   public x: number;
@@ -32,6 +33,9 @@ export class Rock {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
+    if (!image) {
+      return;
+    }
     /* ctx.fillStyle = 'blue';
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
