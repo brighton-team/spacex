@@ -2,14 +2,14 @@ import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { FormControl, TextField } from '@material-ui/core';
-import { FormData } from 'pages/Login/Login';
+import { UserDataType } from 'pages/Login/Login';
 import { signUpAction } from 'actions/signInActions';
 import { useDispatch } from 'react-redux';
 import { StyledButton, TextButton } from './styles';
 
 export const RegisterForm: React.FC = () => {
   const dispatch = useDispatch();
-  const { control, watch, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
+  const { control, watch, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(signUpAction(values));
   });

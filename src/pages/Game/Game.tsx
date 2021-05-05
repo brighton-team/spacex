@@ -33,7 +33,9 @@ export const Game = (): JSX.Element => {
     }
   };
   const { score, lives } = useSelector((state: UserState) => state.game);
-  const { isVisible, isVisibleGameOver } = useSelector((state: UserState) => state.gameModal);
+  const { isVisiblePauseGame, isVisibleGameOver } = useSelector(
+    (state: UserState) => state.gameModal
+  );
 
   const ref: any = useRef();
   const dispatch = useDispatch();
@@ -79,7 +81,7 @@ export const Game = (): JSX.Element => {
         <Health>Health: {lives}</Health>
         <PauseButton onClick={openModalCallback} ref={ref} />
         <FullscreenButton onClick={toggleFullScreen} />
-        <GameModal isVisible={isVisible} onClose={closeModalCallback} />
+        <GameModal isVisible={isVisiblePauseGame} onClose={closeModalCallback} />
         <GameOverModal isModalVisible={isVisibleGameOver} onClose={onClose} />
       </GameWrapper>
     </PageWrapper>

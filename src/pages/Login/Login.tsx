@@ -6,7 +6,7 @@ import { FormInputWrapper, FormWrapper, TextLink, TitleText, StyledLink } from '
 import { RegisterForm } from './RegisterForm';
 import { LoginForm } from './LoginForm';
 
-export type FormData = {
+export type UserDataType = {
   id?: number | null;
   first_name?: string;
   second_name?: string;
