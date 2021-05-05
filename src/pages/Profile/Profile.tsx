@@ -11,10 +11,11 @@ import { logOutAction } from 'actions/signInActions';
 import { UserState } from 'types/actionTypes';
 import { changeUserDataAction } from 'actions/profileActions';
 import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
+import { IsLoadedUserSelector } from 'reducers/selectors/userSelector';
 import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './styledItems';
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
-import { FormData } from '../Login/Login';
+import { UserDataType } from '../Login/Login';
 
 export const StyledButton = withStyles({
   root: {
@@ -27,12 +28,12 @@ export const StyledButton = withStyles({
 })(Button);
 
 export const ProfilePage = (): JSX.Element => {
-  const { loaded } = useSelector((state: UserState) => state.user);
+  const loaded = useSelector(IsLoadedUserSelector);
   const data = useSelector((state: UserState | undefined) => state?.user?.data);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [isVisibleAvatarModal, setIsVisibleAvatarModal] = useState(false);
   const dispatch = useDispatch();
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(changeUserDataAction(values));
   });

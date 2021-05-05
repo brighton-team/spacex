@@ -1,5 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "eslint . --fix --max-warnings=10"
+    "pre-commit": "eslint . --fix --max-warnings=6"
   }
 }

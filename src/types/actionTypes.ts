@@ -1,17 +1,17 @@
-import { FormData } from 'pages/Login/Login';
+import { UserDataType } from 'pages/Login/Login';
 import { RouterState } from 'connected-react-router';
 
 export interface IUser {
-  loaded?: boolean;
+  loaded: boolean;
   isAuth?: boolean;
   isPasswordChanged: boolean;
   isAvatarChanged: boolean;
-  data?: FormData;
+  data?: UserDataType;
 }
 
-export type SignInAction = {
+export type ActionType = {
   type: string;
-  payload?: FormData;
+  payload?: UserDataType;
 };
 
 export type UserState = {
@@ -27,7 +27,7 @@ export interface GameReducer {
 }
 
 export interface IGameModal {
-  isVisible: boolean;
+  isVisiblePauseGame: boolean;
   isVisibleGameOver: boolean;
 }
 

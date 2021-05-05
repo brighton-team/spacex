@@ -1,5 +1,7 @@
 {
-  "name": "react-ssr-tutorial",
+  "name": "spacex",
+  "version": "1.0.0",
+  "description": "space game on React",
   "private": true,
   "engines": {
     "node": "12"
@@ -13,6 +15,16 @@
     "start:server": "nodemon index.js --watch dist/server.js",
     "start": "NODE_ENV=development npm-run-all --print-label --parallel start:*"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brighton-team/spacex.git"
+  },
+  "author": "Brighton-team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brighton-team/spacex/issues"
+  },
+  "homepage": "https://github.com/brighton-team/spacex#readme",
   "dependencies": {
     "@hot-loader/react-dom": "16.8.4",
     "@loadable/component": "5.14.1",

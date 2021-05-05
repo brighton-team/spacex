@@ -2,7 +2,7 @@ import { GameModal, IGameModal } from 'types/actionTypes';
 import { GAME_OVER_MODAL_TOGGLE, TOGGLE_GAME_MODAL } from 'store/actionTypes';
 
 export const initialState: IGameModal = {
-  isVisible: false,
+  isVisiblePauseGame: false,
   isVisibleGameOver: false,
 };
 
@@ -15,7 +15,7 @@ export const gameModalReducer = (
     case TOGGLE_GAME_MODAL:
       return {
         ...state,
-        isVisible: !state.isVisible,
+        isVisiblePauseGame: !state.isVisiblePauseGame,
       };
     case GAME_OVER_MODAL_TOGGLE:
       return {

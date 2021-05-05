@@ -2,14 +2,14 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { FormControl, TextField } from '@material-ui/core';
-import { FormData } from 'pages/Login/Login';
+import { UserDataType } from 'pages/Login/Login';
 import { useDispatch } from 'react-redux';
 import { signInAction } from 'actions/signInActions';
 import { StyledButton, TextButton } from './styles';
 
 export const LoginForm: React.FC = () => {
   const dispatch = useDispatch();
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(signInAction(values));
   });

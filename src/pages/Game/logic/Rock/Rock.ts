@@ -32,12 +32,6 @@ export class Rock {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    /* ctx.fillStyle = 'blue';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath(); */
-
     ctx.drawImage(image, this.x - 65, this.y - 70, 135, 135);
   }
 }
