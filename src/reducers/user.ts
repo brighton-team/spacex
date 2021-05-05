@@ -23,7 +23,7 @@ import {
   CHANGE_USER_AVATAR_SUCCESS,
 } from 'store/actionTypes';
 
-const initialState: IUser = {
+export const initialState: IUser = {
   isAuth: false,
   loaded: true,
   isPasswordChanged: false,

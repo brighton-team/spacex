@@ -49,7 +49,7 @@ export const ProfilePage = (): JSX.Element => {
   };
 
   return (
-    <PageWrapper padding="90px 318px 30px">
+    <PageWrapper padding="90px 150px 30px">
       {loaded ? (
         <>
           <TableWrapper>
