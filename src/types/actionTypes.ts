@@ -34,3 +34,12 @@ export interface IGameModal {
 export type GameModal = {
   type: string;
 };
+
+type Leader = {
+  userName: string;
+  score: number;
+};
+
+export type LeaderReducer = {
+  data?: Leader[] | null;
+};
