@@ -52,11 +52,6 @@ export class Player {
       return;
     }
 
-    /* ctx.fillStyle = 'red';
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath(); */
     ctx.drawImage(image, this.x - 65, this.y - 65, 135, 135);
   }
 }

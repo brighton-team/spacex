@@ -1,4 +1,4 @@
-import { SignInAction, IUser } from 'types/actionTypes';
+import { ActionType, IUser } from 'types/actionTypes';
 import {
   SIGN_IN_REQUEST,
   SIGN_IN_SUCCESS,
@@ -23,14 +23,14 @@ import {
   CHANGE_USER_AVATAR_SUCCESS,
 } from 'store/actionTypes';
 
-const initialState: IUser = {
+export const initialState: IUser = {
   isAuth: false,
   loaded: true,
   isPasswordChanged: false,
   isAvatarChanged: false,
 };
 
-export const userReducer = (state: IUser = initialState, action: SignInAction): IUser => {
+export const userReducer = (state: IUser = initialState, action: ActionType): IUser => {
   switch (action.type) {
     case CHANGE_USER_AVATAR_REQUEST:
       return {

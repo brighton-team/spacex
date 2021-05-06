@@ -1,12 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Controller, useForm } from 'react-hook-form';
 import { FormControl, TextField } from '@material-ui/core';
 
-import { SubmitButton } from '../../pages/Forum/styledItems';
-import { changeUserPasswordAction, PasswordData } from '../../actions/profileActions';
-import { UserState } from '../../types/actionTypes';
+import { SubmitButton } from 'pages/Forum/styledItems';
+import { changeUserPasswordAction, PasswordData } from 'actions/profileActions';
+import { IsPasswordChangedSelector } from 'reducers/selectors/userSelector';
 import { Modal } from '../Modal';
+import { usePrevious } from '../../hooks/usePrevious';
 
 type ChangePasswordModalProps = {
   visible: boolean;
@@ -23,15 +24,8 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
   visible,
   closeModal,
 }) => {
-  const { isPasswordChanged } = useSelector((state: UserState) => state.user);
+  const isPasswordChanged = useSelector(IsPasswordChangedSelector);
   const dispatch = useDispatch();
-  function usePrevious<T>(value: T): T {
-    const ref: any = useRef<T>();
-    useEffect(() => {
-      ref.current = value;
-    }, [value]);
-    return ref.current;
-  }
   const prevIsPasswordChanged: boolean = usePrevious<boolean>(isPasswordChanged);
   useEffect(() => {
     if (prevIsPasswordChanged !== isPasswordChanged && isPasswordChanged) {

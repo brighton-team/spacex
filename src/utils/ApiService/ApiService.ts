@@ -10,11 +10,15 @@ import {
   CHANGE_USER_AVATAR_URL,
 } from 'consts/routes';
 
-import { FormData } from 'pages/Login/Login';
+import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
 
 class ApiService {
-  signIn(values: FormData) {
+  instanceAxios = axios.create({
+    withCredentials: true,
+  });
+
+  async signIn(values: UserDataType) {
     return this.instanceAxios
       .post(SIGN_IN_URL, values)
       .then((response) => response.status)
@@ -23,7 +27,7 @@ class ApiService {
       });
   }
 
-  signUp(values: FormData) {
+  async signUp(values: UserDataType) {
     return this.instanceAxios
       .post(SIGN_UP_URL, values)
       .then((response) => response.status)
@@ -32,7 +36,7 @@ class ApiService {
       });
   }
 
-  getUserData() {
+  async getUserData() {
     return this.instanceAxios
       .get(GET_USER_URL)
       .then(({ data }) => {
@@ -43,7 +47,7 @@ class ApiService {
       });
   }
 
-  logOut() {
+  async logOut() {
     return this.instanceAxios
       .post(LOG_OUT_URL)
       .then((response) => {
@@ -54,7 +58,7 @@ class ApiService {
       });
   }
 
-  putUserData(values: FormData) {
+  async putUserData(values: UserDataType) {
     return this.instanceAxios
       .put(PUT_USER_DATA_URL, values)
       .then((response) => response)
@@ -63,7 +67,7 @@ class ApiService {
       });
   }
 
-  changeUserPassword(values: PasswordData) {
+  async changeUserPassword(values: PasswordData) {
     return this.instanceAxios
       .put(CHANGE_USER_PASSWORD_URL, values)
       .then((response) => response)
@@ -72,7 +76,7 @@ class ApiService {
       });
   }
 
-  changeUserAvatar(values: any) {
+  async changeUserAvatar(values: any) {
     return this.instanceAxios
       .put(CHANGE_USER_AVATAR_URL, values)
       .then((response) => response)
@@ -80,10 +84,6 @@ class ApiService {
         throw err;
       });
   }
-
-  instanceAxios = axios.create({
-    withCredentials: true,
-  });
 }
 
 export const ApiServiceInstance = new ApiService();
