@@ -1,8 +1,9 @@
+import { getImage } from 'pages/Game/logic/utils/getImage';
+
 import imageSrc from './img/bullet1.png';
 import { Player } from '../Player';
 
-const image = new Image();
-image.src = imageSrc;
+const image = getImage(imageSrc);
 
 export class Bullet {
   public x: number;
@@ -28,7 +29,7 @@ export class Bullet {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!ctx) {
+    if (!ctx || !image) {
       return;
     }
     ctx.drawImage(image, this.x - 165, this.y - 165, 70, 70);

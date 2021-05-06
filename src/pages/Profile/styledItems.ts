@@ -17,7 +17,7 @@ const AvatarWrapper = styled.div<{ onClick: any }>`
 `;
 
 const AvatarImage = styled.img.attrs((props) => ({
-  src: props.src || img,
+  src: props.src ? `https://ya-praktikum.tech/api/v2/resources/${props.src}` : img,
   width: props.src ? '100px' : '50px',
   height: 'auto',
 }))``;

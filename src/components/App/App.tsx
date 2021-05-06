@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { hot } from 'react-hot-loader/root';
 
-import { signIn, signUp, forum, profile, leaders } from 'consts/routes';
+import { signIn, signUp, forum, profile, leaders, game } from 'consts/routes';
 
 import { Header } from 'components/Header';
 import { LoginPage } from 'pages/Login';
@@ -12,11 +12,13 @@ import ForumTopicView from 'pages/ForumTopicView';
 import { LeadersPage } from 'pages/Leaders';
 import { ProfilePage } from 'pages/Profile';
 import { Landing } from 'pages/Landing';
+import { Game } from 'pages/Game';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
 import { getUserDataAction } from '../../actions/signInActions';
 import { UserState } from '../../types/actionTypes';
 import { ErrorPage } from '../../pages/Error';
+// import { Game } from '../../pages/Game';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,7 @@ const App: React.FC = () => {
           path={leaders}
           render={() => (isAuth ? <LeadersPage /> : <Redirect to={signIn} />)}
         />
+        <Route path={game} render={() => (isAuth ? <Game /> : <Redirect to={signIn} />)} />;
         <Route
           path={signIn}
           render={() => (isAuth ? <Redirect to={leaders} /> : <LoginPage page="login" />)}
@@ -52,6 +55,7 @@ const App: React.FC = () => {
           render={() => (isAuth ? <Redirect to={leaders} /> : <LoginPage page="register" />)}
         />
         <Route path={signUp} component={LoginPage} />
+        {/* <Route path={game} component={Game} /> */}
         <Route path={forum} component={Forum} exact />
         <Route path={`${forum}/:id`} component={ForumTopicView} />
         <Route path="*">
