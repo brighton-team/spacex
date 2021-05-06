@@ -1,0 +1,7 @@
+.headerWrapper {
+  background: url('../../assets/images/loginBg.png') no-repeat center center;
+  min-height: 100vh;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}

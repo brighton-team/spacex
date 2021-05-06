@@ -1,7 +1,8 @@
+import { getImage } from 'pages/Game/logic/utils/getImage';
+
 import imageSrc from './img/rocket.png';
 
-const image = new Image();
-image.src = imageSrc;
+const image = getImage(imageSrc);
 
 export class Player {
   public x: number;
@@ -48,7 +49,7 @@ export class Player {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!ctx) {
+    if (!ctx || !image) {
       return;
     }
 
