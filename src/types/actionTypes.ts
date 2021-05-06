@@ -19,6 +19,7 @@ export type UserState = {
   game: GameReducer;
   gameModal: IGameModal;
   router: RouterState;
+  fullscreen:IFullscreen;
 };
 
 export interface GameReducer {
@@ -31,6 +32,13 @@ export interface IGameModal {
   isVisibleGameOver: boolean;
 }
 
+
 export type GameModal = {
+  type: string;
+};
+export interface IFullscreen {
+  fullscreenOn: boolean;
+}
+export type Fullscreen = {
   type: string;
 };

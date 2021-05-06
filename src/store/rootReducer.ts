@@ -5,6 +5,7 @@ import { History } from 'history';
 import { userReducer } from 'reducers/user';
 import { gameReducer } from 'reducers/game';
 import { gameModalReducer } from 'reducers/GameModal';
+import { fullscreenReducer } from 'reducers/Fullscreen';
 
 export const createRootReducer = (history: History) =>
   combineReducers({
@@ -12,4 +13,5 @@ export const createRootReducer = (history: History) =>
     game: gameReducer,
     gameModal: gameModalReducer,
     router: connectRouter(history),
+    fullscreen:fullscreenReducer,
   });
