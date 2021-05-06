@@ -5,6 +5,8 @@ import { GameModal } from 'components/GameModal';
 
 import { GameOverModal } from 'components/GameOverModal';
 import { gameOverAction, restartGame } from 'actions/gameActions';
+import { toggleGameModal } from 'actions/gameModalActions';
+import { putGameLeaderDataAction } from 'actions/leadersActions';
 import {
   PageWrapper,
   PauseButton,
@@ -18,7 +20,6 @@ import {
 } from './styledItems';
 import { UserState } from '../../types/actionTypes';
 import { gameInst } from './logic/GameLogic/GameLogic';
-import { toggleGameModal } from '../../actions/gameModalActions';
 
 export const Game = (): JSX.Element => {
   const toggleFullScreen = (e: React.MouseEvent) => {
@@ -71,8 +72,13 @@ export const Game = (): JSX.Element => {
   useEffect(() => {
     if (lives === 0) {
       gameInst.togglePause();
+      dispatch(
+        putGameLeaderDataAction({
+          data: { userName, scorespacex: score },
+          ratingFieldName: 'scorespacex',
+        })
+      );
       dispatch(gameOverAction());
-      // !!!!!!!!! dispatch(putGameLeaderDataAction())
     }
   }, [dispatch, lives]);
 

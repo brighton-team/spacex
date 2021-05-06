@@ -9,11 +9,12 @@ import {
   CHANGE_USER_PASSWORD_URL,
   CHANGE_USER_AVATAR_URL,
   PUT_GAME_LEADER_DATA,
+  GET_GAME_LEADER_DATA,
 } from 'consts/routes';
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
-import { LeaderDataType } from '../../actions/leadersActions';
+import { LeaderDataRequestType, LeaderDataType } from '../../actions/leadersActions';
 
 class ApiService {
   instanceAxios = axios.create({
@@ -90,6 +91,15 @@ class ApiService {
   async putGameLeaderData(values: LeaderDataType) {
     return this.instanceAxios
       .post(PUT_GAME_LEADER_DATA, values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async getGameLeaderData(values: LeaderDataRequestType) {
+    return this.instanceAxios
+      .post(GET_GAME_LEADER_DATA, values)
       .then((response) => response)
       .catch((err) => {
         throw err;
