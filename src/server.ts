@@ -3,22 +3,48 @@ import express from 'express';
 import compression from 'compression';
 import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
+import { cookieParser, logger } from './server/middlewares';
 
 const app = express();
 
-// I recommend use it only for development
-// In production env you can use Nginx or CDN
 app
   .use(compression())
+  .use(logger)
+  .use(cookieParser)
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.static(path.resolve(__dirname, '../static')));
 
-// для Valeriy Statinov. Надо что-то сделать тут?
-// типа когда попадаем на этот роут, то рисуем обычно по реакту? но как рисовать обычно по реакту?))))
 app.get('/play', (req, res) => {
-  console.log('HHHH', req);
-  console.log('HHHH', res);
-  res.redirect('/profile');
+  res.send(
+    `
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="google-site-verification" content="nLL5VlSAgcKL756luG6o6UwKcvR8miU2duRnhU-agmE" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <meta http-equiv="X-UA-Compatible" content="ie=edge">
+              <link
+                rel="stylesheet"
+                href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+              />
+              <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+              <link rel="preconnect" href="https://fonts.gstatic.com" />
+              <link
+                href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+                rel="stylesheet"
+              />
+              <link rel="shortcut icon" type="image/png" href="/images/favicon.png">
+              <title>SpaceX Game</title>
+              <link href="/main.css" rel="stylesheet">
+          </head>
+          <body>
+              <div id="mount"></div>
+              <script src="/main.js"></script>
+          </body>
+          </html>
+      `
+  );
 });
 
 app.get('/*', serverRenderMiddleware);

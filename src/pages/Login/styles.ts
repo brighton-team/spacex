@@ -1,18 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import img from 'assets/images/loginBg.png';
-
 import { Button, withStyles } from '@material-ui/core';
 import { authButtonColor, linkColor, white } from '../../consts/colors';
 
-const HeaderWrapper = styled.div`
-  background: url(${img}) no-repeat center center;
-  min-height: 100vh;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-`;
 const FormWrapper = styled.div<{ height: string }>`
   width: 340px;
   height: ${(props) => props.height};
@@ -83,13 +74,4 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-export {
-  HeaderWrapper,
-  FormWrapper,
-  TitleText,
-  TextLink,
-  TextButton,
-  FormInputWrapper,
-  StyledLink,
-  StyledButton,
-};
+export { FormWrapper, TitleText, TextLink, TextButton, FormInputWrapper, StyledLink, StyledButton };

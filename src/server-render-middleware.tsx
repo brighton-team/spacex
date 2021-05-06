@@ -58,6 +58,11 @@ export default (req: Request, res: Response) => {
   const reactHtml = renderToString(jsx);
   const reduxState = store.getState();
 
+  // if (!reduxState.user.isAuth) {
+  //   res.redirect('/signIn');
+  // }
+  // console.log('res.headers', res.headers)
+  console.log('req.headers', req.headers.cookie);
   if (context.url) {
     res.redirect(context.url);
     return;

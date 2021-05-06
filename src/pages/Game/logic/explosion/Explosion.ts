@@ -1,8 +1,9 @@
+import { getImage } from 'pages/Game/logic/utils/getImage';
+
 import imageSrc from './img/expl.png';
 import { Rock } from '../Rock';
 
-const image = new Image();
-image.src = imageSrc;
+const image = getImage(imageSrc);
 
 export class Explosion {
   public x: number;
@@ -18,7 +19,7 @@ export class Explosion {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!ctx) {
+    if (!ctx || !image) {
       return;
     }
     ctx.drawImage(image, this.x, this.y, 150, 150);
