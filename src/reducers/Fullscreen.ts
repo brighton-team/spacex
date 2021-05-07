@@ -1,5 +1,5 @@
 import { Fullscreen, IFullscreen } from 'types/actionTypes';
-import {  FULLSCREEN_ON , FULLSCREEN_OFF} from 'store/actionTypes';
+import { FULLSCREEN_ON, FULLSCREEN_OFF } from 'store/actionTypes';
 
 export const initialState: IFullscreen = {
   fullscreenOn: false,
@@ -17,11 +17,11 @@ export const fullscreenReducer = (
         fullscreenOn: true,
       };
     case FULLSCREEN_OFF:
-        return {
-          ...state,
-          fullscreenOn: false,
-        };
+      return {
+        ...state,
+        fullscreenOn: false,
+      };
     default:
-      return initialState;
+      return state;
   }
 };

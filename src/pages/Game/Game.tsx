@@ -5,7 +5,7 @@ import { GameModal } from 'components/GameModal';
 
 import { GameOverModal } from 'components/GameOverModal';
 import { gameOverAction, restartGame } from 'actions/gameActions';
-import { fullscreenOn,fullscreenOff } from  'actions/fullscreenActions';
+import { fullscreenOn, fullscreenOff } from 'actions/fullscreenActions';
 import {
   PageWrapper,
   PauseButton,
@@ -23,7 +23,9 @@ import { toggleGameModal } from '../../actions/gameModalActions';
 
 export const Game = (): JSX.Element => {
   const ref: any = useRef();
+
   const dispatch = useDispatch();
+
   const toggleFullScreen = (e: React.MouseEvent) => {
     const button = e.target as HTMLHtmlElement;
     button.blur();
@@ -41,8 +43,6 @@ export const Game = (): JSX.Element => {
   const { isVisiblePauseGame, isVisibleGameOver } = useSelector(
     (state: UserState) => state.gameModal
   );
-
-
 
   const onClose = () => {
     dispatch(gameOverAction());
@@ -67,6 +67,10 @@ export const Game = (): JSX.Element => {
     return () => {
       gameInst.deinitialize();
       dispatch(restartGame());
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        dispatch(fullscreenOff());
+      }
     };
   }, [dispatch]);
 
