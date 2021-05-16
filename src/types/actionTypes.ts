@@ -20,6 +20,7 @@ export type UserState = {
   gameModal: IGameModal;
   leaders: LeaderReducer;
   router: RouterState;
+  fullscreen:IFullscreen;
 };
 
 export interface GameReducer {
@@ -32,7 +33,15 @@ export interface IGameModal {
   isVisibleGameOver: boolean;
 }
 
+
 export type GameModal = {
+  type: string;
+};
+
+export interface IFullscreen {
+  fullscreenOn: boolean;
+}
+export type Fullscreen = {
   type: string;
 };
 
@@ -46,3 +55,4 @@ export type Leader = {
 export type LeaderReducer = {
   data?: Array<Leader> | null;
 };
+

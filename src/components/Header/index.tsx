@@ -4,6 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'assets/images/logo.png';
 import { forum, leaders, game, profile } from 'consts/routes';
+import { useSelector } from 'react-redux';
+import { UserState } from 'types/actionTypes';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -54,9 +56,10 @@ const routesWithHeader = [forum, leaders, game, profile];
 
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
+  const { fullscreenOn } = useSelector((state: UserState) => state.fullscreen);
   const isShowHeader = routesWithHeader.includes(pathname);
 
-  return isShowHeader ? (
+  return isShowHeader && !fullscreenOn ? (
     <Wrapper>
       <Content>
         <Logo />
