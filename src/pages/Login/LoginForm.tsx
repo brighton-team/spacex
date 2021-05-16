@@ -1,7 +1,7 @@
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { Button, FormControl, TextField } from '@material-ui/core';
+import { FormControl, TextField } from '@material-ui/core';
 import { UserDataType } from 'pages/Login/Login';
 import { useDispatch } from 'react-redux';
 import { signInAction } from 'actions/signInActions';

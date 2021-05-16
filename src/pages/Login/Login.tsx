@@ -23,7 +23,6 @@ type LoginPageProps = {
   loaded?: boolean;
   isAuth?: boolean;
   page?: string;
-  code?: any;
 };
 
 const authWrapperHeight = '400px';
@@ -31,7 +30,7 @@ const regWrapperHeight = '650px';
 const authMarginTopTitle = '30px';
 const regMarginTopTitle = '30px';
 
-export const LoginPage: React.FC<LoginPageProps> = ({ page, code }) => {
+export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
   const checkLoginPage = page === 'login';
   const wrapperHeight = checkLoginPage ? authWrapperHeight : regWrapperHeight;
   const titleMarginTop = checkLoginPage ? authMarginTopTitle : regMarginTopTitle;
