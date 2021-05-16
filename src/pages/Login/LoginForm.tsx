@@ -1,11 +1,13 @@
 import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { FormControl, TextField } from '@material-ui/core';
+import { Button, FormControl, TextField } from '@material-ui/core';
 import { UserDataType } from 'pages/Login/Login';
 import { useDispatch } from 'react-redux';
 import { signInAction } from 'actions/signInActions';
 import { StyledButton, TextButton } from './styles';
+import { ApiServiceInstance } from 'utils/ApiService/ApiService';
+ 
 
 export const LoginForm: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,7 +15,13 @@ export const LoginForm: React.FC = () => {
   const onSubmit = handleSubmit((values) => {
     dispatch(signInAction(values));
   });
+
+ const oauth = ()=> {
+    ApiServiceInstance.getCodeOAuth();
+ }
+
   return (
+  <div>
     <form onSubmit={onSubmit}>
       <FormControl fullWidth variant="outlined">
         <Controller
@@ -63,6 +71,11 @@ export const LoginForm: React.FC = () => {
       <StyledButton type="submit">
         <TextButton>ВХОД</TextButton>
       </StyledButton>
+
     </form>
+    <Button onClick={oauth}>
+         через Яндекс 
+      </Button>
+    </div>
   );
 };

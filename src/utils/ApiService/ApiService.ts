@@ -8,10 +8,13 @@ import {
   PUT_USER_DATA_URL,
   CHANGE_USER_PASSWORD_URL,
   CHANGE_USER_AVATAR_URL,
+  BASE_OAUTH_URL,
+  signIn,
 } from 'consts/routes';
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
+ 
 
 class ApiService {
   instanceAxios = axios.create({
@@ -84,6 +87,31 @@ class ApiService {
         throw err;
       });
   }
+
+  getCodefromCallback () {
+    const params = new URLSearchParams(document.location.search);
+    return params.get('code');
+  }
+
+  async getClientID  ()  {
+    const redirectURL = window.location.origin+signIn;
+    return this.instanceAxios.get(`${BASE_OAUTH_URL}/service-id`);
+  };
+
+  async getCodeOAuth  ()  {
+    const response = await this.getClientID();
+    const clientId = response.data.service_id;
+    const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}`;
+    document.location.href = url;
+  };
+
+  postCodeOauth (code) {
+    return this.instanceAxios 
+    .post(BASE_OAUTH_URL, { code  })
+     
+  } 
+
+
 }
 
 export const ApiServiceInstance = new ApiService();
