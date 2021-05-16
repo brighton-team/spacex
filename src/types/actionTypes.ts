@@ -18,6 +18,7 @@ export type UserState = {
   user: IUser;
   game: GameReducer;
   gameModal: IGameModal;
+  leaders: LeaderReducer;
   router: RouterState;
 };
 
@@ -33,4 +34,15 @@ export interface IGameModal {
 
 export type GameModal = {
   type: string;
+};
+
+export type Leader = {
+  data: {
+    userName: string;
+    scorespacex: number;
+  };
+};
+
+export type LeaderReducer = {
+  data?: Array<Leader> | null;
 };
