@@ -8,22 +8,16 @@ import {
   PUT_USER_DATA_URL,
   CHANGE_USER_PASSWORD_URL,
   CHANGE_USER_AVATAR_URL,
-<<<<<<< HEAD
   BASE_OAUTH_URL,
   signIn,
-=======
   PUT_GAME_LEADER_DATA,
   GET_GAME_LEADER_DATA,
->>>>>>> dev
 } from 'consts/routes';
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
-<<<<<<< HEAD
- 
-=======
+
 import { LeaderDataRequestType, LeaderDataType } from '../../actions/leadersActions';
->>>>>>> dev
 
 class ApiService {
   instanceAxios = axios.create({
@@ -97,29 +91,26 @@ class ApiService {
       });
   }
 
-  getCodefromCallback () {
+  getCodefromCallback() {
     const params = new URLSearchParams(document.location.search);
     return params.get('code');
   }
 
-  async getClientID  ()  {
-    const redirectURL = window.location.origin+signIn;
+  async getClientID() {
+    const redirectURL = window.location.origin + signIn;
     return this.instanceAxios.get(`${BASE_OAUTH_URL}/service-id`);
-  };
+  }
 
-  async getCodeOAuth  ()  {
+  async getCodeOAuth() {
     const response = await this.getClientID();
     const clientId = response.data.service_id;
     const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}`;
     document.location.href = url;
-  };
+  }
 
-  postCodeOauth (code) {
-    return this.instanceAxios 
-    .post(BASE_OAUTH_URL, { code  })
-     
-  } 
-
+  postCodeOauth(code) {
+    return this.instanceAxios.post(BASE_OAUTH_URL, { code });
+  }
 
   async putGameLeaderData(values: LeaderDataType) {
     return this.instanceAxios
