@@ -14,7 +14,7 @@ export const initialState: LeaderReducer = {
 export const leadersReducer = (
   state: LeaderReducer = initialState,
   action: LeaderActionType
-): any => {
+): LeaderReducer => {
   switch (action.type) {
     case PUT_GAME_LEADER_DATA_REQUEST:
       return {

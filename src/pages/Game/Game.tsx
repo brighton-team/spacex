@@ -35,7 +35,6 @@ export const Game = (): JSX.Element => {
   };
   const { score, lives } = useSelector((state: UserState) => state.game);
   const userName = useSelector((state: UserState) => state.user.data.login);
-  console.log('userName', userName);
   const { isVisiblePauseGame, isVisibleGameOver } = useSelector(
     (state: UserState) => state.gameModal
   );
