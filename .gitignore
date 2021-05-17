@@ -2,3 +2,5 @@ node_modules
 dist
 .idea
 temp
+*.env
+postgresdata
