@@ -5,8 +5,8 @@ import { Topic } from '../models/topic';
 import { Post } from '../models/post';
 
 const sequelizeOptions: SequelizeOptions = {
-  host: process.env.POSTGRES_HOST,
-  port: Number(process.env.POSTGRES_PORT),
+  host: 'postgres',
+  port: 5432,
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
@@ -14,11 +14,19 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
 };
 
-export const sequelize = new Sequelize(sequelizeOptions);
+const sequelize = new Sequelize(
+  sequelizeOptions.database,
+  sequelizeOptions.username,
+  sequelizeOptions.password,
+  {
+    host: sequelizeOptions.host,
+    dialect: sequelizeOptions.dialect,
+  }
+);
 
 const userModel = sequelize.define('user', User);
-const topicModel = sequelize.define('user', Topic);
-const postModel = sequelize.define('user', Post);
+const topicModel = sequelize.define('topic', Topic);
+const postModel = sequelize.define('post', Post);
 
 userModel.hasMany(topicModel);
 userModel.hasMany(postModel);

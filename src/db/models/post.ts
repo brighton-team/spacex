@@ -11,7 +11,7 @@ export const Post = {
     type: DataType.STRING,
     allowNull: false,
   },
-  postId: {
+  topicId: {
     type: DataType.INTEGER,
     allowNull: false,
   },

@@ -5,6 +5,8 @@ import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
 import { cookieParser, logger } from './server/middlewares';
 
+import db from './db/init';
+
 const app = express();
 
 app
@@ -13,6 +15,14 @@ app
   .use(cookieParser)
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.static(path.resolve(__dirname, '../static')));
+
+db.sync()
+  .then(() => {
+    console.info('Database connection established');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.get('/play', (req, res) => {
   res.send(
