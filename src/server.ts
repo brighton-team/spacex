@@ -16,7 +16,7 @@ app
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.static(path.resolve(__dirname, '../static')));
 
-db.sync()
+db.sync({ force: true })
   .then(() => {
     console.info('Database connection established');
   })

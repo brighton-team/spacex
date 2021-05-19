@@ -3,6 +3,7 @@ import { User } from '../models/user';
 import { Topic } from '../models/topic';
 // eslint-disable-next-line import/no-cycle
 import { Post } from '../models/post';
+import { Feedback } from '../models/feedback';
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'postgres',
@@ -27,8 +28,11 @@ const sequelize = new Sequelize(
 const userModel = sequelize.define('user', User);
 const topicModel = sequelize.define('topic', Topic);
 const postModel = sequelize.define('post', Post);
+const feedbackModel = sequelize.define('feedback', Feedback);
 
 userModel.hasMany(topicModel);
+feedbackModel.belongsTo(userModel);
+userModel.hasMany(feedbackModel);
 userModel.hasMany(postModel);
 topicModel.hasMany(postModel);
 
