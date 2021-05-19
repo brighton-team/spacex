@@ -14,7 +14,7 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
 };
 
-const sequelize = new Sequelize(
+const sequelize: any = new Sequelize(
   sequelizeOptions.database,
   sequelizeOptions.username,
   sequelizeOptions.password,
@@ -31,5 +31,7 @@ const postModel = sequelize.define('post', Post);
 userModel.hasMany(topicModel);
 userModel.hasMany(postModel);
 topicModel.hasMany(postModel);
+
+sequelize.topics = topicModel;
 
 export default sequelize;
