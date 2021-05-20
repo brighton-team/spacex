@@ -5,10 +5,9 @@ import bodyParser from 'body-parser';
 import 'babel-polyfill';
 import serverRenderMiddleware from './server-render-middleware';
 import { cookieParser, logger } from './server/middlewares';
+import { apiRouter } from './server/routes';
 
 import db from './db/init';
-
-import topicsController from './server/controllers/topics.controller';
 
 // type DB = {
 //   topics: any;
@@ -24,7 +23,7 @@ app
   .use(express.static(path.resolve(__dirname, '../dist')))
   .use(express.static(path.resolve(__dirname, '../static')));
 
-db.sync({ force: true })
+db.sync()
   .then(() => {
     console.info('Database connection established');
   })
@@ -65,8 +64,9 @@ app.get('/play', (req, res) => {
   );
 });
 
-app.get('/*', serverRenderMiddleware);
+app.use('/api', apiRouter);
 
-app.post('/api/forum-topics', topicsController.create);
+app.get('/*', serverRenderMiddleware);
+// app.post('/api/forum-topics', topicsController.create);
 
 export { app };

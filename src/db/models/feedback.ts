@@ -19,8 +19,8 @@ export const Feedback = {
     type: DataType.STRING,
     allowNull: false,
   },
-  userId: {
-    type: DataType.NUMBER,
-    allowNull: false,
-  },
+  // userId: {
+  //   type: DataType.INTEGER,
+  //   allowNull: false,
+  // },
 };
