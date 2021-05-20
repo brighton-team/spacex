@@ -10,10 +10,12 @@ import {
   CHANGE_USER_AVATAR_URL,
   PUT_GAME_LEADER_DATA,
   GET_GAME_LEADER_DATA,
+  CREATE_FEEDBACK,
 } from 'consts/routes';
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
+import { FeedbackData } from 'actions/feedbackAction';
 import { LeaderDataRequestType, LeaderDataType } from '../../actions/leadersActions';
 
 class ApiService {
@@ -100,6 +102,15 @@ class ApiService {
   async getGameLeaderData(values: LeaderDataRequestType) {
     return this.instanceAxios
       .post(GET_GAME_LEADER_DATA, values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async createFeedback(values: FeedbackData) {
+    return this.instanceAxios
+      .post(CREATE_FEEDBACK, values)
       .then((response) => response)
       .catch((err) => {
         throw err;

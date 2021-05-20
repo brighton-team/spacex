@@ -5,6 +5,7 @@ export const forum = '/forum';
 export const profile = '/profile';
 export const game = '/play';
 export const error = '/error';
+export const feedback = '/feedback';
 
 const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 export const BASE_AUTH_URL = `${BASE_URL}/auth`;
@@ -17,3 +18,8 @@ export const CHANGE_USER_PASSWORD_URL = `${BASE_URL}/user/password`;
 export const CHANGE_USER_AVATAR_URL = `${BASE_URL}/user/profile/avatar`;
 export const PUT_GAME_LEADER_DATA = `${BASE_URL}/leaderboard`;
 export const GET_GAME_LEADER_DATA = `${BASE_URL}/leaderboard/all`;
+
+const BASE_LOCAL_URL = '/api';
+const CREATE = '/create';
+const FEEDBACK = '/feedback';
+export const CREATE_FEEDBACK = `${BASE_LOCAL_URL}${FEEDBACK}${CREATE}`;

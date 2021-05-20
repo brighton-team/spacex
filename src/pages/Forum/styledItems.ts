@@ -31,8 +31,8 @@ export const TitleText = styled.h1`
   color: #fff;
 `;
 
-export const TableWrapper = styled.div`
-  width: 100%;
+export const TableWrapper = styled.div<{ width?: string }>`
+  width: ${(props) => props.width || '100%'};
   height: 100%;
   background: rgba(24, 23, 67, 0.9);
   border-radius: 7px;
