@@ -5,6 +5,7 @@ import { Topic } from '../models/topic';
 import { Post } from '../models/post';
 import { Theme } from '../models/theme';
 import { UserTheme } from '../models/userTheme';
+import { Feedback } from '../models/feedback';
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'postgres',
@@ -16,7 +17,7 @@ const sequelizeOptions: SequelizeOptions = {
   dialect: 'postgres',
 };
 
-const sequelize = new Sequelize(
+const sequelize: any = new Sequelize(
   sequelizeOptions.database,
   sequelizeOptions.username,
   sequelizeOptions.password,
@@ -31,11 +32,17 @@ const topicModel = sequelize.define('topic', Topic);
 const postModel = sequelize.define('post', Post);
 const themeModel = sequelize.define('theme', Theme);
 const userThemeModel = sequelize.define('user_theme', UserTheme);
+const feedbackModel = sequelize.define('feedback', Feedback);
 
 userModel.hasMany(topicModel);
+feedbackModel.belongsTo(userModel);
+// userModel.hasMany(feedbackModel);
 userModel.hasMany(postModel);
 topicModel.hasMany(postModel);
 themeModel.hasOne(userThemeModel, { foreignKey: 'themeId' });
 userThemeModel.belongsTo(themeModel, { foreignKey: 'themeId' });
+
+sequelize.topics = topicModel;
+sequelize.feedback = feedbackModel;
 
 export default sequelize;
