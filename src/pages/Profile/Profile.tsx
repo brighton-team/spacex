@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Controller, useForm } from 'react-hook-form';
-import { Button, FormControl } from '@material-ui/core';
+import { Button, FormControl, Select } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import { authButtonColor } from 'consts/colors';
@@ -16,6 +16,9 @@ import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './style
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { UserDataType } from '../Login/Login';
+import { selectModel } from 'db/models/functions';
+import { themeModel } from 'db/init';
+ 
 
 export const StyledButton = withStyles({
   root: {
@@ -47,6 +50,8 @@ export const ProfilePage = (): JSX.Element => {
   const logOut = () => {
     dispatch(logOutAction());
   };
+  const themes = selectModel(themeModel, {});
+  console.log(themes)
 
   return (
     <PageWrapper padding="90px 150px 30px">
@@ -198,6 +203,15 @@ export const ProfilePage = (): JSX.Element => {
                     }}
                   />
                 </FormControl>
+                <Select
+                  native
+                  
+                >
+                  <option aria-label="None" value="" />
+                  <option value={10}>Ten</option>
+                  <option value={20}>Twenty</option>
+                  <option value={30}>Thirty</option>
+                </Select>
                 <StyledButton type="submit">
                   <TextButton>Изменить данные</TextButton>
                 </StyledButton>

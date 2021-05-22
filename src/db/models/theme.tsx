@@ -14,6 +14,7 @@ export const Theme = {
 
   data: {
     type: DataType.JSON,
-    allowNull: false,
+    allowNull: true,
   },
 };
+
