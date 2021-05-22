@@ -33,11 +33,13 @@ const feedbackModel = sequelize.define('feedback', Feedback);
 userModel.hasMany(topicModel);
 feedbackModel.belongsTo(userModel);
 // userModel.hasMany(feedbackModel);
-userModel.hasMany(postModel);
+userModel.hasMany(postModel, { foreignKey: 'userId' });
+postModel.belongsTo(userModel);
 topicModel.hasMany(postModel);
 
 sequelize.topics = topicModel;
 sequelize.feedback = feedbackModel;
 sequelize.users = userModel;
+sequelize.posts = postModel;
 
 export default sequelize;

@@ -1,5 +1,6 @@
 import { UserDataType } from 'pages/Login/Login';
 import { ForumTopic } from 'pages/Forum/Forum';
+import { ForumTopicPost } from 'pages/ForumTopicView/ForumTopicView';
 import { RouterState } from 'connected-react-router';
 
 export interface IUser {
@@ -65,5 +66,8 @@ export type ForumReducer = {
 
 export type ForumAction = {
   type: string;
-  payload?: ForumTopic | Array<ForumTopic>;
+  payload?: {
+    data: ForumTopic | Array<ForumTopic> | Array<ForumTopicPost>;
+    topicId?: number;
+  };
 };

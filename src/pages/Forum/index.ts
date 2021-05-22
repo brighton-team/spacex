@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<ForumReducer, void, Action>)
       createForumTopicAction({
         title,
         userId,
-        time: new Date(),
       })
     );
   },

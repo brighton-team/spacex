@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { ForumTopicPost } from 'pages/ForumTopicView/ForumTopicView';
+
 import { ErrorBoundary } from 'components/ErrorBoundary';
 
 import { FormModal } from 'components/FormModal';
@@ -20,6 +22,7 @@ import {
 export type ForumTopic = {
   id?: number;
   title?: string;
+  posts?: Array<ForumTopicPost>;
 };
 
 const submitButton = (

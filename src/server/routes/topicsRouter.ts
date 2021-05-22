@@ -6,6 +6,6 @@ export const topicsRouter = (apiRouter: Router) => {
 
   apiRouter.use('/forum-topics', router);
 
-  router.get('/get', topicsController.getAll);
-  router.post('/create', topicsController.create);
+  router.get('/', topicsController.getAll);
+  router.post('/', topicsController.create);
 };

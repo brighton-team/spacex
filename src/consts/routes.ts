@@ -29,5 +29,9 @@ const USER = '/user';
 export const FIND_OR_CREATE_USER = `${BASE_LOCAL_URL}${USER}/find-or-create`;
 
 const FORUM_TOPICS = '/forum-topics';
-export const GET_FORUM_TOPICS = `${BASE_LOCAL_URL}${FORUM_TOPICS}/get`;
-export const CREATE_FORUM_TOPIC = `${BASE_LOCAL_URL}${FORUM_TOPICS}/create`;
+export const GET_FORUM_TOPICS = `${BASE_LOCAL_URL}${FORUM_TOPICS}`;
+export const CREATE_FORUM_TOPIC = `${BASE_LOCAL_URL}${FORUM_TOPICS}`;
+
+const FORUM_POSTS = '/forum-posts';
+export const GET_FORUM_TOPIC_POSTS = `${BASE_LOCAL_URL}${FORUM_POSTS}`;
+export const CREATE_FORUM_TOPIC_POST = `${BASE_LOCAL_URL}${FORUM_POSTS}`;
