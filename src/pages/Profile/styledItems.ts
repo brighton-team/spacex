@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
+import { TextField, Select } from '@material-ui/core';
 import img from './img/defaultimg.png';
 
 import { white } from '../../consts/colors';
@@ -70,4 +70,41 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-export { AvatarWrapper, AvatarImage, TitleUserName, CssTextField };
+const CssSelect = withStyles({
+  root: {
+    '& .MuiInputBase-input': {
+      color: 'white',
+    },
+    '& label + .MuiInput-formControl': {
+      marginTop: '10px',
+    },
+    '& .MuiInputLabel-root': {
+      color: 'white',
+    },
+    '& .MuiInput-underline:before': {
+      borderBottomColor: 'white',
+    },
+    '& .MuiInputLabel-outlined': {
+      color: 'white',
+    },
+    '& label.Mui-focused': {
+      color: 'white',
+    },
+    '& .MuiInput-underline:after': {
+      borderBottomColor: 'white',
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'red',
+      },
+      '&:hover fieldset': {
+        borderColor: 'yellow',
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'green',
+      },
+    },
+  },
+})(Select);
+
+export { AvatarWrapper, AvatarImage, TitleUserName, CssTextField, CssSelect };

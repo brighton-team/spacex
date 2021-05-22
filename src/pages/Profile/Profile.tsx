@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Controller, useForm } from 'react-hook-form';
-import { Button, FormControl, Select } from '@material-ui/core';
+import { Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import { authButtonColor } from 'consts/colors';
@@ -12,13 +12,11 @@ import { UserState } from 'types/actionTypes';
 import { changeUserDataAction } from 'actions/profileActions';
 import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
 import { IsLoadedUserSelector } from 'reducers/selectors/userSelector';
-import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './styledItems';
+import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField, CssSelect } from './styledItems';
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { UserDataType } from '../Login/Login';
-import { selectModel } from 'db/models/functions';
-import { themeModel } from 'db/init';
- 
+import { ApiServiceInstance } from 'utils/ApiService/ApiService';
 
 export const StyledButton = withStyles({
   root: {
@@ -50,8 +48,14 @@ export const ProfilePage = (): JSX.Element => {
   const logOut = () => {
     dispatch(logOutAction());
   };
-  const themes = selectModel(themeModel, {});
-
+  const [themes, setThemes] = useState([]);
+  useEffect(() => {
+    const getThemes = async () => {
+      const response = await ApiServiceInstance.listTheme();
+      setThemes(response.data);
+    };
+    getThemes();
+  }, []);
 
   return (
     <PageWrapper padding="90px 150px 30px">
@@ -203,15 +207,23 @@ export const ProfilePage = (): JSX.Element => {
                     }}
                   />
                 </FormControl>
-                <Select
-                  native
-                  
-                >
-                  <option aria-label="None" value="" />
-                  <option value={10}>Ten</option>
-                  <option value={20}>Twenty</option>
-                  <option value={30}>Thirty</option>
-                </Select>
+                <FormControl fullWidth variant="outlined">
+                  <InputLabel id="theme-label">Цветовая схема</InputLabel>
+                  <Controller
+                    control={control}
+                    defaultValue={themes[0]?.id || ''}
+                    name="theme"
+                    as={
+                      <CssSelect labelId="theme-label" label="Цветовая схема">
+                        {themes.map((value, key) => (
+                          <MenuItem key={key} value={value.id}>
+                            {value.name}
+                          </MenuItem>
+                        ))}
+                      </CssSelect>
+                    }
+                  />
+                </FormControl>
                 <StyledButton type="submit">
                   <TextButton>Изменить данные</TextButton>
                 </StyledButton>

@@ -116,6 +116,14 @@ class ApiService {
         throw err;
       });
   }
+  async listTheme() {
+    return this.instanceAxios
+      .get('/api/theme/list')
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
 }
 
 export const ApiServiceInstance = new ApiService();
