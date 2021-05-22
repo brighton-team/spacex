@@ -4,7 +4,7 @@ import { Action } from 'redux';
 import { ForumReducer, UserState } from 'types/actionTypes';
 
 // eslint-disable-next-line import/no-cycle
-import { createForumTopicAction } from '../../actions/forumActions';
+import { createForumTopicAction, getForumTopicsAction } from '../../actions/forumActions';
 
 import Forum from './Forum';
 
@@ -13,10 +13,12 @@ const mapStateToProps = (state: UserState) => {
     user: {
       data: { id },
     },
+    forum: { topics },
   } = state;
 
   return {
     userId: id,
+    forumTopics: Object.keys(topics).map((key) => topics[key]),
   };
 };
 
@@ -29,6 +31,9 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<ForumReducer, void, Action>)
         time: new Date(),
       })
     );
+  },
+  getForumTopics: () => {
+    dispatch(getForumTopicsAction());
   },
 });
 

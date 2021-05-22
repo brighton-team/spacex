@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ErrorBoundary } from 'components/ErrorBoundary';
@@ -29,7 +29,11 @@ const submitButton = (
 );
 
 const Forum = (props: OwnProps): JSX.Element => {
-  const { createForumTopic, userId } = props;
+  const { createForumTopic, userId, getForumTopics, forumTopics } = props;
+
+  useEffect(() => {
+    getForumTopics();
+  }, []);
 
   const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumTopic>();
 
@@ -60,7 +64,7 @@ const Forum = (props: OwnProps): JSX.Element => {
 
       <TableWrapper>
         <ErrorBoundary type="local">
-          <ForumsTable />
+          <ForumsTable forumTopics={forumTopics} />
         </ErrorBoundary>
       </TableWrapper>
 
@@ -82,6 +86,8 @@ const Forum = (props: OwnProps): JSX.Element => {
 type OwnProps = {
   createForumTopic: (title: string, userId: number) => void;
   userId: number;
+  getForumTopics: () => void;
+  forumTopics: Array<ForumTopic>;
 };
 
 export default Forum;

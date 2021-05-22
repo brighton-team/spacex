@@ -1,4 +1,5 @@
 import React from 'react';
+import { ForumTopic } from 'pages/Forum/Forum';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -7,13 +8,9 @@ import TableRow from '@material-ui/core/TableRow';
 
 import { TableCell, StyledLink } from './styledItems';
 
-const forumTopics = [
-  { id: 1, title: 'Атака звезды смерти' },
-  { id: 2, title: 'Крушение Вулкана' },
-  { id: 3, title: 'Карибский кризис' },
-];
+const ForumsTable = (props: OwnProps): JSX.Element => {
+  const { forumTopics } = props;
 
-const ForumsTable: React.FC = () => {
   return (
     <Table aria-label="forums topics">
       <TableHead>
@@ -23,7 +20,7 @@ const ForumsTable: React.FC = () => {
       </TableHead>
       <TableBody>
         {forumTopics.map((row) => (
-          <TableRow key={row.title}>
+          <TableRow key={row.id}>
             <TableCell component="th" scope="row">
               <StyledLink to={`forum/${row.id}`}>{row.title}</StyledLink>
             </TableCell>
@@ -32,6 +29,10 @@ const ForumsTable: React.FC = () => {
       </TableBody>
     </Table>
   );
+};
+
+type OwnProps = {
+  forumTopics: Array<ForumTopic>;
 };
 
 export default ForumsTable;
