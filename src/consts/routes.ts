@@ -21,5 +21,13 @@ export const GET_GAME_LEADER_DATA = `${BASE_URL}/leaderboard/all`;
 
 const BASE_LOCAL_URL = '/api';
 const CREATE = '/create';
+
 const FEEDBACK = '/feedback';
 export const CREATE_FEEDBACK = `${BASE_LOCAL_URL}${FEEDBACK}${CREATE}`;
+
+const USER = '/user';
+export const FIND_OR_CREATE_USER = `${BASE_LOCAL_URL}${USER}/find-or-create`;
+
+const FORUM_TOPICS = '/forum-topics';
+export const GET_FORUM_TOPICS = `${BASE_LOCAL_URL}${FORUM_TOPICS}/get`;
+export const CREATE_FORUM_TOPIC = `${BASE_LOCAL_URL}${FORUM_TOPICS}/create`;

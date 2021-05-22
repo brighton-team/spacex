@@ -11,11 +11,15 @@ import {
   PUT_GAME_LEADER_DATA,
   GET_GAME_LEADER_DATA,
   CREATE_FEEDBACK,
+  FIND_OR_CREATE_USER,
+  GET_FORUM_TOPICS,
+  CREATE_FORUM_TOPIC,
 } from 'consts/routes';
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
 import { FeedbackData } from 'actions/feedbackAction';
+import { ForumTopic } from 'pages/Forum/Forum';
 import { LeaderDataRequestType, LeaderDataType } from '../../actions/leadersActions';
 
 class ApiService {
@@ -111,6 +115,33 @@ class ApiService {
   async createFeedback(values: FeedbackData) {
     return this.instanceAxios
       .post(CREATE_FEEDBACK, values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async findOrCreateUser(values: UserDataType) {
+    return this.instanceAxios
+      .post(FIND_OR_CREATE_USER, values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async getForumTopics() {
+    return this.instanceAxios
+      .get(GET_FORUM_TOPICS)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async createForumTopic(values: ForumTopic) {
+    return this.instanceAxios
+      .post(CREATE_FORUM_TOPIC, values)
       .then((response) => response)
       .catch((err) => {
         throw err;

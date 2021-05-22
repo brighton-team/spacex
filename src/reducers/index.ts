@@ -5,6 +5,7 @@ import { gameReducer } from './game';
 import { gameModalReducer } from './GameModal';
 import { leadersReducer } from './leaders';
 import { feedbackReducer } from './feedback';
+import { forumReducer } from './forum';
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   gameModal: gameModalReducer,
   leaders: leadersReducer,
   feedback: feedbackReducer,
+  forum: forumReducer,
 });

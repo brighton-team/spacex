@@ -38,5 +38,6 @@ topicModel.hasMany(postModel);
 
 sequelize.topics = topicModel;
 sequelize.feedback = feedbackModel;
+sequelize.users = userModel;
 
 export default sequelize;
