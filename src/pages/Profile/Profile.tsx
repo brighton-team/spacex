@@ -51,7 +51,7 @@ export const ProfilePage = (): JSX.Element => {
     dispatch(logOutAction());
   };
   const themes = selectModel(themeModel, {});
-  console.log(themes)
+
 
   return (
     <PageWrapper padding="90px 150px 30px">

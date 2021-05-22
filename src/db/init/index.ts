@@ -48,6 +48,9 @@ updateOrCreate(themeModel, {name:'dark'},{name:'dark', data:'{}'});
 updateOrCreate(themeModel, {name:'light'},{name:'light', data:'{}'});
 sequelize.topics = topicModel;
 sequelize.feedback = feedbackModel;
+sequelize.theme = themeModel;
+sequelize.userTheme = userThemeModel;
+
 
 export default sequelize;
 
