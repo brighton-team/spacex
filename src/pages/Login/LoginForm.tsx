@@ -28,13 +28,13 @@ export const LoginForm: React.FC = () => {
           }
           control={control}
           defaultValue=""
-          rules={{
-            required: 'Required',
-            pattern: {
-              value: /[0-9a-zA-Z]{6,20}/g,
-              message: 'invalid value from 6 to 20 letters or numbers',
-            },
-          }}
+          // rules={{
+          //   required: 'Required',
+          //   pattern: {
+          //     value: /[0-9a-zA-Z]{6,20}/g,
+          //     message: 'invalid value from 6 to 20 letters or numbers',
+          //   },
+          // }}
         />
       </FormControl>
       <FormControl fullWidth variant="outlined">
@@ -51,13 +51,13 @@ export const LoginForm: React.FC = () => {
           }
           control={control}
           defaultValue=""
-          rules={{
-            required: 'Required',
-            pattern: {
-              value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
-              message: 'invalid value',
-            },
-          }}
+          // rules={{
+          //   required: 'Required',
+          //   pattern: {
+          //     value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
+          //     message: 'invalid value',
+          //   },
+          // }}
         />
       </FormControl>
       <StyledButton type="submit">

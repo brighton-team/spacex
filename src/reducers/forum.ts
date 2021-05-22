@@ -1,4 +1,4 @@
-import { /* ForumAction, */ ForumReducer } from 'types/actionTypes';
+import { ForumAction, ForumReducer } from 'types/actionTypes';
 import {
   CREATE_FORUM_TOPIC_SUCCESS,
   GET_FORUM_TOPICS_SUCCESS,
@@ -10,39 +10,46 @@ export const initialState: ForumReducer = {
   topics: {},
 };
 
-export const forumReducer = (state: ForumReducer = initialState, action: any): ForumReducer => {
+export const forumReducer = (
+  state: ForumReducer = initialState,
+  action: ForumAction
+): ForumReducer => {
   switch (action.type) {
     case GET_FORUM_TOPICS_SUCCESS:
+      if (!action.payload.topics) {
+        return state;
+      }
       return {
         ...state,
-        topics:
-          Array.isArray(action.payload.data) &&
-          action.payload.data.reduce((obj, item) => {
-            obj[item.id] = item; // eslint-disable-line no-param-reassign
-            return obj;
-          }, {}),
+        topics: action.payload.topics.reduce((obj, item) => {
+          obj[item.id] = item; // eslint-disable-line no-param-reassign
+          return obj;
+        }, {}),
       };
+
     case CREATE_FORUM_TOPIC_SUCCESS:
-      if (Array.isArray(action.payload.data)) {
-        return {
-          ...state,
-        };
+      if (!action.payload.topic) {
+        return state;
       }
       return {
         ...state,
         topics: {
           ...state.topics,
-          [action.payload.data.id]: action.payload.data,
+          [action.payload.topic.id]: action.payload.topic,
         },
       };
+
     case GET_FORUM_TOPIC_POSTS_SUCCESS:
+      if (!action.payload.posts || !action.payload.topicId) {
+        return state;
+      }
       return {
         ...state,
         topics: {
           ...state.topics,
           [action.payload.topicId]: {
             ...state.topics[action.payload.topicId],
-            posts: action.payload.data,
+            posts: action.payload.posts,
           },
         },
       };

@@ -67,7 +67,9 @@ export type ForumReducer = {
 export type ForumAction = {
   type: string;
   payload?: {
-    data: ForumTopic | Array<ForumTopic> | Array<ForumTopicPost>;
+    topic?: ForumTopic;
+    topics?: Array<ForumTopic>;
+    posts?: Array<ForumTopicPost>;
     topicId?: number;
   };
 };
