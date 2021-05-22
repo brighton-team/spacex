@@ -35,7 +35,7 @@ const submitButton = (
 );
 
 const ForumTopicView = (props: OwnProps): JSX.Element => {
-  const { createPost, userId, topicId, getPosts, posts } = props;
+  const { createPost, userId, topicId, getPosts, posts, topicTitle } = props;
 
   useEffect(() => {
     getPosts(topicId);
@@ -62,7 +62,7 @@ const ForumTopicView = (props: OwnProps): JSX.Element => {
     <PageWrapper>
       <Heading>
         <StyledLink to={forum}>Назад</StyledLink>
-        <TitleText>ТЕМА</TitleText>
+        <TitleText>{topicTitle}</TitleText>
         <StyledButton variant="outlined" onClick={openModal}>
           Новое сообщение
         </StyledButton>
@@ -100,6 +100,7 @@ type OwnProps = {
   topicId: number;
   getPosts: (topicId: number) => void;
   posts: Array<ForumTopicPost>;
+  topicTitle: string;
 };
 
 export default ForumTopicView;

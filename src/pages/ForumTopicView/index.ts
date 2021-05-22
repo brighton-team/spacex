@@ -20,10 +20,13 @@ const mapStateToProps = (state: UserState, ownProps: any) => {
 
   const posts = topics[topicId]?.posts || [];
 
+  const topicTitle = topics[topicId]?.title || 'Тема';
+
   return {
     userId: id,
     topicId,
     posts,
+    topicTitle,
   };
 };
 
