@@ -144,13 +144,13 @@ export const RegisterForm: React.FC = () => {
           }
           control={control}
           defaultValue=""
-          // rules={{
-          //   required: 'Required',
-          //   pattern: {
-          //     value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
-          //     message: 'invalid value',
-          //   },
-          // }}
+          rules={{
+            required: 'Required',
+            pattern: {
+              value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
+              message: 'invalid value',
+            },
+          }}
         />
       </FormControl>
       <FormControl fullWidth variant="outlined">
@@ -169,14 +169,14 @@ export const RegisterForm: React.FC = () => {
           }
           control={control}
           defaultValue=""
-          // rules={{
-          //   required: 'Required',
-          //   pattern: {
-          //     value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
-          //     message: 'invalid value',
-          //   },
-          //   validate: (value) => value === password.current || 'The passwords do not match',
-          // }}
+          rules={{
+            required: 'Required',
+            pattern: {
+              value: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{6,20}/g,
+              message: 'invalid value',
+            },
+            validate: (value) => value === password.current || 'The passwords do not match',
+          }}
         />
       </FormControl>
       <StyledButton type="submit">
