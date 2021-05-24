@@ -3,11 +3,13 @@ import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import 'babel-polyfill';
+import cookieParser from 'cookie-parser';
 import serverRenderMiddleware from './server-render-middleware';
-import { cookieParser, logger } from './server/middlewares';
+import { logger } from './server/middlewares';
 import { apiRouter } from './server/routes';
 
 import db from './db/init';
+import { serverUserAuthMiddleware } from './server/middlewares/authMiddleware';
 
 // type DB = {
 //   topics: any;
@@ -16,12 +18,13 @@ import db from './db/init';
 const app = express();
 
 app
-  .use(compression())
+  .use(cookieParser())
   .use(logger)
-  .use(cookieParser)
+  .use(compression())
   .use(bodyParser.json())
   .use(express.static(path.resolve(__dirname, '../dist')))
-  .use(express.static(path.resolve(__dirname, '../static')));
+  .use(express.static(path.resolve(__dirname, '../static')))
+  .use(serverUserAuthMiddleware);
 
 db.sync()
   .then(() => {
