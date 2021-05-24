@@ -1,4 +1,6 @@
 import { UserDataType } from 'pages/Login/Login';
+import { ForumTopic } from 'pages/Forum/Forum';
+import { ForumTopicPost } from 'pages/ForumTopicView/ForumTopicView';
 import { RouterState } from 'connected-react-router';
 
 export interface IUser {
@@ -20,7 +22,8 @@ export type UserState = {
   gameModal: IGameModal;
   leaders: LeaderReducer;
   router: RouterState;
-  fullscreen:IFullscreen;
+  fullscreen: IFullscreen;
+  forum: ForumReducer;
 };
 
 export interface GameReducer {
@@ -32,7 +35,6 @@ export interface IGameModal {
   isVisiblePauseGame: boolean;
   isVisibleGameOver: boolean;
 }
-
 
 export type GameModal = {
   type: string;
@@ -56,3 +58,18 @@ export type LeaderReducer = {
   data?: Array<Leader> | null;
 };
 
+export type ForumReducer = {
+  topics: {
+    [key: number]: ForumTopic;
+  };
+};
+
+export type ForumAction = {
+  type: string;
+  payload?: {
+    topic?: ForumTopic;
+    topics?: Array<ForumTopic>;
+    posts?: Array<ForumTopicPost>;
+    topicId?: number;
+  };
+};

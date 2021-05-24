@@ -11,7 +11,7 @@ export const Landing = (): JSX.Element => {
       <h1 className="description">
         У вас есть три жизни, чтобы преодолеть пояс астероидов.
         <br />
-        Ваша цель - сбить как можно препятствий с помощью лазерной пушки и остаться живым!
+        Ваша цель - сбить как можно больше препятствий с помощью лазерной пушки и остаться живым!
       </h1>
       <div className="linksWrapper">
         <Link className="styledLink" to={signIn}>

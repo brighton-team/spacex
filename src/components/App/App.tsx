@@ -19,7 +19,6 @@ import { getUserDataAction } from '../../actions/signInActions';
 import { UserState } from '../../types/actionTypes';
 import { ErrorPage } from '../../pages/Error';
 import { Feedback } from '../../pages/Feedback';
-// import { Game } from '../../pages/Game';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -57,9 +56,11 @@ const App: React.FC = () => {
         />
         <Route path={feedback} render={() => (isAuth ? <Feedback /> : <Redirect to={signIn} />)} />
         <Route path={signUp} component={LoginPage} />
-        {/* <Route path={game} component={Game} /> */}
-        <Route path={forum} component={Forum} exact />
-        <Route path={`${forum}/:id`} component={ForumTopicView} />
+        <Route path={forum} exact render={() => (isAuth ? <Forum /> : <Redirect to={signIn} />)} />
+        <Route
+          path={`${forum}/:id`}
+          render={(props) => (isAuth ? <ForumTopicView {...props} /> : <Redirect to={signIn} />)}
+        />
         <Route path="*">
           <ErrorPage errorNumber={404} />
         </Route>

@@ -5,6 +5,9 @@ import { Card, Author, Content, StyledAvatar } from './styledItems';
 const MessageCard = (props: OwnProps): JSX.Element => {
   const { authorName, datePublished, message } = props;
 
+  const formattedDate = new Date(datePublished).toLocaleDateString();
+  const formattedTime = new Date(datePublished).toLocaleTimeString();
+
   return (
     <Card>
       <Author>
@@ -12,7 +15,9 @@ const MessageCard = (props: OwnProps): JSX.Element => {
         <p>{authorName}</p>
       </Author>
       <Content>
-        <p>Опубликовано {datePublished}</p>
+        <p>
+          Опубликовано {formattedDate} {formattedTime}
+        </p>
         <p>{message}</p>
       </Content>
     </Card>

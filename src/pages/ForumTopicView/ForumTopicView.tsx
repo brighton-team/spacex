@@ -1,5 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { UserDataType } from 'pages/Login/Login';
 
 import { forum } from 'consts/routes';
 
@@ -17,26 +19,14 @@ import {
   SubmitButton,
 } from './styledItems';
 
-type ForumData = {
-  message: string;
+export type ForumTopicPost = {
+  id?: number;
+  text?: string;
+  topicId?: number;
+  userId?: number;
+  time?: string;
+  user?: UserDataType;
 };
-
-const messages = [
-  {
-    id: 1,
-    authorName: 'Соло',
-    datePublished: '25.03.2247',
-    message:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra vulputate ante, vel imperdiet tellus dictum in. Nullam tristique, urna sed tincidunt tristique, ex nisl semper ipsum, at eleifend leo nisl sit amet massa. Sed eleifend urna massa, vel gravida lectus elementum et. Nullam pharetra lacus nec ante blandit pulvinar. Integer ornare mi id est interdum viverra. Vivamus ex ante, tempor tincidunt mi in, blandit scelerisque augue. Mauris a dapibus enim. Donec et dapibus nunc. Fusce mi libero, dictum vitae elementum quis, consequat non purus. Integer eros orci, condimentum sed elementum in, lobortis et risus. Suspendisse potenti. In sed quam ornare, ultrices est vel, hendrerit nunc. Fusce consequat efficitur vehicula. Donec non ullamcorper leo. Proin tristique laoreet magna eu pretium. Praesent rhoncus velit at justo tempus porta. Nam convallis, odio quis imperdiet imperdiet, lacus sapien vestibulum dolor, quis luctus massa augue id lacus. Cras placerat pretium finibus. Morbi eget varius risus. Nulla dui diam, interdum et efficitur vel, porttitor eget urna. Donec et ex non ante venenatis cursus. Cras ac velit fermentum massa faucibus molestie.',
-  },
-  {
-    id: 2,
-    authorName: 'Соло',
-    datePublished: '25.03.2247',
-    message:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra vulputate ante, vel imperdiet tellus dictum in. Nullam tristique, urna sed tincidunt tristique, ex nisl semper ipsum, at eleifend leo nisl sit amet massa. Sed eleifend urna massa, vel gravida lectus elementum et. Nullam pharetra lacus nec ante blandit pulvinar. Integer ornare mi id est interdum viverra. Vivamus ex ante, tempor tincidunt mi in, blandit scelerisque augue. Mauris a dapibus enim. Donec et dapibus nunc. Fusce mi libero, dictum vitae elementum quis, consequat non purus. Integer eros orci, condimentum sed elementum in, lobortis et risus. Suspendisse potenti. In sed quam ornare, ultrices est vel, hendrerit nunc. Fusce consequat efficitur vehicula. Donec non ullamcorper leo. Proin tristique laoreet magna eu pretium. Praesent rhoncus velit at justo tempus porta. Nam convallis, odio quis imperdiet imperdiet, lacus sapien vestibulum dolor, quis luctus massa augue id lacus. Cras placerat pretium finibus. Morbi eget varius risus. Nulla dui diam, interdum et efficitur vel, porttitor eget urna. Donec et ex non ante venenatis cursus. Cras ac velit fermentum massa faucibus molestie.',
-  },
-];
 
 const submitButton = (
   <SubmitButton variant="outlined" type="submit" form="new-forum-message">
@@ -44,7 +34,13 @@ const submitButton = (
   </SubmitButton>
 );
 
-const ForumTopicView: React.FC = () => {
+const ForumTopicView = (props: OwnProps): JSX.Element => {
+  const { createPost, userId, topicId, getPosts, posts, topicTitle } = props;
+
+  useEffect(() => {
+    getPosts(topicId);
+  }, [topicId]);
+
   const [isModalVisible, setModalVisibility] = useState(false);
 
   const openModal = useCallback(() => {
@@ -55,11 +51,10 @@ const ForumTopicView: React.FC = () => {
     setModalVisibility(false);
   }, []);
 
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumData>();
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumTopicPost>();
 
-  const onSubmit = handleSubmit(({ message }) => {
-    // TODO: remove console logging
-    console.log('message:', message); // eslint-disable-line no-console
+  const onSubmit = handleSubmit(({ text }) => {
+    createPost(text, topicId, userId);
     closeModal();
   });
 
@@ -67,15 +62,20 @@ const ForumTopicView: React.FC = () => {
     <PageWrapper>
       <Heading>
         <StyledLink to={forum}>Назад</StyledLink>
-        <TitleText>ТЕМА</TitleText>
+        <TitleText>{topicTitle}</TitleText>
         <StyledButton variant="outlined" onClick={openModal}>
           Новое сообщение
         </StyledButton>
       </Heading>
 
       <TableWrapper>
-        {messages.map((message) => (
-          <MessageCard key={message.id} {...message} />
+        {posts.map((post) => (
+          <MessageCard
+            key={post.id}
+            authorName={post.user?.login}
+            datePublished={post.time}
+            message={post.text}
+          />
         ))}
       </TableWrapper>
 
@@ -86,12 +86,21 @@ const ForumTopicView: React.FC = () => {
         title="Опубликуйте сообщение"
         formId="new-forum-message"
         onSubmit={onSubmit}
-        formFields={[{ title: 'message', label: 'Сообщение', required: true }]}
+        formFields={[{ title: 'text', label: 'Сообщение', required: true }]}
         fieldsErrors={fieldsErrors}
         control={control}
       />
     </PageWrapper>
   );
+};
+
+type OwnProps = {
+  createPost: (text: string, topicId: number, userId: number) => void;
+  userId: number;
+  topicId: number;
+  getPosts: (topicId: number) => void;
+  posts: Array<ForumTopicPost>;
+  topicTitle: string;
 };
 
 export default ForumTopicView;
