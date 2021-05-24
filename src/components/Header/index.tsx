@@ -3,9 +3,11 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import img from 'assets/images/logo.png';
-import { forum, leaders, game, profile } from 'consts/routes';
+import { forum, leaders, game, profile, feedback } from 'consts/routes';
+import { useSelector } from 'react-redux';
+import { UserState } from 'types/actionTypes';
 
-const Wraper = styled.div`
+const Wrapper = styled.div`
   position: absolute;
   left: 0;
   top: 0;
@@ -50,17 +52,15 @@ const HeaderButton = styled.div`
   left: 180px;
 `;
 
-const routesWithHeader = [forum, leaders, game, profile];
+const routesWithHeader = [forum, leaders, game, profile, feedback];
 
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
+  const { fullscreenOn } = useSelector((state: UserState) => state.fullscreen);
   const isShowHeader = routesWithHeader.includes(pathname);
-  // if (routesWithoutHeader.includes(pathname)) {
-  //   return null;
-  // }
 
-  return isShowHeader ? (
-    <Wraper>
+  return isShowHeader && !fullscreenOn ? (
+    <Wrapper>
       <Content>
         <Logo />
         <HeaderButton>
@@ -72,8 +72,9 @@ export function Header(): JSX.Element | null {
           <StyledLink to={leaders}>Лидеры</StyledLink>
           <StyledLink to={forum}>Форум</StyledLink>
           <StyledLink to={profile}>Профиль</StyledLink>
+          <StyledLink to={feedback}>Обратная связь</StyledLink>
         </TopLinks>
       </Content>
-    </Wraper>
+    </Wrapper>
   ) : null;
 }

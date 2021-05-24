@@ -13,7 +13,7 @@ const HeaderWrapper = styled.div`
   align-items: center;
 `;
 
-const PageTitle = styled.h1<{ color: string }>`
+const PageTitle = styled.h1<{ color: string; marginTop?: string }>`
   font-family: Montserrat, serif;
   font-style: normal;
   font-weight: 600;
@@ -23,7 +23,7 @@ const PageTitle = styled.h1<{ color: string }>`
   letter-spacing: 0.05em;
   text-transform: uppercase;
   align-self: center;
-  margin-top: 130px;
+  margin-top: ${(props) => props.marginTop || '130px'};
   margin-bottom: 30px;
   color: ${(props) => props.color};
 `;

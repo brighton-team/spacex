@@ -1,56 +1,54 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import './styles.css';
 
 import { signUp, signIn } from 'consts/routes';
-import {
-  FormInputWrapper,
-  FormWrapper,
-  HeaderWrapper,
-  TextLink,
-  TitleText,
-  StyledLink,
-} from './styles';
+import { FormInputWrapper, FormWrapper, TextLink, TitleText, StyledLink } from './styles';
 import { RegisterForm } from './RegisterForm';
 import { LoginForm } from './LoginForm';
 
-type PagesType = {
-  [key: string]: string;
+export type UserDataType = {
+  id?: number | null;
+  first_name?: string;
+  second_name?: string;
+  display_name?: string;
+  login?: string;
+  email?: string;
+  phone?: string;
+  avatar?: string;
+  password?: string;
+  password_confirm?: string;
 };
 
-const loginPage = 'login';
-const registerPage = 'register';
+type LoginPageProps = {
+  loaded?: boolean;
+  isAuth?: boolean;
+  page?: string;
+};
+
 const authWrapperHeight = '360px';
 const regWrapperHeight = '650px';
 const authMarginTopTitle = '50px';
 const regMarginTopTitle = '30px';
 
-const pages: PagesType = {
-  [signIn]: loginPage,
-  [signUp]: registerPage,
-  default: loginPage,
-};
-
-const getPage = (path: string): string => (path.length === 1 ? pages.default : pages[path]);
-const isLoginPage = (pageName: string): boolean => pageName === loginPage;
-
-export const LoginPage: React.FC = () => {
-  const { pathname } = useLocation();
-  const currentPage = getPage(pathname);
-  const checkLoginPage = isLoginPage(currentPage);
+export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
+  const checkLoginPage = page === 'login';
   const wrapperHeight = checkLoginPage ? authWrapperHeight : regWrapperHeight;
   const titleMarginTop = checkLoginPage ? authMarginTopTitle : regMarginTopTitle;
   const link = checkLoginPage ? signUp : signIn;
+  const titleText = checkLoginPage ? 'ВХОД' : 'РЕГИСТРАЦИЯ';
+  const linkText = checkLoginPage ? 'Нет аккаунта?' : 'Уже зарегистрированы?';
+  const renderPage = checkLoginPage ? <LoginForm /> : <RegisterForm />;
   return (
-    <HeaderWrapper>
+    <div className="headerWrapper">
       <FormWrapper height={wrapperHeight}>
-        <TitleText marginTop={titleMarginTop}>{checkLoginPage ? 'ВХОД' : 'РЕГИСТРАЦИЯ'}</TitleText>
-        <FormInputWrapper marginTop={titleMarginTop}>
-          {checkLoginPage ? <LoginForm /> : <RegisterForm />}
+        <TitleText marginTop={titleMarginTop}>{titleText}</TitleText>
+        <FormInputWrapper currentMarginTop={titleMarginTop} currentWidth="250px">
+          {renderPage}
         </FormInputWrapper>
         <StyledLink to={link}>
-          <TextLink>{checkLoginPage ? 'Нет аккаунта?' : 'Уже зарегистрированы?'}</TextLink>
+          <TextLink>{linkText}</TextLink>
         </StyledLink>
       </FormWrapper>
-    </HeaderWrapper>
+    </div>
   );
 };

@@ -1,21 +1,17 @@
 import React, { useRef } from 'react';
-import axios from 'axios';
 import { Controller, useForm } from 'react-hook-form';
 
 import { FormControl, TextField } from '@material-ui/core';
-
-import { SIGN_UP_URL } from 'consts/routes';
-import { IUser } from 'types/actionTypes';
+import { UserDataType } from 'pages/Login/Login';
+import { signUpAction } from 'actions/signInActions';
+import { useDispatch } from 'react-redux';
 import { StyledButton, TextButton } from './styles';
 
 export const RegisterForm: React.FC = () => {
-  const { control, watch, handleSubmit, errors: fieldsErrors } = useForm<IUser>();
+  const dispatch = useDispatch();
+  const { control, watch, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
-    axios.post(SIGN_UP_URL, values).then((response) => {
-      if (response.status === 200) {
-        console.log('values', values);
-      }
-    });
+    dispatch(signUpAction(values));
   });
   const password = useRef<HTMLInputElement | null>(null);
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

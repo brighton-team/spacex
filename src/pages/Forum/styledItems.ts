@@ -3,14 +3,14 @@ import { Button, withStyles } from '@material-ui/core';
 
 import img from 'assets/images/rocketBg.jpg';
 
-export const PageWrapper = styled.div`
+export const PageWrapper = styled.div<{ padding?: string }>`
   background: url(${img}) no-repeat center center;
   height: 100vh;
   background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 120px 70px 0;
+  padding: ${(props) => props.padding};
   box-sizing: border-box;
 `;
 
@@ -31,13 +31,16 @@ export const TitleText = styled.h1`
   color: #fff;
 `;
 
-export const TableWrapper = styled.div`
-  width: 100%;
+export const TableWrapper = styled.div<{ width?: string }>`
+  width: ${(props) => props.width || '100%'};
   height: 100%;
   background: rgba(24, 23, 67, 0.9);
   border-radius: 7px;
   margin-top: 20px;
   overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 export const EmptySpace = styled.div`

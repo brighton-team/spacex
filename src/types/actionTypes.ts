@@ -1,21 +1,58 @@
+import { UserDataType } from 'pages/Login/Login';
+import { RouterState } from 'connected-react-router';
+
 export interface IUser {
-  id?: number | null;
-  first_name?: string;
-  second_name?: string;
-  display_name?: string;
-  login?: string;
-  email?: string;
-  phone?: string;
-  avatar?: string;
-  password?: string;
-  password_confirm?: string;
+  loaded: boolean;
+  isAuth?: boolean;
+  isPasswordChanged: boolean;
+  isAvatarChanged: boolean;
+  data?: UserDataType;
 }
 
-export type SignInAction = {
+export type ActionType = {
   type: string;
-  payload: IUser;
+  payload?: UserDataType;
 };
 
 export type UserState = {
   user: IUser;
+  game: GameReducer;
+  gameModal: IGameModal;
+  leaders: LeaderReducer;
+  router: RouterState;
+  fullscreen:IFullscreen;
 };
+
+export interface GameReducer {
+  score: number;
+  lives: number;
+}
+
+export interface IGameModal {
+  isVisiblePauseGame: boolean;
+  isVisibleGameOver: boolean;
+}
+
+
+export type GameModal = {
+  type: string;
+};
+
+export interface IFullscreen {
+  fullscreenOn: boolean;
+}
+export type Fullscreen = {
+  type: string;
+};
+
+export type Leader = {
+  data: {
+    userName: string;
+    scorespacex: number;
+  };
+};
+
+export type LeaderReducer = {
+  data?: Array<Leader> | null;
+};
+

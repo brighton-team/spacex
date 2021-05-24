@@ -22,12 +22,12 @@ const submitButton = (
   </SubmitButton>
 );
 
-type FormData = {
+type ForumData = {
   title: string;
 };
 
 const Forum = (): JSX.Element => {
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<FormData>();
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumData>();
 
   const [isModalVisible, setModalVisibility] = useState(false);
 
@@ -46,7 +46,7 @@ const Forum = (): JSX.Element => {
   });
 
   return (
-    <PageWrapper>
+    <PageWrapper padding="100px 0">
       <Heading>
         <EmptySpace />
         <TitleText>ТЕМЫ ФОРУМА</TitleText>

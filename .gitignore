@@ -1,3 +1,6 @@
 node_modules
-.idea
 dist
+.idea
+temp
+*.env
+postgresdata
