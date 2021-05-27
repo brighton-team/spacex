@@ -91,7 +91,7 @@ export const Game = (): JSX.Element => {
   return (
     <PageWrapper>
       <GameWrapper>
-        <Canvas id="game" />
+        <Canvas id="game" data-test="game-area" />
         <Score>Score: {score}</Score>
         <Health>Health: {lives}</Health>
         <PauseButton onClick={openModalCallback} ref={ref} />

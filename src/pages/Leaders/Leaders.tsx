@@ -35,7 +35,7 @@ export const LeadersPage: React.FC = () => {
   return (
     <HeaderWrapperStyled>
       <PageTitle color={white}>Лидеры</PageTitle>
-      <StyledTable>
+      <StyledTable data-test="leaders-table">
         <StyledTableHead>
           <StyledTableRow>
             <StyledTableCell>Место</StyledTableCell>

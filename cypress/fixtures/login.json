@@ -1,0 +1,6 @@
+{
+  "emptyLoginWarning": "Required",
+  "emptyPasswordlWarning": "Required",
+  "correctTestLogin": "brightonTesting",
+  "correctTestPassword": "Brighton&Testing123"
+}
