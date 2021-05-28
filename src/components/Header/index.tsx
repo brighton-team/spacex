@@ -57,7 +57,7 @@ const routesWithHeader = [forum, leaders, game, profile, feedback];
 export function Header(): JSX.Element | null {
   const { pathname } = useLocation();
   const { fullscreenOn } = useSelector((state: UserState) => state.fullscreen);
-  const isShowHeader = routesWithHeader.includes(pathname);
+  const isShowHeader = routesWithHeader.includes(pathname) || pathname.startsWith(forum);
 
   return isShowHeader && !fullscreenOn ? (
     <Wrapper>

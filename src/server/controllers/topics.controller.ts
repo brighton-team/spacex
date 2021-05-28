@@ -18,6 +18,20 @@ const create = async (req: Request, res: Response) => {
   }
 };
 
+const getAll = async (req: Request, res: Response) => {
+  try {
+    const topics = await db.topics.findAll({
+      attributes: ['id', 'title'],
+    });
+
+    res.send(topics);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
+
 export default {
   create,
+  getAll,
 };

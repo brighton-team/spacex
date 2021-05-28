@@ -7,6 +7,7 @@ import { gameModalReducer } from 'reducers/GameModal';
 import { fullscreenReducer } from 'reducers/Fullscreen';
 import { leadersReducer } from 'reducers/leaders';
 import { feedbackReducer } from '../reducers/feedback';
+import { forumReducer } from '../reducers/forum';
 
 export const createRootReducer = (history: History) =>
   combineReducers({
@@ -17,4 +18,5 @@ export const createRootReducer = (history: History) =>
     router: connectRouter(history),
     fullscreen: fullscreenReducer,
     feedback: feedbackReducer,
+    forum: forumReducer,
   });

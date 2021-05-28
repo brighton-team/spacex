@@ -38,7 +38,8 @@ const feedbackModel = sequelize.define('feedback', Feedback);
 userModel.hasMany(topicModel);
 feedbackModel.belongsTo(userModel);
 // userModel.hasMany(feedbackModel);
-userModel.hasMany(postModel);
+userModel.hasMany(postModel, { foreignKey: 'userId' });
+postModel.belongsTo(userModel);
 topicModel.hasMany(postModel);
 themeModel.hasOne(userThemeModel, { foreignKey: 'themeId' });
 userThemeModel.belongsTo(themeModel, { foreignKey: 'themeId' });
@@ -49,5 +50,7 @@ sequelize.topics = topicModel;
 sequelize.feedback = feedbackModel;
 sequelize.theme = themeModel;
 sequelize.userTheme = userThemeModel;
+sequelize.users = userModel;
+sequelize.posts = postModel;
 
 export default sequelize;

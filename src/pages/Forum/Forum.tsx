@@ -1,5 +1,8 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { ForumTopicPost } from 'pages/ForumTopicView/ForumTopicView';
+
 import { ErrorBoundary } from 'components/ErrorBoundary';
 
 import { FormModal } from 'components/FormModal';
@@ -16,18 +19,26 @@ import {
   SubmitButton,
 } from './styledItems';
 
+export type ForumTopic = {
+  id?: number;
+  title?: string;
+  posts?: Array<ForumTopicPost>;
+};
+
 const submitButton = (
   <SubmitButton variant="outlined" type="submit" form="new-forum-topic">
     Создать
   </SubmitButton>
 );
 
-type ForumData = {
-  title: string;
-};
+const Forum = (props: OwnProps): JSX.Element => {
+  const { createForumTopic, userId, getForumTopics, forumTopics } = props;
 
-const Forum = (): JSX.Element => {
-  const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumData>();
+  useEffect(() => {
+    getForumTopics();
+  }, []);
+
+  const { control, handleSubmit, errors: fieldsErrors } = useForm<ForumTopic>();
 
   const [isModalVisible, setModalVisibility] = useState(false);
 
@@ -40,8 +51,7 @@ const Forum = (): JSX.Element => {
   }, []);
 
   const onSubmit = handleSubmit(({ title }) => {
-    // TODO: remove console logging
-    console.log('title:', title); // eslint-disable-line no-console
+    createForumTopic(title, userId);
     closeModal();
   });
 
@@ -57,7 +67,7 @@ const Forum = (): JSX.Element => {
 
       <TableWrapper>
         <ErrorBoundary type="local">
-          <ForumsTable />
+          <ForumsTable forumTopics={forumTopics} />
         </ErrorBoundary>
       </TableWrapper>
 
@@ -74,6 +84,13 @@ const Forum = (): JSX.Element => {
       />
     </PageWrapper>
   );
+};
+
+type OwnProps = {
+  createForumTopic: (title: string, userId: number) => void;
+  userId: number;
+  getForumTopics: () => void;
+  forumTopics: Array<ForumTopic>;
 };
 
 export default Forum;

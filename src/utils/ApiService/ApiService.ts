@@ -11,11 +11,18 @@ import {
   PUT_GAME_LEADER_DATA,
   GET_GAME_LEADER_DATA,
   CREATE_FEEDBACK,
+  FIND_OR_CREATE_USER,
+  GET_FORUM_TOPICS,
+  CREATE_FORUM_TOPIC,
+  GET_FORUM_TOPIC_POSTS,
+  CREATE_FORUM_TOPIC_POST,
 } from 'consts/routes';
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
 import { FeedbackData } from 'actions/feedbackAction';
+import { ForumTopic } from 'pages/Forum/Forum';
+import { ForumTopicPost } from 'pages/ForumTopicView/ForumTopicView';
 import { LeaderDataRequestType, LeaderDataType } from '../../actions/leadersActions';
 
 class ApiService {
@@ -116,17 +123,62 @@ class ApiService {
         throw err;
       });
   }
-  async listTheme() {
+
+  async findOrCreateUser(values: UserDataType) {
     return this.instanceAxios
-      .get('/api/theme/list')
+      .post(FIND_OR_CREATE_USER, values)
       .then((response) => response)
       .catch((err) => {
         throw err;
       });
   }
+  async listTheme() {
+    return this.instanceAxios
+      .get('/api/theme/list') .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+
   async setTheme(id,themeId) {
     return this.instanceAxios
-      .post('/api/theme/set', [id,themeId])
+      .post('/api/theme/set', [id,themeId]) .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async getForumTopics() {
+    return this.instanceAxios
+      .get(GET_FORUM_TOPICS)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async createForumTopic(values: ForumTopic) {
+    return this.instanceAxios
+      .post(CREATE_FORUM_TOPIC, values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async getForumTopicPosts(topicId: number) {
+    return this.instanceAxios
+      .get(`${GET_FORUM_TOPIC_POSTS}/${topicId}`)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async createForumTopicPost(values: ForumTopicPost) {
+    return this.instanceAxios
+      .post(CREATE_FORUM_TOPIC_POST, values)
       .then((response) => response)
       .catch((err) => {
         throw err;
