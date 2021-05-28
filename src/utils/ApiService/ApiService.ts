@@ -124,6 +124,14 @@ class ApiService {
         throw err;
       });
   }
+  async setTheme(id,themeId) {
+    return this.instanceAxios
+      .post('/api/theme/set', [id,themeId])
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
 }
 
 export const ApiServiceInstance = new ApiService();

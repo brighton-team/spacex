@@ -9,7 +9,7 @@ import { authButtonColor } from 'consts/colors';
 import { ChangePasswordModal } from 'components/ChangePasswordModal';
 import { logOutAction } from 'actions/signInActions';
 import { UserState } from 'types/actionTypes';
-import { changeUserDataAction } from 'actions/profileActions';
+import { changeUserDataAction, changeThemeAction } from 'actions/profileActions';
 import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
 import { IsLoadedUserSelector } from 'reducers/selectors/userSelector';
 import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField, CssSelect } from './styledItems';
@@ -37,6 +37,7 @@ export const ProfilePage = (): JSX.Element => {
   const { control, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(changeUserDataAction(values));
+    dispatch(changeThemeAction(data.id, values.theme));
   });
   const handleVisibleModalChangePasswords = () => {
     setIsVisibleModal(!isVisibleModal);
@@ -48,11 +49,11 @@ export const ProfilePage = (): JSX.Element => {
   const logOut = () => {
     dispatch(logOutAction());
   };
-  const [themes, setThemes] = useState([]);
+  const [themes, listThemes] = useState([]);
   useEffect(() => {
     const getThemes = async () => {
       const response = await ApiServiceInstance.listTheme();
-      setThemes(response.data);
+      listThemes(response.data);
     };
     getThemes();
   }, []);

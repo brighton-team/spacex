@@ -102,3 +102,17 @@ export const changeUserDataAction = (userData: UserDataType) => (
     })
     .catch(() => dispatch(changeUserDataFailure()));
 };
+
+export const changeThemeAction  = (id: number, theme:number) => (
+  dispatch: ThunkDispatch<UserState, void, Action>
+): void => {
+  dispatch(changeUserDataRequest());
+  ApiServiceInstance.setTheme(id,theme)
+    .then((response) => {
+      const { data, status } = response;
+      if (status === 200) {
+        dispatch(changeUserDataSuccess(data));
+      }
+    })
+    .catch(() => dispatch(changeUserDataFailure()));
+};

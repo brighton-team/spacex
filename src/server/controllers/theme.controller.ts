@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import db from 'db/init';
 
-export const settheme = async (req: Request, res: Response) => {
-  const { name, email, text } = req.body;
+export const setTheme = async (req: Request, res: Response) => {
+  const {id, themeId } = req.body;
 
   try {
-    const theme = await db.theme.create({ name, email, text });
+    const theme = await db.theme.create({id, themeId});
 
     res.send(theme);
   } catch (err) {
