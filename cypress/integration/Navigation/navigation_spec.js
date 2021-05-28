@@ -3,9 +3,7 @@ import Landing from '../../sectionObjects/Landing/Landing';
 
 describe('Navigation Test', () => {
   before(() => {
-    cy.fixture('login').then((data) => {
-      cy.login(data.correctTestLogin, data.correctTestPassword);
-    });
+    cy.login(Cypress.env('testLogin'), Cypress.env('testPassword'));
 
     cy.visit('/');
 
