@@ -15,6 +15,9 @@ import {
   CHANGE_USER_DATA_REQUEST,
   CHANGE_USER_DATA_FAILURE,
   CHANGE_USER_DATA_SUCCESS,
+  CHANGE_USER_THEME_REQUEST,
+  CHANGE_USER_THEME_FAILURE,
+  CHANGE_USER_THEME_SUCCESS,
   CHANGE_USER_PASSWORD_REQUEST,
   CHANGE_USER_PASSWORD_FAILURE,
   CHANGE_USER_PASSWORD_SUCCESS,
@@ -78,6 +81,19 @@ export const userReducer = (state: IUser = initialState, action: ActionType): IU
         isAuth: false,
         loaded: true,
       };
+      case CHANGE_USER_THEME_REQUEST:
+        return {
+          ...state,
+        };
+      case CHANGE_USER_THEME_SUCCESS:
+        return {
+          ...state,
+          data: { ...action.payload },
+        };
+      case CHANGE_USER_THEME_FAILURE:
+        return {
+          ...state,
+        };
     case GET_USER_DATA_REQUEST:
       return {
         ...state,

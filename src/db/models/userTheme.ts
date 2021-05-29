@@ -14,5 +14,7 @@ export const UserTheme = {
   userId: {
     type: DataType.INTEGER,
     allowNull: false,
+    unique: true,
+
   },
 };

@@ -6,7 +6,6 @@ import { Post } from '../models/post';
 import { Theme } from '../models/theme';
 import { UserTheme } from '../models/userTheme';
 import { Feedback } from '../models/feedback';
-import { updateOrCreate } from 'db/models/functions';
 
 const sequelizeOptions: SequelizeOptions = {
   host: 'postgres',
@@ -45,8 +44,7 @@ themeModel.hasOne(userThemeModel, { foreignKey: 'themeId' });
 userThemeModel.belongsTo(themeModel, { foreignKey: 'themeId' });
 userThemeModel.belongsTo(userModel, { foreignKey: 'userId' });
 
-updateOrCreate(themeModel, { name: 'dark' }, { name: 'dark', data: '{}' });
-updateOrCreate(themeModel, { name: 'light' }, { name: 'light', data: '{}' });
+
 sequelize.topics = topicModel;
 sequelize.feedback = feedbackModel;
 sequelize.theme = themeModel;

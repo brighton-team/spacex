@@ -8,6 +8,7 @@ import { cookieParser, logger } from './server/middlewares';
 import { apiRouter } from './server/routes';
 
 import db from './db/init';
+import { updateOrCreate } from 'db/models/functions';
 
 // type DB = {
 //   topics: any;
@@ -26,6 +27,8 @@ app
 db.sync()
   .then(() => {
     console.info('Database connection established');
+    updateOrCreate(db.theme, { name: 'dark' }, { name: 'dark', data: '{}' });
+    updateOrCreate(db.theme, { name: 'light' }, { name: 'light', data: '{}' });
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err);

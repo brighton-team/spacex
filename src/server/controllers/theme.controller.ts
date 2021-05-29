@@ -5,9 +5,9 @@ export const setTheme = async (req: Request, res: Response) => {
   const {userId, themeId } = req.body;
 
   try {
-    const theme = await db.userTheme.create({userId, themeId});
+    const result = await db.userTheme.upsert({userId, themeId});
 
-    res.send(theme);
+    res.send(result[0]);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
@@ -16,9 +16,9 @@ export const setTheme = async (req: Request, res: Response) => {
 
 export const getAlltheme = async (req: Request, res: Response) => {
   try {
-    const theme = await db.theme.findAll();
+    const result = await db.theme.findAll();
 
-    res.send(theme);
+    res.send(result);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);
