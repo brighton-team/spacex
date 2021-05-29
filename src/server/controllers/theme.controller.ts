@@ -2,10 +2,10 @@ import { Request, Response } from 'express';
 import db from 'db/init';
 
 export const setTheme = async (req: Request, res: Response) => {
-  const {id, themeId } = req.body;
+  const {userId, themeId } = req.body;
 
   try {
-    const theme = await db.theme.create({id, themeId});
+    const theme = await db.userTheme.create({userId, themeId});
 
     res.send(theme);
   } catch (err) {

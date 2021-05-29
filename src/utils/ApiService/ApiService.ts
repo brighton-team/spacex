@@ -141,9 +141,9 @@ class ApiService {
   }
 
 
-  async setTheme(id,themeId) {
+  async setTheme(values) {
     return this.instanceAxios
-      .post('/api/theme/set', [id,themeId]) .then((response) => response)
+      .post('/api/theme/set',values) .then((response) => response)
       .catch((err) => {
         throw err;
       });

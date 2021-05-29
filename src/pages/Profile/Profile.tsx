@@ -37,7 +37,8 @@ export const ProfilePage = (): JSX.Element => {
   const { control, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(changeUserDataAction(values));
-    dispatch(changeThemeAction(data.id, values.theme));
+    console.log(data);
+    dispatch(changeThemeAction({userId:data.id, themeId:values.themeId}));
   });
   const handleVisibleModalChangePasswords = () => {
     setIsVisibleModal(!isVisibleModal);
@@ -213,7 +214,7 @@ export const ProfilePage = (): JSX.Element => {
                   <Controller
                     control={control}
                     defaultValue={themes[0]?.id || ''}
-                    name="theme"
+                    name="themeId"
                     as={
                       <CssSelect labelId="theme-label" label="Цветовая схема">
                         {themes.map((value, key) => (

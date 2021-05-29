@@ -11,6 +11,9 @@ import {
   CHANGE_USER_AVATAR_REQUEST,
   CHANGE_USER_AVATAR_FAILURE,
   CHANGE_USER_AVATAR_SUCCESS,
+  CHANGE_USER_THEME_FAILURE,
+  CHANGE_USER_THEME_REQUEST,
+  CHANGE_USER_THEME_SUCCESS
 } from 'store/actionTypes';
 import { ActionType, UserState } from 'types/actionTypes';
 
@@ -60,6 +63,19 @@ export const changeUserDataFailure = (): ActionType => ({
   type: CHANGE_USER_DATA_FAILURE,
 });
 
+export const changeUserThemeFailure = (): ActionType => ({
+  type: CHANGE_USER_THEME_FAILURE,
+});
+
+export const changeUserThemeRequest = (): ActionType => ({
+  type: CHANGE_USER_THEME_REQUEST,
+});
+
+export const changeUserThemeSuccess = (userData: UserDataType): ActionType => ({
+  type: CHANGE_USER_THEME_SUCCESS,
+  payload: userData,
+});
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const changeUserAvatarAction = (userData: FormData) => (
   dispatch: ThunkDispatch<UserState, void, Action>
@@ -103,16 +119,16 @@ export const changeUserDataAction = (userData: UserDataType) => (
     .catch(() => dispatch(changeUserDataFailure()));
 };
 
-export const changeThemeAction  = (id: number, theme:number) => (
+export const changeThemeAction  = (values) => (
   dispatch: ThunkDispatch<UserState, void, Action>
 ): void => {
-  dispatch(changeUserDataRequest());
-  ApiServiceInstance.setTheme(id,theme)
+  dispatch(changeUserThemeRequest());
+  ApiServiceInstance.setTheme(values)
     .then((response) => {
       const { data, status } = response;
       if (status === 200) {
-        dispatch(changeUserDataSuccess(data));
+        dispatch(changeUserThemeSuccess(data));
       }
     })
-    .catch(() => dispatch(changeUserDataFailure()));
+    .catch(() => dispatch(changeUserThemeFailure()));
 };

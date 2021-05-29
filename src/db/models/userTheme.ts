@@ -1,7 +1,7 @@
 import { DataType } from 'sequelize-typescript';
 
 export const UserTheme = {
-  id: {
+  userthemeId: {
     type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,

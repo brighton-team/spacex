@@ -17,6 +17,7 @@ export type UserDataType = {
   avatar?: string;
   password?: string;
   password_confirm?: string;
+  themeId?: number;
 };
 
 type LoginPageProps = {

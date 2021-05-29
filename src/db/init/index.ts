@@ -43,6 +43,7 @@ postModel.belongsTo(userModel);
 topicModel.hasMany(postModel);
 themeModel.hasOne(userThemeModel, { foreignKey: 'themeId' });
 userThemeModel.belongsTo(themeModel, { foreignKey: 'themeId' });
+userThemeModel.belongsTo(userModel, { foreignKey: 'userId' });
 
 updateOrCreate(themeModel, { name: 'dark' }, { name: 'dark', data: '{}' });
 updateOrCreate(themeModel, { name: 'light' }, { name: 'light', data: '{}' });
