@@ -37,8 +37,7 @@ export const ProfilePage = (): JSX.Element => {
   const { control, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(changeUserDataAction(values));
-    console.log(data);
-    dispatch(changeThemeAction({userId:data.id, themeId:values.themeId}));
+    dispatch(changeThemeAction({ userId: data.id, themeId: values.themeId }));
   });
   const handleVisibleModalChangePasswords = () => {
     setIsVisibleModal(!isVisibleModal);
