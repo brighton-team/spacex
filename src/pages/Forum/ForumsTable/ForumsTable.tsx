@@ -12,7 +12,7 @@ const ForumsTable = (props: OwnProps): JSX.Element => {
   const { forumTopics } = props;
 
   return (
-    <Table aria-label="forums topics">
+    <Table aria-label="forums topics" data-test="forum-topics-list">
       <TableHead>
         <TableRow>
           <TableCell>НАЗВАНИЕ ТЕМЫ</TableCell>

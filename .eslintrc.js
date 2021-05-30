@@ -3,11 +3,11 @@ module.exports = {
     'airbnb-typescript',
     'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
+    'plugin:cypress/recommended',
     'prettier',
     'plugin:prettier/recommended',
   ],
-  plugins: ['react', '@typescript-eslint', 'jest'],
+  plugins: ['react', '@typescript-eslint', 'cypress'],
   env: {
     browser: true,
     es6: true,
