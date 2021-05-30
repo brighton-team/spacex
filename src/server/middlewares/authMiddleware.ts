@@ -7,12 +7,15 @@ export const serverUserAuthMiddleware = async (
   response: Response,
   next: NextFunction
 ): Promise<void> => {
+  if (process.env.NODE_ENV === 'development') {
+    next();
+    return;
+  }
   const authData = {
     uuid: request.cookies.uuid,
     authCookie: request.cookies.authCookie,
   };
 
-  console.log('authData', authData);
   response.locals.user = null;
 
   if (authData.authCookie && authData.uuid) {
@@ -40,6 +43,10 @@ export const serverUserAuthMiddleware = async (
 const isAuthUser = (res: Response) => res.locals.user !== undefined && res.locals.user !== null;
 
 export const isAuthMiddleware = (req: Request, res: Response, next: NextFunction) => {
+  if (process.env.NODE_ENV === 'development') {
+    next();
+    return;
+  }
   if (isAuthUser(res)) {
     next();
   } else {
