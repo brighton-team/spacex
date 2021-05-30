@@ -7,8 +7,6 @@ COPY package.json /app
 COPY package-lock.json /app
 COPY . /app
 
-EXPOSE 8080
-
-RUN npm install
+EXPOSE 4444
 
 CMD ["npm", "run", "start"]

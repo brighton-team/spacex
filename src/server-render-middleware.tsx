@@ -47,6 +47,9 @@ export default (req: Request, res: Response) => {
   const location = req.url;
   const context: StaticRouterContext = {};
   const { store } = configureStore(getInitialState(location), location);
+  // const { cookies } = req.locals;
+  console.log('req!!!', req);
+  console.log('res!!!', res);
 
   const jsx = (
     <ReduxProvider store={store}>

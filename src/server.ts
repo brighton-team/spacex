@@ -1,18 +1,38 @@
 import path from 'path';
 import express from 'express';
 import compression from 'compression';
+import bodyParser from 'body-parser';
 import 'babel-polyfill';
+import cookieParser from 'cookie-parser';
 import serverRenderMiddleware from './server-render-middleware';
-import { cookieParser, logger } from './server/middlewares';
+import { logger } from './server/middlewares';
+import { apiRouter } from './server/routes';
+
+import db from './db/init';
+import { serverUserAuthMiddleware } from './server/middlewares/authMiddleware';
+
+// type DB = {
+//   topics: any;
+// };
 
 const app = express();
 
 app
-  .use(compression())
+  .use(cookieParser())
   .use(logger)
-  .use(cookieParser)
+  .use(compression())
+  .use(bodyParser.json())
   .use(express.static(path.resolve(__dirname, '../dist')))
-  .use(express.static(path.resolve(__dirname, '../static')));
+  .use(express.static(path.resolve(__dirname, '../static')))
+  .use(serverUserAuthMiddleware);
+
+db.sync()
+  .then(() => {
+    console.info('Database connection established');
+  })
+  .catch((err) => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 app.get('/play', (req, res) => {
   res.send(
@@ -47,6 +67,9 @@ app.get('/play', (req, res) => {
   );
 });
 
+app.use('/api', apiRouter);
+
 app.get('/*', serverRenderMiddleware);
+// app.post('/api/forum-topics', topicsController.create);
 
 export { app };
