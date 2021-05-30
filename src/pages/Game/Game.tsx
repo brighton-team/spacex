@@ -63,7 +63,7 @@ export const Game = (): JSX.Element => {
   };
 
   useEffect(() => {
-    gameInst.initialize(dispatch);
+    gameInst.initialize(dispatch, openModalCallback);
 
     return () => {
       gameInst.deinitialize();

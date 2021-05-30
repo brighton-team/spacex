@@ -1,5 +1,7 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
 
+import { GamepadCommands } from 'pages/Game/logic/GameLogic/GameLogic';
+
 import imageSrc from './img/rocket.png';
 
 const image = getImage(imageSrc);
@@ -20,17 +22,21 @@ export class Player {
     this.speed = 15;
   }
 
-  update(canvas: HTMLCanvasElement, keysDown: Record<string, boolean>): void {
-    if ('ArrowUp' in keysDown) {
+  update(
+    canvas: HTMLCanvasElement,
+    keysDown: Record<string, boolean>,
+    gamepadCommands: GamepadCommands
+  ): void {
+    if ('ArrowUp' in keysDown || gamepadCommands.up) {
       this.y -= this.speed;
     }
-    if ('ArrowDown' in keysDown) {
+    if ('ArrowDown' in keysDown || gamepadCommands.down) {
       this.y += this.speed;
     }
-    if ('ArrowLeft' in keysDown) {
+    if ('ArrowLeft' in keysDown || gamepadCommands.left) {
       this.x -= this.speed;
     }
-    if ('ArrowRight' in keysDown) {
+    if ('ArrowRight' in keysDown || gamepadCommands.right) {
       this.x += this.speed;
     }
 
