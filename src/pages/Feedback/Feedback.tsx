@@ -15,7 +15,6 @@ export const Feedback: React.FC = () => {
   const dispatch = useDispatch();
   const { control, handleSubmit } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values: FeedbackData) => {
-    console.log('values', values);
     dispatch(createFeedBackAction(values));
   });
 

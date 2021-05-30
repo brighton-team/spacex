@@ -38,7 +38,7 @@ export const StyledButton = withStyles({
 export const ProfilePage = (): JSX.Element => {
   const loaded = useSelector(IsLoadedUserSelector);
   const data = useSelector((state: UserState | undefined) => state?.user?.data);
-  const themeId = useSelector((state: UserState | undefined) => state?.user?.themeId);
+  const themeId = useSelector((state: UserState | undefined) => state?.user?.theme?.themeId);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [isVisibleAvatarModal, setIsVisibleAvatarModal] = useState(false);
   const dispatch = useDispatch();

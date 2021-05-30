@@ -91,7 +91,7 @@ export const userReducer = (state: IUser = initialState, action: ActionType): IU
     case CHANGE_USER_THEME_SUCCESS:
       return {
         ...state,
-        themeId: action.payload.themeId,
+        theme: action.payload,
       };
     case CHANGE_USER_THEME_FAILURE:
       return {
@@ -102,10 +102,9 @@ export const userReducer = (state: IUser = initialState, action: ActionType): IU
         ...state,
       };
     case GET_USER_THEME_SUCCESS:
-      console.log('action', action);
       return {
         ...state,
-        themeId: action.payload.themeId,
+        theme: action.payload,
       };
     case GET_USER_THEME_FAILURE:
       return {

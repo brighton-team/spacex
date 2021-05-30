@@ -48,9 +48,6 @@ export default (req: Request, res: Response) => {
   const context: StaticRouterContext = {};
   const { store } = configureStore(getInitialState(location), location);
   // const { cookies } = req.locals;
-  console.log('req!!!', req);
-  console.log('res!!!', res);
-
   const jsx = (
     <ReduxProvider store={store}>
       <StaticRouter context={context} location={location}>
@@ -65,7 +62,7 @@ export default (req: Request, res: Response) => {
   //   res.redirect('/signIn');
   // }
   // console.log('res.headers', res.headers)
-  console.log('req.headers', req.headers.cookie);
+
   if (context.url) {
     res.redirect(context.url);
     return;
