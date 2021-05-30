@@ -18,6 +18,9 @@ import {
   CHANGE_USER_THEME_REQUEST,
   CHANGE_USER_THEME_FAILURE,
   CHANGE_USER_THEME_SUCCESS,
+  GET_USER_THEME_FAILURE,
+  GET_USER_THEME_REQUEST,
+  GET_USER_THEME_SUCCESS,
   CHANGE_USER_PASSWORD_REQUEST,
   CHANGE_USER_PASSWORD_FAILURE,
   CHANGE_USER_PASSWORD_SUCCESS,
@@ -91,6 +94,20 @@ export const userReducer = (state: IUser = initialState, action: ActionType): IU
         themeId: action.payload.themeId,
       };
     case CHANGE_USER_THEME_FAILURE:
+      return {
+        ...state,
+      };
+    case GET_USER_THEME_REQUEST:
+      return {
+        ...state,
+      };
+    case GET_USER_THEME_SUCCESS:
+      console.log('action', action);
+      return {
+        ...state,
+        themeId: action.payload.themeId,
+      };
+    case GET_USER_THEME_FAILURE:
       return {
         ...state,
       };

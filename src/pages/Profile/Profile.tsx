@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Controller, useForm } from 'react-hook-form';
-import { Button, FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { Button, FormControl, MenuItem, Select } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import { authButtonColor } from 'consts/colors';
@@ -12,7 +12,14 @@ import { UserState } from 'types/actionTypes';
 import { changeUserDataAction, changeThemeAction } from 'actions/profileActions';
 import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
 import { IsLoadedUserSelector } from 'reducers/selectors/userSelector';
-import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField, CssSelect } from './styledItems';
+import {
+  AvatarWrapper,
+  AvatarImage,
+  TitleUserName,
+  CssTextField,
+  CssSelect,
+  InputLabelCss,
+} from './styledItems';
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { UserDataType } from '../Login/Login';
@@ -31,6 +38,7 @@ export const StyledButton = withStyles({
 export const ProfilePage = (): JSX.Element => {
   const loaded = useSelector(IsLoadedUserSelector);
   const data = useSelector((state: UserState | undefined) => state?.user?.data);
+  const themeId = useSelector((state: UserState | undefined) => state?.user?.themeId);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [isVisibleAvatarModal, setIsVisibleAvatarModal] = useState(false);
   const dispatch = useDispatch();
@@ -208,11 +216,11 @@ export const ProfilePage = (): JSX.Element => {
                     }}
                   />
                 </FormControl>
-                <FormControl fullWidth variant="outlined">
-                  <InputLabel id="theme-label">Цветовая схема</InputLabel>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <InputLabelCss id="theme-label">Цветовая схема</InputLabelCss>
                   <Controller
                     control={control}
-                    defaultValue={themes[0]?.id || ''}
+                    defaultValue={themeId || ''}
                     name="themeId"
                     as={
                       <CssSelect labelId="theme-label" label="Цветовая схема">

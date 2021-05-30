@@ -134,16 +134,28 @@ class ApiService {
   }
   async listTheme() {
     return this.instanceAxios
-      .get('/api/theme/list') .then((response) => response)
+      .get('/api/theme/list')
+      .then((response) => response)
       .catch((err) => {
         throw err;
       });
   }
 
+  async getUserTheme(userId: number) {
+    return this.instanceAxios
+      .post('/api/theme/get', { userId })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
 
   async setTheme(values) {
     return this.instanceAxios
-      .post('/api/theme/set',values) .then((response) => response)
+      .post('/api/theme/set', values)
+      .then((response) => response)
       .catch((err) => {
         throw err;
       });
