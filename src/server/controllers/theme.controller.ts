@@ -5,8 +5,8 @@ export const setTheme = async (req: Request, res: Response) => {
   const { userId, themeId } = req.body;
 
   try {
-    const result = await db.userTheme.upsert({ userId, themeId });
-
+    await db.userTheme.upsert({ userId, themeId });
+    const result = await db.theme.findAll({ where: { themeId }, attributes: ['themeId', 'name'] });
     res.send(result[0]);
   } catch (err) {
     console.error(err);
@@ -28,14 +28,14 @@ export const getAlltheme = async (req: Request, res: Response) => {
 export const getUsertheme = async (req: Request, res: Response) => {
   const { userId } = req.body;
 
-
   try {
-    const result = await db.query(`SELECT themeId, name FROM user_themes
-      LEFT JOIN themes ON (themes.id=user_themes.themeId)
-      WHERE userId=${userId} LIMIT 1`);
+    const result = await db.query(
+      'SELECT "user_themes"."themeId", "name" FROM "user_themes", "themes" WHERE "themes"."themeId"="user_themes"."themeId" AND "userId"=' +
+        userId +
+        ' LIMIT 1'
+    );
 
-
-    res.send(result);
+    res.send(result[0][0]);
   } catch (err) {
     console.error(err);
     res.sendStatus(500);

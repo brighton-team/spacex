@@ -225,7 +225,7 @@ export const ProfilePage = (): JSX.Element => {
                     as={
                       <CssSelect labelId="theme-label" label="Цветовая схема">
                         {themes.map((value, key) => (
-                          <MenuItem key={key} value={value.id}>
+                          <MenuItem key={key} value={value.themeId}>
                             {value.name}
                           </MenuItem>
                         ))}

@@ -1,7 +1,7 @@
 import { DataType } from 'sequelize-typescript';
 
 export const Theme = {
-  id: {
+  themeId: {
     type: DataType.INTEGER,
     autoIncrement: true,
     primaryKey: true,
@@ -17,4 +17,3 @@ export const Theme = {
     allowNull: true,
   },
 };
-
