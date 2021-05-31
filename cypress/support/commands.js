@@ -25,12 +25,11 @@ Cypress.Commands.add('login', (username, password) => {
       cy.request({
         url: SIGN_IN_URL,
         method: 'POST',
+        failOnStatusCode: false,
         body: {
           login: username,
           password,
         },
-      }).then(({ data }) => {
-        cy.log(data);
       });
     }
   });
