@@ -106,7 +106,8 @@ class ApiService {
   }
 
   async getClientID() {
-    return this.instanceAxios.get(`${BASE_OAUTH_URL}/service-id`);
+    const redirectURL = window.location.origin;
+    return this.instanceAxios.get(`${BASE_OAUTH_URL}/service-id?redirect_uri=${redirectURL}`);
   }
 
   async getCodeOAuth() {
