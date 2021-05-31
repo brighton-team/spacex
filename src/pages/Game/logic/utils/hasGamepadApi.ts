@@ -1,1 +1,1 @@
-export const hasGamepadAPI = (): boolean => 'getGamepads' in navigator;
+// export const hasGamepadAPI = (): boolean => 'getGamepads' in navigator;
