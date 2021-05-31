@@ -119,7 +119,8 @@ class ApiService {
   }
 
   postCodeOauth(code) {
-    return this.instanceAxios.post(BASE_OAUTH_URL, { code });
+    const redirect_uri = window.location.origin;
+    return this.instanceAxios.post(BASE_OAUTH_URL, { code, redirect_uri });
   }
 
   async putGameLeaderData(values: LeaderDataType) {
