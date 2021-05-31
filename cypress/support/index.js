@@ -18,3 +18,10 @@ import './commands';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// eslint-disable-next-line consistent-return
+Cypress.on('uncaught:exception', (err) => {
+  if (err.message.includes('Api error')) {
+    return false;
+  }
+});
