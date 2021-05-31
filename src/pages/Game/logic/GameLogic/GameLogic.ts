@@ -1,6 +1,6 @@
 import redux from 'redux';
 
-// import { hasGamepadAPI } from 'pages/Game/logic/utils/hasGamepadAPI';
+import { hasGamepadAPI } from 'pages/Game/logic/utils/hasGamepadApi';
 
 import { Player } from 'pages/Game/logic/Player';
 import { Rock } from 'pages/Game/logic/Rock';
@@ -106,9 +106,9 @@ export class GameLogic {
   };
 
   handleGamepadControls = (): void => {
-    // if (!hasGamepadAPI() || this.gamepadIndex === undefined || this.gamepadIndex === null) {
-    //   return;
-    // }
+    if (!hasGamepadAPI() || this.gamepadIndex === undefined || this.gamepadIndex === null) {
+      return;
+    }
 
     const gamepad = navigator.getGamepads()[this.gamepadIndex];
 
