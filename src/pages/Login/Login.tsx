@@ -46,7 +46,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
         <FormInputWrapper currentMarginTop={titleMarginTop} currentWidth="250px">
           {renderPage}
         </FormInputWrapper>
-        <StyledLink to={link}>
+        <StyledLink to={link} data-test="login-page-signup-button">
           <TextLink>{linkText}</TextLink>
         </StyledLink>
       </FormWrapper>

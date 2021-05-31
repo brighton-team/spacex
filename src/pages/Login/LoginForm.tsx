@@ -22,7 +22,7 @@ export const LoginForm: React.FC = () => {
   return (
     <div>
       <StyledButtonOauth onClick={oauth} />
-      <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit} data-test="login-form">
         <FormControl fullWidth variant="outlined">
           <Controller
             name="login"
@@ -32,6 +32,7 @@ export const LoginForm: React.FC = () => {
                 helperText={fieldsErrors.login ? fieldsErrors.login.message : null}
                 label="Login"
                 error={Boolean(fieldsErrors.login)}
+                data-test="login-field-form-item"
               />
             }
             control={control}
@@ -55,6 +56,7 @@ export const LoginForm: React.FC = () => {
                 label="Password"
                 type="password"
                 error={Boolean(fieldsErrors.password)}
+                data-test="password-field-form-item"
               />
             }
             control={control}
@@ -68,7 +70,7 @@ export const LoginForm: React.FC = () => {
             }}
           />
         </FormControl>
-        <StyledButton type="submit">
+        <StyledButton type="submit" data-test="log-in-button">
           <TextButton>ВХОД</TextButton>
         </StyledButton>
       </form>
