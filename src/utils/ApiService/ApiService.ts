@@ -106,14 +106,14 @@ class ApiService {
   }
 
   async getClientID() {
-    const redirectURL = window.location.origin + signIn;
     return this.instanceAxios.get(`${BASE_OAUTH_URL}/service-id`);
   }
 
   async getCodeOAuth() {
+    const redirectURL = window.location.origin;
     const response = await this.getClientID();
     const clientId = response.data.service_id;
-    const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}`;
+    const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectURL}`;
     document.location.href = url;
   }
 
