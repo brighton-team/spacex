@@ -1,8 +1,8 @@
 import LoginForm from '../../sectionObjects/Login/LoginForm';
 import Header from '../../sectionObjects/Header/Header';
 
-const testLogin = Cypress.env('testLogin') || process.env.testLogin;
-const testPassword = Cypress.env('testPassword') || process.env.testPassword;
+// const testLogin = Cypress.env('testLogin') || process.env.testLogin;
+// const testPassword = Cypress.env('testPassword') || process.env.testPassword;
 
 describe('Login Page Test', () => {
   before(() => {
@@ -49,8 +49,8 @@ describe('Login Page Test', () => {
     const loginForm = new LoginForm();
     const header = new Header();
 
-    loginForm.loginFieldInput().type(Cypress.env(testLogin)).blur();
-    loginForm.passwordFieldInput().type(Cypress.env(testPassword)).blur();
+    loginForm.loginFieldInput().type(Cypress.env('zzzFFF333')).blur();
+    loginForm.passwordFieldInput().type(Cypress.env('zzzFFF333!!!')).blur();
     loginForm.logInButton().click();
     header.root().should('be.visible');
   });

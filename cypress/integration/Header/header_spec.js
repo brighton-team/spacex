@@ -1,12 +1,12 @@
 import Header from '../../sectionObjects/Header/Header';
 import Landing from '../../sectionObjects/Landing/Landing';
 
-const testLogin = Cypress.env('testLogin') || process.env.testLogin;
-const testPassword = Cypress.env('testPassword') || process.env.testPassword;
+// const testLogin = Cypress.env('testLogin') || process.env.testLogin;
+// const testPassword = Cypress.env('testPassword') || process.env.testPassword;
 
 describe('Header Test', () => {
   before(() => {
-    cy.login(Cypress.env(testLogin), Cypress.env(testPassword));
+    cy.login(Cypress.env('zzzFFF333'), Cypress.env('zzzFFF333!!!'));
 
     cy.visit('/');
 
