@@ -28,11 +28,12 @@ export const getAlltheme = async (req: Request, res: Response) => {
 export const getUsertheme = async (req: Request, res: Response) => {
   const { userId } = req.body;
 
+
   try {
-    const result = await db.userTheme.findAll({
-      include: [{ model: db.theme, attributes: [['name']] }],
-      where: { userId },
-    });
+    const result = await db.query(`SELECT themeId, name FROM user_themes
+      LEFT JOIN themes ON (themes.id=user_themes.themeId)
+      WHERE userId=${userId} LIMIT 1`);
+
 
     res.send(result);
   } catch (err) {
