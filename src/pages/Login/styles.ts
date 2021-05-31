@@ -74,4 +74,22 @@ const StyledButton = withStyles({
   },
 })(Button);
 
-export { FormWrapper, TitleText, TextLink, TextButton, FormInputWrapper, StyledLink, StyledButton };
+const StyledButtonOauth = withStyles({
+  root: {
+    backgroundImage: 'url(https://yastatic.net/s3/fiji-static/_/ILFmOIJ8woHVcXPynY5R8UCSfME.svg)',
+    height: '35px',
+    width: '86px',
+    marginBottom: '40px',
+  },
+})(Button);
+
+export {
+  FormWrapper,
+  TitleText,
+  TextLink,
+  TextButton,
+  FormInputWrapper,
+  StyledLink,
+  StyledButton,
+  StyledButtonOauth,
+};
