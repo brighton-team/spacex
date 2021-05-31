@@ -128,8 +128,8 @@ class ApiService {
     return this.instanceAxios
       .post(FIND_OR_CREATE_USER, values)
       .then((response) => response)
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        throw new Error('Api error: cannot find or create user');
       });
   }
 
@@ -137,8 +137,8 @@ class ApiService {
     return this.instanceAxios
       .get(GET_FORUM_TOPICS)
       .then((response) => response)
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        throw new Error('Api error: cannot get forum topics');
       });
   }
 
