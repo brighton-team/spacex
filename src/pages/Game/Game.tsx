@@ -7,6 +7,8 @@ import { fullscreenOn, fullscreenOff } from 'actions/fullscreenActions';
 import { toggleGameModal } from 'actions/gameModalActions';
 import { putGameLeaderDataAction } from 'actions/leadersActions';
 
+import { getThemePath } from 'consts/theme';
+
 import {
   PageWrapper,
   PauseButton,
@@ -20,11 +22,11 @@ import {
 } from './styledItems';
 import { UserState } from '../../types/actionTypes';
 import { gameInst } from './logic/GameLogic/GameLogic';
-import { getThemePath } from 'consts/theme';
-import { themeName } from 'reducers/selectors/userSelector';
 
 export const Game = (): JSX.Element => {
-  const img = getThemePath(useSelector(themeName), 'gameBg.jpg');
+  const theme = useSelector((state: UserState) => state.user.theme.name);
+
+  const img = getThemePath(theme, 'gameBg.jpg');
   const ref: any = useRef();
 
   const dispatch = useDispatch();
@@ -66,7 +68,7 @@ export const Game = (): JSX.Element => {
   };
 
   useEffect(() => {
-    gameInst.initialize(dispatch, openModalCallback);
+    gameInst.initialize(dispatch, openModalCallback, theme);
 
     return () => {
       gameInst.deinitialize();
@@ -76,7 +78,7 @@ export const Game = (): JSX.Element => {
         dispatch(fullscreenOff());
       }
     };
-  }, [dispatch]);
+  }, [dispatch, theme]);
 
   useEffect(() => {
     if (lives === 0) {

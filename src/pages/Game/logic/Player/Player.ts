@@ -1,5 +1,4 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
-import { store } from 'store';
 import { getThemePath } from 'consts/theme';
 import { GamepadCommands } from 'pages/Game/logic/GameLogic/GameLogic';
 
@@ -11,14 +10,17 @@ export class Player {
   public radius: number;
 
   private speed: number;
+
   private theme: string;
+
   private image: HTMLImageElement;
-  constructor(canvas: HTMLCanvasElement) {
+
+  constructor(canvas: HTMLCanvasElement, theme: string) {
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     this.radius = 40;
     this.speed = 15;
-    this.theme = store.getState().user.theme.name;
+    this.theme = theme;
     this.image = getImage(getThemePath(this.theme, 'rocket.png'));
   }
 

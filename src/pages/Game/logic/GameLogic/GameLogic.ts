@@ -47,6 +47,8 @@ export class GameLogic {
 
   private pauseCallback: VoidFunction;
 
+  private theme: string;
+
   constructor() {
     this.keysDown = {};
     this.gamepadCommands = {};
@@ -62,9 +64,10 @@ export class GameLogic {
     this.isStarted = false;
     this.gamepadIndex = undefined;
     this.pauseCallback = () => {};
+    this.theme = 'natural';
   }
 
-  initialize(dispatch: redux.Dispatch<any>, pauseCallback: VoidFunction): void {
+  initialize(dispatch: redux.Dispatch<any>, pauseCallback: VoidFunction, theme: string): void {
     this.dispatch = dispatch;
     this.canvas = document.getElementById('game') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d');
@@ -72,12 +75,13 @@ export class GameLogic {
     this.canvas.height = this.canvas.offsetHeight;
     this.isStarted = true;
     this.pauseCallback = pauseCallback;
+    this.theme = theme;
 
     window.addEventListener('keydown', this.onKeyDown);
 
     window.addEventListener('keyup', this.onKeyUp);
     if (!this.player) {
-      this.player = new Player(this.canvas);
+      this.player = new Player(this.canvas, this.theme);
     }
 
     window.addEventListener('gamepadconnected', this.handleGamepadConnect);
@@ -93,6 +97,7 @@ export class GameLogic {
     this.isStarted = false;
     this.gamepadIndex = undefined;
     this.pauseCallback = () => {};
+    this.player = null;
 
     window.removeEventListener('keydown', this.onKeyDown);
 
@@ -139,7 +144,7 @@ export class GameLogic {
   };
 
   addBullet = (): void => {
-    this.bullets.push(new Bullet(this.canvas, this.player));
+    this.bullets.push(new Bullet(this.canvas, this.player, this.theme));
   };
 
   onKeyDown = (event: KeyboardEvent): void => {
@@ -189,7 +194,7 @@ export class GameLogic {
     }
     for (let i = 0; i < this.obstacles.length; i += 1) {
       if (this.obstacles[i].distance < this.obstacles[i].radius + this.player.radius) {
-        const explosion = new Explosion(this.obstacles[i], this.gameFrame);
+        const explosion = new Explosion(this.obstacles[i], this.gameFrame, this.theme);
         this.explosions.push(explosion);
         this.dispatch(reduceGameLives());
         this.obstacles.splice(i, 1);
@@ -202,7 +207,7 @@ export class GameLogic {
           Math.abs(this.obstacles[i]?.x + 135 - this.bullets[j].x) < 50 &&
           Math.abs(this.obstacles[i].y + 50 - this.bullets[j].y) < 130
         ) {
-          const explosion = new Explosion(this.obstacles[i], this.gameFrame);
+          const explosion = new Explosion(this.obstacles[i], this.gameFrame, this.theme);
           this.explosions.push(explosion);
           this.obstacles.splice(i, 1);
           this.bullets.splice(j, 1);
@@ -212,7 +217,7 @@ export class GameLogic {
     }
 
     if (this.gameFrame % 50 === 0) {
-      this.obstacles.push(new Rock(this.canvas));
+      this.obstacles.push(new Rock(this.canvas, this.theme));
     }
   }
 
