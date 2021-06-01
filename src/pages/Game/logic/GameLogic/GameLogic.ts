@@ -1,6 +1,6 @@
 import redux from 'redux';
 
-import { hasGamepadAPI } from 'pages/Game/logic/utils/hasGamepadAPI';
+import { hasGamepadAPI } from 'pages/Game/logic/utils/hasGamepadApi';
 
 import { Player } from 'pages/Game/logic/Player';
 import { Rock } from 'pages/Game/logic/Rock';
