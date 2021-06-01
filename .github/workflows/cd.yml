@@ -1,4 +1,4 @@
-name: deploy to nairobi-arcnd-4.ya-praktikum.tech
+name: brighton-space-04.ya-praktikum.tech
 on: push
 
 jobs:
@@ -9,7 +9,7 @@ jobs:
         uses: garygrossgarten/github-action-ssh@release
         with:
           command: |
-            cd /spacex
+            cd spacex
             git checkout dev
             git pull
             docker-compose build
