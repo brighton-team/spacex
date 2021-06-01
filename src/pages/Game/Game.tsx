@@ -20,8 +20,11 @@ import {
 } from './styledItems';
 import { UserState } from '../../types/actionTypes';
 import { gameInst } from './logic/GameLogic/GameLogic';
+import { getThemePath } from 'consts/theme';
+import { themeName } from 'reducers/selectors/userSelector';
 
 export const Game = (): JSX.Element => {
+  const img = getThemePath(useSelector(themeName), 'gameBg.jpg');
   const ref: any = useRef();
 
   const dispatch = useDispatch();
@@ -89,7 +92,7 @@ export const Game = (): JSX.Element => {
   }, [dispatch, lives]);
 
   return (
-    <PageWrapper>
+    <PageWrapper img={img}>
       <GameWrapper>
         <Canvas id="game" />
         <Score>Score: {score}</Score>

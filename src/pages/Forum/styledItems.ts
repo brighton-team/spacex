@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { Button, withStyles } from '@material-ui/core';
 
-import img from 'assets/images/rocketBg.jpg';
-
-export const PageWrapper = styled.div<{ padding?: string }>`
-  background: url(${img}) no-repeat center center;
+export const PageWrapper = styled.div<{ padding?: string; img: string }>`
+  background: url(${(props) => props.img}) no-repeat center center;
   height: 100vh;
   background-size: cover;
   display: flex;

@@ -1,10 +1,8 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
 
-import imageSrc from './img/bullet1.png';
 import { Player } from '../Player';
-
-const image = getImage(imageSrc);
-
+import { store } from 'store';
+import { getThemePath } from 'consts/theme';
 export class Bullet {
   public x: number;
 
@@ -16,12 +14,17 @@ export class Bullet {
 
   public distance: number;
 
+  private theme: string;
+  private image: HTMLImageElement;
+
   constructor(canvas: HTMLCanvasElement, player: Player) {
     this.x = player.x + 135;
     this.y = player.y + 75;
     this.radius = 50;
     this.speed = 10;
     this.distance = 0;
+    this.theme = store.getState().user.theme.name;
+    this.image = getImage(getThemePath(this.theme, 'bullet1.png'));
   }
 
   update(): void {
@@ -29,9 +32,9 @@ export class Bullet {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!ctx || !image) {
+    if (!ctx || !this.image) {
       return;
     }
-    ctx.drawImage(image, this.x - 165, this.y - 165, 70, 70);
+    ctx.drawImage(this.image, this.x - 165, this.y - 165, 70, 70);
   }
 }

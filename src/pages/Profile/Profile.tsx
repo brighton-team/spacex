@@ -11,7 +11,7 @@ import { logOutAction } from 'actions/signInActions';
 import { UserState } from 'types/actionTypes';
 import { changeUserDataAction, changeThemeAction } from 'actions/profileActions';
 import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
-import { IsLoadedUserSelector } from 'reducers/selectors/userSelector';
+import { IsLoadedUserSelector, themeName } from 'reducers/selectors/userSelector';
 import {
   AvatarWrapper,
   AvatarImage,
@@ -24,6 +24,7 @@ import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { UserDataType } from '../Login/Login';
 import { ApiServiceInstance } from 'utils/ApiService/ApiService';
+import { getThemePath } from 'consts/theme';
 
 export const StyledButton = withStyles({
   root: {
@@ -36,6 +37,7 @@ export const StyledButton = withStyles({
 })(Button);
 
 export const ProfilePage = (): JSX.Element => {
+  const img = getThemePath(useSelector(themeName), 'rocketBg.jpg');
   const loaded = useSelector(IsLoadedUserSelector);
   const data = useSelector((state: UserState | undefined) => state?.user?.data);
   const themeId = useSelector((state: UserState | undefined) => state?.user?.theme?.themeId);
@@ -67,7 +69,7 @@ export const ProfilePage = (): JSX.Element => {
   }, []);
 
   return (
-    <PageWrapper padding="90px 150px 30px">
+    <PageWrapper padding="90px 150px 30px" img={img}>
       {loaded ? (
         <>
           <TableWrapper>

@@ -1,6 +1,6 @@
 .wrapper {
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('../../assets/images/loginBg.png') no-repeat center center;
+    url('../../assets/images/theme/natural/loginBg.png') no-repeat center center;
   height: 100vh;
   background-size: cover;
   display: flex;

@@ -15,6 +15,8 @@ import {
 } from './styles';
 import { getGameLeaderDataAction } from '../../actions/leadersActions';
 import { UserState } from '../../types/actionTypes';
+import { getThemePath } from 'consts/theme';
+import { themeName } from 'reducers/selectors/userSelector';
 
 const HeaderWrapperStyled = styled(HeaderWrapper)`
   flex-direction: column;
@@ -23,6 +25,8 @@ const HeaderWrapperStyled = styled(HeaderWrapper)`
 export const LeadersPage: React.FC = () => {
   const dispatch = useDispatch();
   const leaders = useSelector((state: UserState) => state.leaders.data);
+
+  const img = getThemePath(useSelector(themeName), 'loginBg.png');
   useEffect(() => {
     dispatch(
       getGameLeaderDataAction({
@@ -33,7 +37,7 @@ export const LeadersPage: React.FC = () => {
     );
   }, [dispatch]);
   return (
-    <HeaderWrapperStyled img=''>
+    <HeaderWrapperStyled img={img}>
       <PageTitle color={white}>Лидеры</PageTitle>
       <StyledTable>
         <StyledTableHead>

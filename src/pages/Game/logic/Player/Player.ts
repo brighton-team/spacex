@@ -1,8 +1,6 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
-
-import imageSrc from './img/rocket.png';
-
-const image = getImage(imageSrc);
+import { store } from 'store';
+import { getThemePath } from 'consts/theme';
 
 export class Player {
   public x: number;
@@ -12,12 +10,15 @@ export class Player {
   public radius: number;
 
   private speed: number;
-
+  private theme: string;
+  private image: HTMLImageElement;
   constructor(canvas: HTMLCanvasElement) {
     this.x = canvas.width / 2;
     this.y = canvas.height / 2;
     this.radius = 40;
     this.speed = 15;
+    this.theme = store.getState().user.theme.name;
+    this.image = getImage(getThemePath(this.theme, 'rocket.png'));
   }
 
   update(canvas: HTMLCanvasElement, keysDown: Record<string, boolean>): void {
@@ -49,10 +50,10 @@ export class Player {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!ctx || !image) {
+    if (!ctx || !this.image) {
       return;
     }
 
-    ctx.drawImage(image, this.x - 65, this.y - 65, 135, 135);
+    ctx.drawImage(this.image, this.x - 65, this.y - 65, 135, 135);
   }
 }

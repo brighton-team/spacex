@@ -9,7 +9,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-import { IS_DEV, DIST_DIR, SRC_DIR, STATIC_DIR} from './env';
+import { IS_DEV, DIST_DIR, SRC_DIR } from './env';
 import fileLoader from './loaders/file';
 import cssLoader from './loaders/css';
 import jsLoader from './loaders/js';
@@ -37,11 +37,7 @@ const config: Configuration = {
     plugins: [new TsconfigPathsPlugin({ configFile: './tsconfig.json' })],
   },
   plugins: [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: 'src/assets/theme', to: './static/theme' },
-      ]
-    }),
+    new CopyWebpackPlugin([{ from: 'src/assets/images/theme', to: 'static/theme' }]),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
     !IS_DEV && new CompressionPlugin(),
   ].filter(Boolean) as Plugin[],

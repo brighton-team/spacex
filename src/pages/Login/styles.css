@@ -1,5 +1,5 @@
 .headerWrapper {
-  background: url('../../assets/images/loginBg.png') no-repeat center center;
+  background: url('../../assets/images/theme/natural/loginBg.png') no-repeat center center;
   min-height: 100vh;
   background-size: cover;
   display: flex;

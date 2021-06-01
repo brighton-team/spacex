@@ -2,10 +2,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Button, withStyles } from '@material-ui/core';
 
-import img from 'assets/images/rocketBg.jpg';
-
-export const PageWrapper = styled.div`
-  background: url(${img}) no-repeat center center;
+export const PageWrapper = styled.div<{ img: string }>`
+  background: url(${(props) => props.img}) no-repeat center center;
   height: 100vh;
   background-size: cover;
   display: flex;

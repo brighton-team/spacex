@@ -34,6 +34,7 @@ export const initialState: IUser = {
   loaded: true,
   isPasswordChanged: false,
   isAvatarChanged: false,
+  theme: { name: 'natural' },
 };
 
 export const userReducer = (state: IUser = initialState, action: ActionType): IUser => {
