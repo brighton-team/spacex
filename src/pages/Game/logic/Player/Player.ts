@@ -1,7 +1,6 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
 import { store } from 'store';
 import { getThemePath } from 'consts/theme';
-
 import { GamepadCommands } from 'pages/Game/logic/GameLogic/GameLogic';
 
 export class Player {
