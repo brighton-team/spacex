@@ -1,9 +1,6 @@
 name: deploy to nairobi-arcnd-4.ya-praktikum.tech
-on:
-  push:
-    branches: [deploy]
-  pull_request:
-    branches: [deploy]
+on: push
+
 jobs:
   build:
     runs-on: ubuntu-latest
