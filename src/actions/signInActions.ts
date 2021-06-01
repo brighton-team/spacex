@@ -95,14 +95,8 @@ export const logOutAction = () => (dispatch: ThunkDispatch<UserState, void, Acti
     .catch(() => dispatch(logOutFailure()));
 };
 
-export const findOrCreateUserAction = (userData: UserDataType) => (
-  dispatch: ThunkDispatch<UserState, void, Action>
-): void => {
-  ApiServiceInstance.findOrCreateUser(userData)
-    .then(() => {
-      dispatch(getUserDataSuccess(userData));
-    })
-    .catch(() => dispatch(getUserDataFailure()));
+export const findOrCreateUserAction = (userData: UserDataType): void => {
+  ApiServiceInstance.findOrCreateUser(userData);
 };
 
 export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void, Action>): void => {
@@ -110,8 +104,8 @@ export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void,
   dispatch(getUserThemeRequest());
   ApiServiceInstance.getUserData()
     .then((res) => {
-      dispatch(findOrCreateUserAction(res));
-      dispatch(getUserThemeAction(res));
+      dispatch(getUserDataSuccess(res));
+      findOrCreateUserAction(res);
     })
     .catch(() => dispatch(getUserDataFailure()));
 };

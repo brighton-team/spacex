@@ -60,19 +60,27 @@ export function Header(): JSX.Element | null {
   const isShowHeader = routesWithHeader.includes(pathname) || pathname.startsWith(forum);
 
   return isShowHeader && !fullscreenOn ? (
-    <Wrapper>
+    <Wrapper data-test="header">
       <Content>
-        <Logo />
+        <Logo data-test="logo" />
         <HeaderButton>
-          <Link to={game}>
+          <Link to={game} data-test="play-button">
             <ActionButton>Играть</ActionButton>
           </Link>
         </HeaderButton>
         <TopLinks>
-          <StyledLink to={leaders}>Лидеры</StyledLink>
-          <StyledLink to={forum}>Форум</StyledLink>
-          <StyledLink to={profile}>Профиль</StyledLink>
-          <StyledLink to={feedback}>Обратная связь</StyledLink>
+          <StyledLink to={leaders} data-test="leaders-button">
+            Лидеры
+          </StyledLink>
+          <StyledLink to={forum} data-test="forum-button">
+            Форум
+          </StyledLink>
+          <StyledLink to={profile} data-test="profile-button">
+            Профиль
+          </StyledLink>
+          <StyledLink to={feedback} data-test="feedback-button">
+            Обратная связь
+          </StyledLink>
         </TopLinks>
       </Content>
     </Wrapper>

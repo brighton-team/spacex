@@ -60,7 +60,7 @@ const Forum = (props: OwnProps): JSX.Element => {
   });
 
   return (
-    <PageWrapper padding="100px 0" img={img}>
+    <PageWrapper padding="120px 150px 0" img={img}>
       <Heading>
         <EmptySpace />
         <TitleText>ТЕМЫ ФОРУМА</TitleText>

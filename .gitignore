@@ -4,3 +4,6 @@ dist
 temp
 *.env
 postgresdata
+cypress/videos
+cypress/screenshots
+cypress.env.json

@@ -8,6 +8,8 @@ import {
   PUT_USER_DATA_URL,
   CHANGE_USER_PASSWORD_URL,
   CHANGE_USER_AVATAR_URL,
+  BASE_OAUTH_URL,
+  signIn,
   PUT_GAME_LEADER_DATA,
   GET_GAME_LEADER_DATA,
   CREATE_FEEDBACK,
@@ -20,6 +22,7 @@ import {
 
 import { UserDataType } from 'pages/Login/Login';
 import { PasswordData } from 'actions/profileActions';
+
 import { FeedbackData } from 'actions/feedbackAction';
 import { ForumTopic } from 'pages/Forum/Forum';
 import { ForumTopicPost } from 'pages/ForumTopicView/ForumTopicView';
@@ -97,6 +100,29 @@ class ApiService {
       });
   }
 
+  getCodefromCallback() {
+    const params = new URLSearchParams(document.location.search);
+    return params.get('code');
+  }
+
+  async getClientID() {
+    const redirectURL = window.location.origin;
+    return this.instanceAxios.get(`${BASE_OAUTH_URL}/service-id?redirect_uri=${redirectURL}`);
+  }
+
+  async getCodeOAuth() {
+    const redirectURL = window.location.origin;
+    const response = await this.getClientID();
+    const clientId = response.data.service_id;
+    const url = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectURL}`;
+    document.location.href = url;
+  }
+
+  postCodeOauth(code) {
+    const redirect_uri = window.location.origin;
+    return this.instanceAxios.post(BASE_OAUTH_URL, { code, redirect_uri });
+  }
+
   async putGameLeaderData(values: LeaderDataType) {
     return this.instanceAxios
       .post(PUT_GAME_LEADER_DATA, values)
@@ -128,8 +154,8 @@ class ApiService {
     return this.instanceAxios
       .post(FIND_OR_CREATE_USER, values)
       .then((response) => response)
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        throw new Error('Api error: cannot find or create user');
       });
   }
   async listTheme() {
@@ -165,8 +191,8 @@ class ApiService {
     return this.instanceAxios
       .get(GET_FORUM_TOPICS)
       .then((response) => response)
-      .catch((err) => {
-        throw err;
+      .catch(() => {
+        throw new Error('Api error: cannot get forum topics');
       });
   }
 

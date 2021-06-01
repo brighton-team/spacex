@@ -26,9 +26,9 @@ type LoginPageProps = {
   page?: string;
 };
 
-const authWrapperHeight = '360px';
+const authWrapperHeight = '400px';
 const regWrapperHeight = '650px';
-const authMarginTopTitle = '50px';
+const authMarginTopTitle = '30px';
 const regMarginTopTitle = '30px';
 
 export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
@@ -39,6 +39,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
   const titleText = checkLoginPage ? 'ВХОД' : 'РЕГИСТРАЦИЯ';
   const linkText = checkLoginPage ? 'Нет аккаунта?' : 'Уже зарегистрированы?';
   const renderPage = checkLoginPage ? <LoginForm /> : <RegisterForm />;
+
   return (
     <div className="headerWrapper">
       <FormWrapper height={wrapperHeight}>
@@ -46,7 +47,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ page }) => {
         <FormInputWrapper currentMarginTop={titleMarginTop} currentWidth="250px">
           {renderPage}
         </FormInputWrapper>
-        <StyledLink to={link}>
+        <StyledLink to={link} data-test="login-page-signup-button">
           <TextLink>{linkText}</TextLink>
         </StyledLink>
       </FormWrapper>
