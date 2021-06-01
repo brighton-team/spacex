@@ -49,8 +49,8 @@ describe('Login Page Test', () => {
     const loginForm = new LoginForm();
     const header = new Header();
 
-    loginForm.loginFieldInput().type(Cypress.env('zzzFFF333')).blur();
-    loginForm.passwordFieldInput().type(Cypress.env('zzzFFF333!!!')).blur();
+    loginForm.loginFieldInput().type('zzzFFF333').blur();
+    loginForm.passwordFieldInput().type('zzzFFF333!!!').blur();
     loginForm.logInButton().click();
     header.root().should('be.visible');
   });

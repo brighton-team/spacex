@@ -6,7 +6,7 @@ import Landing from '../../sectionObjects/Landing/Landing';
 
 describe('Header Test', () => {
   before(() => {
-    cy.login(Cypress.env('zzzFFF333'), Cypress.env('zzzFFF333!!!'));
+    cy.login('zzzFFF333', 'zzzFFF333!!!');
 
     cy.visit('/');
 
