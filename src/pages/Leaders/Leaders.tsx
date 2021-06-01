@@ -33,7 +33,7 @@ export const LeadersPage: React.FC = () => {
     );
   }, [dispatch]);
   return (
-    <HeaderWrapperStyled>
+    <HeaderWrapperStyled img=''>
       <PageTitle color={white}>Лидеры</PageTitle>
       <StyledTable>
         <StyledTableHead>
