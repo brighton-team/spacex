@@ -1,19 +1,23 @@
-name: Command via SSH
-
-on: push
-
+name: deploy to nairobi-arcnd-4.ya-praktikum.tech
+on:
+  push:
+    branches: [deploy]
+  pull_request:
+    branches: [deploy]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: ls -a via OPEN SSH Private Key
+      - name: deploy to YC
         uses: garygrossgarten/github-action-ssh@release
         with:
-          command: ls -a
-          host: ${{ secrets.HOST }}
+          command: |
+            cd /spacex
+            git checkout dev
+            git pull
+            docker-compose build
+            docker-compose up -d
+          host: 84.252.130.70
           username: oleg
-          password: ${{ secrets.PASSPHRASE }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           privateKey: ${{ secrets.PRIVATE_KEY}}
-        env:
-          CI: true
