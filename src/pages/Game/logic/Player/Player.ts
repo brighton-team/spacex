@@ -2,6 +2,8 @@ import { getImage } from 'pages/Game/logic/utils/getImage';
 import { store } from 'store';
 import { getThemePath } from 'consts/theme';
 
+import { GamepadCommands } from 'pages/Game/logic/GameLogic/GameLogic';
+
 export class Player {
   public x: number;
 
@@ -21,17 +23,21 @@ export class Player {
     this.image = getImage(getThemePath(this.theme, 'rocket.png'));
   }
 
-  update(canvas: HTMLCanvasElement, keysDown: Record<string, boolean>): void {
-    if ('ArrowUp' in keysDown) {
+  update(
+    canvas: HTMLCanvasElement,
+    keysDown: Record<string, boolean>,
+    gamepadCommands: GamepadCommands
+  ): void {
+    if ('ArrowUp' in keysDown || gamepadCommands.up) {
       this.y -= this.speed;
     }
-    if ('ArrowDown' in keysDown) {
+    if ('ArrowDown' in keysDown || gamepadCommands.down) {
       this.y += this.speed;
     }
-    if ('ArrowLeft' in keysDown) {
+    if ('ArrowLeft' in keysDown || gamepadCommands.left) {
       this.x -= this.speed;
     }
-    if ('ArrowRight' in keysDown) {
+    if ('ArrowRight' in keysDown || gamepadCommands.right) {
       this.x += this.speed;
     }
 

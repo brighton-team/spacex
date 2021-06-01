@@ -1,5 +1,7 @@
 import redux from 'redux';
 
+import { hasGamepadAPI } from 'pages/Game/logic/utils/hasGamepadAPI';
+
 import { Player } from 'pages/Game/logic/Player';
 import { Rock } from 'pages/Game/logic/Rock';
 import { increaseGameScore, reduceGameLives } from 'actions/gameActions';
@@ -7,12 +9,23 @@ import { Bullet } from '../Bullet';
 
 import { Explosion } from '../explosion';
 
+export type GamepadCommands = {
+  up?: boolean;
+  right?: boolean;
+  down?: boolean;
+  left?: boolean;
+  fire?: boolean;
+  pause?: boolean;
+};
+
 export class GameLogic {
   private canvas: HTMLCanvasElement | null;
 
   private ctx: CanvasRenderingContext2D | null;
 
   private keysDown: Record<string, boolean>;
+
+  private gamepadCommands: GamepadCommands;
 
   private gameFrame: number;
 
@@ -30,8 +43,13 @@ export class GameLogic {
 
   private isStarted: boolean;
 
+  private gamepadIndex: number;
+
+  private pauseCallback: VoidFunction;
+
   constructor() {
     this.keysDown = {};
+    this.gamepadCommands = {};
     this.canvas = null;
     this.ctx = null;
     this.gameFrame = 0;
@@ -42,15 +60,18 @@ export class GameLogic {
     this.isPause = false;
     this.dispatch = null;
     this.isStarted = false;
+    this.gamepadIndex = undefined;
+    this.pauseCallback = () => {};
   }
 
-  initialize(dispatch: redux.Dispatch<any>): void {
+  initialize(dispatch: redux.Dispatch<any>, pauseCallback: VoidFunction): void {
     this.dispatch = dispatch;
     this.canvas = document.getElementById('game') as HTMLCanvasElement;
     this.ctx = this.canvas.getContext('2d');
     this.canvas.width = this.canvas.offsetWidth;
     this.canvas.height = this.canvas.offsetHeight;
     this.isStarted = true;
+    this.pauseCallback = pauseCallback;
 
     window.addEventListener('keydown', this.onKeyDown);
 
@@ -58,6 +79,8 @@ export class GameLogic {
     if (!this.player) {
       this.player = new Player(this.canvas);
     }
+
+    window.addEventListener('gamepadconnected', this.handleGamepadConnect);
 
     this.animate();
   }
@@ -68,17 +91,63 @@ export class GameLogic {
     this.bullets = [];
     this.explosions = [];
     this.isStarted = false;
+    this.gamepadIndex = undefined;
+    this.pauseCallback = () => {};
+
     window.removeEventListener('keydown', this.onKeyDown);
 
     window.removeEventListener('keyup', this.onKeyUp);
+
+    window.removeEventListener('gamepadconnected', this.handleGamepadConnect);
   }
+
+  handleGamepadConnect = (event: GamepadEvent): void => {
+    this.gamepadIndex = event.gamepad.index;
+  };
+
+  handleGamepadControls = (): void => {
+    if (!hasGamepadAPI() || this.gamepadIndex === undefined || this.gamepadIndex === null) {
+      return;
+    }
+
+    const gamepad = navigator.getGamepads()[this.gamepadIndex];
+
+    // buttons placement to index
+    // see: https://github.com/w3c/gamepad/blob/gh-pages/standard_gamepad.svg
+    const isFireButtonPressed = gamepad?.buttons[0].pressed;
+    const isPauseButtonPressed = gamepad?.buttons[9].pressed;
+    const isUpButtonPressed = gamepad?.buttons[12].pressed;
+    const isDownButtonPressed = gamepad?.buttons[13].pressed;
+    const isLeftButtonPressed = gamepad?.buttons[14].pressed;
+    const isRightButtonPressed = gamepad?.buttons[15].pressed;
+
+    if (isFireButtonPressed && !this.gamepadCommands.fire) {
+      this.addBullet();
+    }
+
+    if (isPauseButtonPressed && !this.gamepadCommands.pause) {
+      this.pauseCallback();
+    }
+
+    this.gamepadCommands = {
+      up: isUpButtonPressed,
+      right: isRightButtonPressed,
+      down: isDownButtonPressed,
+      left: isLeftButtonPressed,
+      fire: isFireButtonPressed,
+    };
+  };
+
+  addBullet = (): void => {
+    this.bullets.push(new Bullet(this.canvas, this.player));
+  };
 
   onKeyDown = (event: KeyboardEvent): void => {
     if (!this.player || !this.ctx || !this.canvas) {
       return;
     }
     if (event.key === ' ') {
-      this.bullets.push(new Bullet(this.canvas, this.player));
+      this.addBullet();
     }
     this.keysDown[event.key] = true;
   };
@@ -176,9 +245,11 @@ export class GameLogic {
       return;
     }
 
+    this.handleGamepadControls();
+
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.handleObstacles();
-    this.player.update(this.canvas, this.keysDown);
+    this.player.update(this.canvas, this.keysDown, this.gamepadCommands);
     this.player.draw(this.ctx);
     this.handleBullets();
     this.handleExplosions();

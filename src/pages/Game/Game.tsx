@@ -66,7 +66,7 @@ export const Game = (): JSX.Element => {
   };
 
   useEffect(() => {
-    gameInst.initialize(dispatch);
+    gameInst.initialize(dispatch, openModalCallback);
 
     return () => {
       gameInst.deinitialize();
@@ -94,7 +94,7 @@ export const Game = (): JSX.Element => {
   return (
     <PageWrapper img={img}>
       <GameWrapper>
-        <Canvas id="game" />
+        <Canvas id="game" data-test="game-area" />
         <Score>Score: {score}</Score>
         <Health>Health: {lives}</Health>
         <PauseButton onClick={openModalCallback} ref={ref} />
