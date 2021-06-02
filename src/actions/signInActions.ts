@@ -118,7 +118,9 @@ export const getUserThemeAction = (userData: UserDataType) => (
   const userId = userData.id;
   ApiServiceInstance.getUserTheme(userId)
     .then((res) => {
-      dispatch(getUserThemeSuccess(res));
+      if (res) {
+        dispatch(getUserThemeSuccess(res));
+      }
     })
     .catch(() => dispatch(getUserThemeFailure()));
 };
