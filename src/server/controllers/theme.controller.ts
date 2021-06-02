@@ -29,12 +29,14 @@ export const getUsertheme = async (req: Request, res: Response) => {
   const { userId } = req.body;
 
   try {
+    if (typeof userId !== 'number') {
+      throw new Error('UserId must be a number');
+    }
     const result = await db.query(
       'SELECT "user_themes"."themeId", "name" FROM "user_themes", "themes" WHERE "themes"."themeId"="user_themes"."themeId" AND "userId"=' +
         userId +
         ' LIMIT 1'
     );
-
     res.send(result[0][0]);
   } catch (err) {
     console.error(err);
