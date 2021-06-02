@@ -30,8 +30,8 @@ app
 db.sync()
   .then(() => {
     console.info('Database connection established');
-    updateOrCreate(db.theme, { name: 'natural' }, { name: 'natural', data: '{}' });
-    updateOrCreate(db.theme, { name: 'acid' }, { name: 'acid', data: '{}' });
+    updateOrCreate(db.theme, { name: 'natural' }, { name: 'natural' });
+    updateOrCreate(db.theme, { name: 'acid' }, { name: 'acid' });
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err);

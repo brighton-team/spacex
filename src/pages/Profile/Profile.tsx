@@ -30,7 +30,7 @@ export const StyledButton = withStyles({
   root: {
     backgroundColor: authButtonColor,
     height: '37px',
-    padding: '0',
+    padding: '0 10px',
     marginTop: '15px',
     display: 'block',
   },

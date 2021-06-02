@@ -12,7 +12,7 @@ const StyledDialog = withStyles({
     width: 450,
     height: 480,
     padding: '0px 85px',
-    background: 'rgba(24, 23, 67, 0.8)',
+    background: 'rgba(24, 24, 24, 0.8)',
     boxShadow: '0px 0px 6px rgb(0 0 0 / 14%)',
     borderRadius: 0,
     boxSizing: 'border-box',

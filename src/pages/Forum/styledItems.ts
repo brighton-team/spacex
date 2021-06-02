@@ -32,7 +32,7 @@ export const TitleText = styled.h1`
 export const TableWrapper = styled.div<{ width?: string }>`
   width: ${(props) => props.width || '100%'};
   height: 100%;
-  background: rgba(24, 23, 67, 0.9);
+  background: rgba(24, 24, 24, 0.8);
   border-radius: 7px;
   margin-top: 20px;
   overflow-y: scroll;

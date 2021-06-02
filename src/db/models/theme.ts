@@ -11,9 +11,4 @@ export const Theme = {
     type: DataType.STRING,
     allowNull: false,
   },
-
-  data: {
-    type: DataType.JSON,
-    allowNull: true,
-  },
 };

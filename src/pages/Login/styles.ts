@@ -7,7 +7,7 @@ import { authButtonColor, linkColor, white } from '../../consts/colors';
 const FormWrapper = styled.div<{ height: string }>`
   width: 340px;
   height: ${(props) => props.height};
-  background: rgba(209, 199, 255, 0.75);
+  background: rgba(199, 199, 199, 0.75);
   border-radius: 12px;
   margin-left: 20%;
   display: flex;

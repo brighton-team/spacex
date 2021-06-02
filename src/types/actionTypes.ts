@@ -9,7 +9,7 @@ export interface IUser {
   isPasswordChanged: boolean;
   isAvatarChanged: boolean;
   data?: UserDataType;
-  theme?: any;
+  theme?: { themeId?: number; name?: string };
 }
 
 export type ActionType = {
