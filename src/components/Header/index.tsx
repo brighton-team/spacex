@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  background: rgba(24, 23, 67, 0.65);
+  background: rgba(24, 24, 24, 0.65);
   width: 100%;
   height: 70px;
   box-sizing: border-box;

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { Button, withStyles } from '@material-ui/core';
-
-import img from 'assets/images/gameBg.jpg';
 import pause from 'assets/images/pause.png';
 import expand from 'assets/images/expand.png';
 import reduce from 'assets/images/reduce.png';
@@ -19,8 +17,8 @@ const gameButton = withStyles({
   },
 })(Button);
 
-export const PageWrapper = styled.div`
-  background: url(${img}) no-repeat center center;
+export const PageWrapper = styled.div<{ img: string }>`
+  background: url(${(props) => props.img}) no-repeat center center;
   height: 100vh;
   background-size: cover;
   display: flex;

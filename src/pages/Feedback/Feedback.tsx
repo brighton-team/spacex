@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormControl } from '@material-ui/core';
 import { Controller, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { StyledButton } from '../Profile/Profile';
@@ -10,17 +10,19 @@ import { createFeedBackAction, FeedbackData } from '../../actions/feedbackAction
 import { CssTextField } from '../Profile/styledItems';
 import { PageTitle } from '../Leaders/styles';
 import { white } from '../../consts/colors';
+import { getThemePath } from 'consts/theme';
+import { themeName } from 'reducers/selectors/userSelector';
 
 export const Feedback: React.FC = () => {
+  const img = getThemePath(useSelector(themeName), 'rocketBg.jpg');
   const dispatch = useDispatch();
   const { control, handleSubmit } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values: FeedbackData) => {
-    console.log('values', values);
     dispatch(createFeedBackAction(values));
   });
 
   return (
-    <PageWrapper padding="90px 150px 30px">
+    <PageWrapper padding="90px 150px 30px" img={img}>
       <PageTitle color={white} marginTop="20px">
         Форма обратной связи
       </PageTitle>

@@ -7,6 +7,8 @@ import { fullscreenOn, fullscreenOff } from 'actions/fullscreenActions';
 import { toggleGameModal } from 'actions/gameModalActions';
 import { putGameLeaderDataAction } from 'actions/leadersActions';
 
+import { getThemePath } from 'consts/theme';
+
 import {
   PageWrapper,
   PauseButton,
@@ -22,6 +24,9 @@ import { UserState } from '../../types/actionTypes';
 import { gameInst } from './logic/GameLogic/GameLogic';
 
 export const Game = (): JSX.Element => {
+  const theme = useSelector((state: UserState) => state.user.theme.name);
+
+  const img = getThemePath(theme, 'gameBg.jpg');
   const ref: any = useRef();
 
   const dispatch = useDispatch();
@@ -63,7 +68,7 @@ export const Game = (): JSX.Element => {
   };
 
   useEffect(() => {
-    gameInst.initialize(dispatch, openModalCallback);
+    gameInst.initialize(dispatch, openModalCallback, theme);
 
     return () => {
       gameInst.deinitialize();
@@ -73,7 +78,7 @@ export const Game = (): JSX.Element => {
         dispatch(fullscreenOff());
       }
     };
-  }, [dispatch]);
+  }, [dispatch, theme]);
 
   useEffect(() => {
     if (lives === 0) {
@@ -89,7 +94,7 @@ export const Game = (): JSX.Element => {
   }, [dispatch, lives]);
 
   return (
-    <PageWrapper>
+    <PageWrapper img={img}>
       <GameWrapper>
         <Canvas id="game" data-test="game-area" />
         <Score>Score: {score}</Score>

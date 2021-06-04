@@ -9,6 +9,7 @@ import { logger } from './server/middlewares';
 import { apiRouter } from './server/routes';
 
 import db from './db/init';
+import { updateOrCreate } from 'db/models/functions';
 import { serverUserAuthMiddleware } from './server/middlewares/authMiddleware';
 
 // type DB = {
@@ -29,6 +30,8 @@ app
 db.sync()
   .then(() => {
     console.info('Database connection established');
+    updateOrCreate(db.theme, { name: 'natural' }, { name: 'natural' });
+    updateOrCreate(db.theme, { name: 'acid' }, { name: 'acid' });
   })
   .catch((err) => {
     console.error('Unable to connect to the database:', err);

@@ -1,10 +1,7 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
 
+import { getThemePath } from 'consts/theme';
 import { Player } from '../Player';
-
-import imageSrc from './img/rock.png';
-
-const image = getImage(imageSrc);
 
 export class Rock {
   public x: number;
@@ -17,12 +14,18 @@ export class Rock {
 
   public distance: number;
 
-  constructor(canvas: HTMLCanvasElement) {
+  private theme: string;
+
+  private image: HTMLImageElement;
+
+  constructor(canvas: HTMLCanvasElement, theme: string) {
     this.x = Math.random() * canvas.width;
     this.y = 0 - 50 - canvas.height / 2;
     this.radius = 50;
     this.speed = Math.random() * -5 - 1;
     this.distance = 0;
+    this.theme = theme;
+    this.image = getImage(getThemePath(this.theme, 'rock.png'));
   }
 
   update(player: Player): void {
@@ -33,7 +36,7 @@ export class Rock {
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!image) {
+    if (!this.image) {
       return;
     }
     /* ctx.fillStyle = 'blue';
@@ -42,6 +45,6 @@ export class Rock {
     ctx.fill();
     ctx.closePath(); */
 
-    ctx.drawImage(image, this.x - 65, this.y - 70, 135, 135);
+    ctx.drawImage(this.image, this.x - 65, this.y - 70, 135, 135);
   }
 }

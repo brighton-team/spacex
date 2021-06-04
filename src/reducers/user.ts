@@ -15,6 +15,12 @@ import {
   CHANGE_USER_DATA_REQUEST,
   CHANGE_USER_DATA_FAILURE,
   CHANGE_USER_DATA_SUCCESS,
+  CHANGE_USER_THEME_REQUEST,
+  CHANGE_USER_THEME_FAILURE,
+  CHANGE_USER_THEME_SUCCESS,
+  GET_USER_THEME_FAILURE,
+  GET_USER_THEME_REQUEST,
+  GET_USER_THEME_SUCCESS,
   CHANGE_USER_PASSWORD_REQUEST,
   CHANGE_USER_PASSWORD_FAILURE,
   CHANGE_USER_PASSWORD_SUCCESS,
@@ -28,6 +34,7 @@ export const initialState: IUser = {
   loaded: true,
   isPasswordChanged: false,
   isAvatarChanged: false,
+  theme: { name: 'natural' },
 };
 
 export const userReducer = (state: IUser = initialState, action: ActionType): IUser => {
@@ -77,6 +84,32 @@ export const userReducer = (state: IUser = initialState, action: ActionType): IU
         ...state,
         isAuth: false,
         loaded: true,
+      };
+    case CHANGE_USER_THEME_REQUEST:
+      return {
+        ...state,
+      };
+    case CHANGE_USER_THEME_SUCCESS:
+      return {
+        ...state,
+        theme: action.payload,
+      };
+    case CHANGE_USER_THEME_FAILURE:
+      return {
+        ...state,
+      };
+    case GET_USER_THEME_REQUEST:
+      return {
+        ...state,
+      };
+    case GET_USER_THEME_SUCCESS:
+      return {
+        ...state,
+        theme: action.payload,
+      };
+    case GET_USER_THEME_FAILURE:
+      return {
+        ...state,
       };
     case GET_USER_DATA_REQUEST:
       return {

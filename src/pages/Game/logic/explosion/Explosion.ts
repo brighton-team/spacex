@@ -1,9 +1,7 @@
 import { getImage } from 'pages/Game/logic/utils/getImage';
 
-import imageSrc from './img/expl.png';
+import { getThemePath } from 'consts/theme';
 import { Rock } from '../Rock';
-
-const image = getImage(imageSrc);
 
 export class Explosion {
   public x: number;
@@ -12,16 +10,22 @@ export class Explosion {
 
   public timeStamp: number;
 
-  constructor(obstacle: Rock, currentTimeStamp: number) {
+  private theme: string;
+
+  private image: HTMLImageElement;
+
+  constructor(obstacle: Rock, currentTimeStamp: number, theme: string) {
     this.x = obstacle.x - 70;
     this.y = obstacle.y - 70;
     this.timeStamp = currentTimeStamp;
+    this.theme = theme;
+    this.image = getImage(getThemePath(this.theme, 'expl.png'));
   }
 
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!ctx || !image) {
+    if (!ctx || !this.image) {
       return;
     }
-    ctx.drawImage(image, this.x, this.y, 150, 150);
+    ctx.drawImage(this.image, this.x, this.y, 150, 150);
   }
 }

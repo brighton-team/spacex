@@ -5,7 +5,7 @@ export default function () {
     // @ts-ignore
     req.logger = () => {
       // eslint-disable-next-line
-      console.log(req);
+      // console.log(req);
     };
     next();
   };

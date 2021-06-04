@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { withStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
+import { TextField, Select, InputLabel } from '@material-ui/core';
 import img from './img/defaultimg.png';
 
 import { white } from '../../consts/colors';
@@ -63,11 +63,26 @@ const CssTextField = withStyles({
       '&:hover fieldset': {
         borderColor: 'yellow',
       },
-      '&.Mui-focused fieldset': {
+      '& .Mui-focused fieldset': {
         borderColor: 'green',
       },
     },
   },
 })(TextField);
 
-export { AvatarWrapper, AvatarImage, TitleUserName, CssTextField };
+const CssSelect = withStyles({
+  selectMenu: {
+    color: 'white',
+  },
+  icon: {
+    color: 'white',
+  },
+})(Select);
+
+const InputLabelCss = withStyles({
+  root: {
+    color: 'white',
+  },
+})(InputLabel);
+
+export { AvatarWrapper, AvatarImage, TitleUserName, CssTextField, CssSelect, InputLabelCss };

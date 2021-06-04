@@ -14,6 +14,9 @@ import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_FAILURE,
   GET_USER_DATA_SUCCESS,
+  GET_USER_THEME_FAILURE,
+  GET_USER_THEME_REQUEST,
+  GET_USER_THEME_SUCCESS,
 } from 'store/actionTypes';
 import { ActionType, UserState } from 'types/actionTypes';
 import { ApiServiceInstance } from '../utils/ApiService/ApiService';
@@ -30,6 +33,19 @@ export const getUserDataSuccess = (userData: UserDataType): ActionType => ({
 
 export const getUserDataFailure = (): ActionType => ({
   type: GET_USER_DATA_FAILURE,
+});
+
+export const getUserThemeRequest = (): ActionType => ({
+  type: GET_USER_THEME_REQUEST,
+});
+
+export const getUserThemeSuccess = (userData: UserDataType): ActionType => ({
+  type: GET_USER_THEME_SUCCESS,
+  payload: userData,
+});
+
+export const getUserThemeFailure = (): ActionType => ({
+  type: GET_USER_THEME_FAILURE,
 });
 
 export const signInRequest = (): ActionType => ({
@@ -85,12 +101,28 @@ export const findOrCreateUserAction = (userData: UserDataType): void => {
 
 export const getUserDataAction = () => (dispatch: ThunkDispatch<UserState, void, Action>): void => {
   dispatch(getUserDataRequest());
+  dispatch(getUserThemeRequest());
   ApiServiceInstance.getUserData()
     .then((res) => {
       dispatch(getUserDataSuccess(res));
+      dispatch(getUserThemeAction(res));
       findOrCreateUserAction(res);
     })
     .catch(() => dispatch(getUserDataFailure()));
+};
+
+export const getUserThemeAction = (userData: UserDataType) => (
+  dispatch: ThunkDispatch<UserState, void, Action>
+): void => {
+  dispatch(getUserThemeRequest());
+  const userId = userData.id;
+  ApiServiceInstance.getUserTheme(userId)
+    .then((res) => {
+      if (res) {
+        dispatch(getUserThemeSuccess(res));
+      }
+    })
+    .catch(() => dispatch(getUserThemeFailure()));
 };
 
 export const signUpAction = (userData: UserDataType) => (

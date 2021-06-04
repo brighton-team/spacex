@@ -7,7 +7,7 @@ import { withStyles } from '@material-ui/core';
 export const StyledDialog = withStyles({
   paper: {
     width: 340,
-    background: 'rgba(199, 218, 255, 0.9)',
+    background: 'rgba(199, 199, 199, 0.9)',
     boxShadow: '0px 0px 6px rgb(0 0 0 / 14%)',
     borderRadius: 12,
     paddingBottom: 15,

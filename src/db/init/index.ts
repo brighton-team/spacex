@@ -3,6 +3,8 @@ import { User } from '../models/user';
 import { Topic } from '../models/topic';
 // eslint-disable-next-line import/no-cycle
 import { Post } from '../models/post';
+import { Theme } from '../models/theme';
+import { UserTheme } from '../models/userTheme';
 import { Feedback } from '../models/feedback';
 
 const sequelizeOptions: SequelizeOptions = {
@@ -28,6 +30,8 @@ const sequelize: any = new Sequelize(
 const userModel = sequelize.define('user', User);
 const topicModel = sequelize.define('topic', Topic);
 const postModel = sequelize.define('post', Post);
+const themeModel = sequelize.define('theme', Theme);
+const userThemeModel = sequelize.define('user_theme', UserTheme);
 const feedbackModel = sequelize.define('feedback', Feedback);
 
 userModel.hasMany(topicModel);
@@ -36,9 +40,15 @@ feedbackModel.belongsTo(userModel);
 userModel.hasMany(postModel, { foreignKey: 'userId' });
 postModel.belongsTo(userModel);
 topicModel.hasMany(postModel);
+themeModel.hasOne(userThemeModel, { foreignKey: 'themeId' });
+userThemeModel.belongsTo(themeModel, { foreignKey: 'themeId' });
+userThemeModel.belongsTo(userModel, { foreignKey: 'userId' });
+
 
 sequelize.topics = topicModel;
 sequelize.feedback = feedbackModel;
+sequelize.theme = themeModel;
+sequelize.userTheme = userThemeModel;
 sequelize.users = userModel;
 sequelize.posts = postModel;
 

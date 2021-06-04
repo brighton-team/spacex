@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { Button, withStyles } from '@material-ui/core';
 
-import img from 'assets/images/rocketBg.jpg';
-
-export const PageWrapper = styled.div<{ padding?: string }>`
-  background: url(${img}) no-repeat center center;
+export const PageWrapper = styled.div<{ padding?: string; img: string }>`
+  background: url(${(props) => props.img}) no-repeat center center;
   height: 100vh;
   background-size: cover;
   display: flex;
@@ -34,7 +32,7 @@ export const TitleText = styled.h1`
 export const TableWrapper = styled.div<{ width?: string }>`
   width: ${(props) => props.width || '100%'};
   height: 100%;
-  background: rgba(24, 23, 67, 0.9);
+  background: rgba(24, 24, 24, 0.8);
   border-radius: 7px;
   margin-top: 20px;
   overflow-y: scroll;

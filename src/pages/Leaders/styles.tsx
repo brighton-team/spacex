@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import { Table, TableHead, TableCell, TableRow, withStyles } from '@material-ui/core';
-
-import img from 'assets/images/loginBg.png';
-
 import { white } from 'consts/colors';
 
-const HeaderWrapper = styled.div`
-  background: url(${img}) no-repeat center center;
+const HeaderWrapper = styled.div<{ img: string }>`
+  background: url(${(props) => props.img}) no-repeat center center;
   min-height: 100vh;
   background-size: cover;
   display: flex;
@@ -31,7 +28,7 @@ const PageTitle = styled.h1<{ color: string; marginTop?: string }>`
 const StyledTable = withStyles({
   root: {
     width: '80%',
-    background: 'rgba(24, 23, 67, 0.9)',
+    background: 'rgba(24, 24, 24, 0.8)',
     borderRadius: '7px',
   },
   '@global': {

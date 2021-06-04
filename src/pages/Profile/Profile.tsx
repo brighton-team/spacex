@@ -1,41 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Controller, useForm } from 'react-hook-form';
-import { Button, FormControl } from '@material-ui/core';
+import { Button, FormControl, MenuItem, Select } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import { authButtonColor } from 'consts/colors';
 import { ChangePasswordModal } from 'components/ChangePasswordModal';
 import { logOutAction } from 'actions/signInActions';
 import { UserState } from 'types/actionTypes';
-import { changeUserDataAction } from 'actions/profileActions';
+import { changeUserDataAction, changeThemeAction } from 'actions/profileActions';
 import { ChangeAvatarModal } from 'components/ChangeAvatarModal';
-import { IsLoadedUserSelector } from 'reducers/selectors/userSelector';
-import { AvatarWrapper, AvatarImage, TitleUserName, CssTextField } from './styledItems';
+import { IsLoadedUserSelector, themeName } from 'reducers/selectors/userSelector';
+import {
+  AvatarWrapper,
+  AvatarImage,
+  TitleUserName,
+  CssTextField,
+  CssSelect,
+  InputLabelCss,
+} from './styledItems';
 import { PageWrapper, TableWrapper } from '../Forum/styledItems';
 import { FormInputWrapper, TextButton } from '../Login/styles';
 import { UserDataType } from '../Login/Login';
+import { ApiServiceInstance } from 'utils/ApiService/ApiService';
+import { getThemePath } from 'consts/theme';
 
 export const StyledButton = withStyles({
   root: {
     backgroundColor: authButtonColor,
     height: '37px',
-    padding: '0',
+    padding: '0 10px',
     marginTop: '15px',
     display: 'block',
   },
 })(Button);
 
 export const ProfilePage = (): JSX.Element => {
+  const img = getThemePath(useSelector(themeName), 'rocketBg.jpg');
   const loaded = useSelector(IsLoadedUserSelector);
   const data = useSelector((state: UserState | undefined) => state?.user?.data);
+  const themeId = useSelector((state: UserState | undefined) => state?.user?.theme?.themeId);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [isVisibleAvatarModal, setIsVisibleAvatarModal] = useState(false);
   const dispatch = useDispatch();
   const { control, handleSubmit, errors: fieldsErrors } = useForm<UserDataType>();
   const onSubmit = handleSubmit((values) => {
     dispatch(changeUserDataAction(values));
+    dispatch(changeThemeAction({ userId: data.id, themeId: values.themeId }));
   });
   const handleVisibleModalChangePasswords = () => {
     setIsVisibleModal(!isVisibleModal);
@@ -47,9 +59,17 @@ export const ProfilePage = (): JSX.Element => {
   const logOut = () => {
     dispatch(logOutAction());
   };
+  const [themes, listThemes] = useState([]);
+  useEffect(() => {
+    const getThemes = async () => {
+      const response = await ApiServiceInstance.listTheme();
+      listThemes(response.data);
+    };
+    getThemes();
+  }, []);
 
   return (
-    <PageWrapper padding="90px 150px 30px">
+    <PageWrapper padding="90px 150px 30px" img={img}>
       {loaded ? (
         <>
           <TableWrapper>
@@ -196,6 +216,23 @@ export const ProfilePage = (): JSX.Element => {
                         message: 'invalid value from 6 to 20 letters or numbers',
                       },
                     }}
+                  />
+                </FormControl>
+                <FormControl fullWidth variant="outlined" margin="normal">
+                  <InputLabelCss id="theme-label">Цветовая схема</InputLabelCss>
+                  <Controller
+                    control={control}
+                    defaultValue={themeId || ''}
+                    name="themeId"
+                    as={
+                      <CssSelect labelId="theme-label" label="Цветовая схема">
+                        {themes.map((value, key) => (
+                          <MenuItem key={key} value={value.themeId}>
+                            {value.name}
+                          </MenuItem>
+                        ))}
+                      </CssSelect>
+                    }
                   />
                 </FormControl>
                 <StyledButton type="submit">

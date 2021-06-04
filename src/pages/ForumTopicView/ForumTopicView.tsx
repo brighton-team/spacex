@@ -18,6 +18,9 @@ import {
   TableWrapper,
   SubmitButton,
 } from './styledItems';
+import { getThemePath } from 'consts/theme';
+import { useSelector } from 'react-redux';
+import { themeName } from 'reducers/selectors/userSelector';
 
 export type ForumTopicPost = {
   id?: number;
@@ -35,6 +38,7 @@ const submitButton = (
 );
 
 const ForumTopicView = (props: OwnProps): JSX.Element => {
+  const img = getThemePath(useSelector(themeName), 'rocketBg.jpg');
   const { createPost, userId, topicId, getPosts, posts, topicTitle } = props;
 
   useEffect(() => {
@@ -59,7 +63,7 @@ const ForumTopicView = (props: OwnProps): JSX.Element => {
   });
 
   return (
-    <PageWrapper>
+    <PageWrapper img={img}>
       <Heading>
         <StyledLink to={forum}>Назад</StyledLink>
         <TitleText>{topicTitle}</TitleText>

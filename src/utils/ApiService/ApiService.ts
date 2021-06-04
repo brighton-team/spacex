@@ -158,6 +158,34 @@ class ApiService {
         throw new Error('Api error: cannot find or create user');
       });
   }
+  async listTheme() {
+    return this.instanceAxios
+      .get('/api/theme/list')
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async getUserTheme(userId: number) {
+    return this.instanceAxios
+      .post('/api/theme/get', { userId })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  async setTheme(values) {
+    return this.instanceAxios
+      .post('/api/theme/set', values)
+      .then((response) => response)
+      .catch((err) => {
+        throw err;
+      });
+  }
 
   async getForumTopics() {
     return this.instanceAxios
